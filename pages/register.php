@@ -15,8 +15,26 @@
       <header>
        <img src="../assets/images/logo.svg" alt="logo">
       </header>
+      <?php
+        if(isset($_POST['register'])){
+          $fname = $_POST['fname'];
+          $lname = $_POST['lname'];
+          $email = $_POST['email'];
+          $pwd = $_POST['password'];
 
-      <form action="">
+          if(!empty($fname) && !empty($lname) && !empty($email) && !empty($pwd)){
+            require_once '../components/connect.php';
+            date_default_timezone_set("Africa/Casablanca");
+            $date = date('Y-m-d H:i:s');
+            $sqlState = $conn->prepare('INSERT INTO users VALUES(null,?,?,?,?,?)');
+            $sqlState->execute([$fname,$lname,$email,$pwd,$date]);
+          }else{
+            echo "required";
+          }
+        }
+      
+      ?>
+      <form method="post">
         <header>
           <h1>SIGN UP</h1>
           <p>Explore the world from your bed with a single click</p>
@@ -25,23 +43,23 @@
           <div class="full-name">
             <div class="fname-input">
               <img src="../assets/icons/user1.svg" alt="first name icon">
-              <input type="text" placeholder="First name" required>
+              <input type="text" placeholder="First name" required name="fname">
             </div>
 
             <div class="lname-input">
               <img src="../assets/icons/user1.svg" alt="last name icon">
-              <input type="text" placeholder="Last name" required>
+              <input type="text" placeholder="Last name" required name="lname">
             </div>
           </div>
 
           <div class="email-input">
             <img src="../assets/icons/email.svg" alt="email icon">
-            <input type="email" placeholder="Enter your email" required>
+            <input type="email" placeholder="Enter your email" required name="email">
           </div>
 
           <div class="password-input">
             <img src="../assets/icons/password.svg" alt="password icon">
-            <input type="password" placeholder="Enter your password" required>
+            <input type="password" placeholder="Enter your password" required name="password">
             <img src="../assets/icons/eye.svg" alt="show toggle icon">
           </div>
 
@@ -52,7 +70,7 @@
         </div>
         <div class="cta">
 
-          <input type="submit" value="Create my account">
+          <input type="submit" value="Create my account" name="register">
           <p>Already have an account?<a href="./register.php">Log in</a></p>
         </div>
       </form>
