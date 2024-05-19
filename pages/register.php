@@ -4,6 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Log in</title>
+
+  <!-- custom css links -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="shortcut icon" href="../assets/images/favicon32.png" type="image/x-icon">
+
+  <!-- custom js -->
+  <script src="../js/theme.js" defer></script>
 </head>
 <body>
   <div class="two-cols">
@@ -20,7 +27,7 @@
           $fname = $_POST['fname'];
           $lname = $_POST['lname'];
           $email = $_POST['email'];
-          $pwd = $_POST['password'];
+          $pwd = sha1($_POST['password']);
 
           if(!empty($fname) && !empty($lname) && !empty($email) && !empty($pwd)){
             require_once '../components/connect.php';
@@ -71,7 +78,7 @@
         <div class="cta">
 
           <input type="submit" value="Create my account" name="register">
-          <p>Already have an account?<a href="./register.php">Log in</a></p>
+          <p>Already have an account?<a href="./login.php">Log in</a></p>
         </div>
       </form>
       <footer>

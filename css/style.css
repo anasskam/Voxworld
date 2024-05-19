@@ -1,0 +1,70 @@
+@import url("./global.css");
+
+
+/* LOGIN & SIGN UP PAGES STYLING
+========================================================================== */
+
+.left img {
+  width: 320px;
+}
+
+.right{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
+}
+
+.right header p{
+  font-size: var(--fs-body1);
+}
+.right header {
+  display: flex;
+  flex-direction: column;
+  gap:var(--spacing-05);
+}
+
+.right .logo{
+  width: 120px;
+  margin-inline: auto;
+}
+
+.right form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.right form h1{
+  color: var(--white);
+}
+
+/*inputs*/
+.inputs{
+  width: 100%;
+}
+.inputs img{
+  width: 20px;
+  
+}
+
+
+.inputs input{
+  padding-block: var(--spacing-3);
+  width: 100%;
+  background-color: transparent;
+}
+
+/*Email input*/
+.email-input,
+.password-input{
+  display: flex;
+  background-color: var(--clr-bg-highlight);
+  border-radius: var(--spacing-2);
+  overflow: hidden;
+  width: 100%;
+  gap:var(--spacing-2);
+  padding-inline: var(--spacing-3);
+  color:var(--white)
+}
+
