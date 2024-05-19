@@ -1,9 +1,57 @@
+<?php
+if (isset($_POST['submit'])) {
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $email = $_POST['email'];
+    $pwd = $_POST['password'];
+
+    // Password pattern for validation //
+    $passwordPattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/';
+
+    // Empty fields check
+    if (empty($fname)) {
+        echo "First name is required.";
+    } elseif (empty($lname)) {
+        echo "Last name is required.";
+    } elseif (empty($email)) {
+        echo "Email is required.";
+    } elseif (empty($pwd)) {
+        echo "Password is required.";
+    } elseif (!preg_match($passwordPattern, $pwd)) {
+        echo  "Password must have at least 8 characters, including at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.";       
+    } else {
+      
+        // DB connection
+        require_once '../components/connect.php';
+
+        // Email existence check
+        $sqlCheck = $conn->prepare('SELECT * FROM users WHERE email = ?');
+        $sqlCheck->execute([$email]);
+        if ($sqlCheck->rowCount() > 0) {
+            echo "Email already exists. Please use a different email.";
+        } else {
+            // Hash the password after validation
+            $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+
+            date_default_timezone_set("Africa/Casablanca");
+            $date = date('Y-m-d H:i:s');
+            $sqlState = $conn->prepare('INSERT INTO users (id, FirstName, LastName, email, password, CreationDate) VALUES (null, ?, ?, ?, ?, ?)');
+            $sqlState->execute([$fname, $lname, $email, $hashedPwd, $date]);
+
+            // Redirection to login page
+            header('Location: login.php');
+            exit();
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Log in</title>
+  <title>Sign Up</title>
 </head>
 <body>
   <div class="two-cols">
@@ -15,25 +63,6 @@
       <header>
        <img src="../assets/images/logo.svg" alt="logo">
       </header>
-      <?php
-        if(isset($_POST['register'])){
-          $fname = $_POST['fname'];
-          $lname = $_POST['lname'];
-          $email = $_POST['email'];
-          $pwd = $_POST['password'];
-
-          if(!empty($fname) && !empty($lname) && !empty($email) && !empty($pwd)){
-            require_once '../components/connect.php';
-            date_default_timezone_set("Africa/Casablanca");
-            $date = date('Y-m-d H:i:s');
-            $sqlState = $conn->prepare('INSERT INTO users VALUES(null,?,?,?,?,?)');
-            $sqlState->execute([$fname,$lname,$email,$pwd,$date]);
-          }else{
-            echo "required";
-          }
-        }
-      
-      ?>
       <form method="post">
         <header>
           <h1>SIGN UP</h1>
@@ -69,9 +98,8 @@
           <p>I accept the <a href="#">privacy policy</a></p>
         </div>
         <div class="cta">
-
-          <input type="submit" value="Create my account" name="register">
-          <p>Already have an account?<a href="./register.php">Log in</a></p>
+          <input type="submit" value="Create my account" name="submit">
+          <p>Already have an account?<a href="./login.php">Log in</a></p>
         </div>
       </form>
       <footer>
@@ -86,8 +114,6 @@
         </div>
       </footer>
     </div>
-    
-
   </div>
 </body>
 </html>

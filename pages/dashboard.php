@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Logged-in successfully</h1>
+    <h1>Welcome to admin dashboard</h1>
 </body>
 </html>

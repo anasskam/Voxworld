@@ -1,9 +1,6 @@
 <?php
-
 $db_name = 'mysql:host=localhost;dbname=journal';
-$username = 'root';
-$password = '';
+$db_username = 'root';
+$db_password = '';
 
-$conn = new PDO($db_name, $username, $password);
-var_dump($conn);
-?>
+$conn = new PDO($db_name, $db_username, $db_password);
