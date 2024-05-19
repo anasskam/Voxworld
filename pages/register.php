@@ -51,7 +51,14 @@ if (isset($_POST['submit'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up</title>
+  <title>Log in</title>
+
+  <!-- custom css links -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="shortcut icon" href="../assets/images/favicon32.png" type="image/x-icon">
+
+  <!-- custom js -->
+  <script src="../js/theme.js" defer></script>
 </head>
 <body>
   <div class="two-cols">
@@ -63,6 +70,25 @@ if (isset($_POST['submit'])) {
       <header>
        <img src="../assets/images/logo.svg" alt="logo">
       </header>
+      <?php
+        if(isset($_POST['register'])){
+          $fname = $_POST['fname'];
+          $lname = $_POST['lname'];
+          $email = $_POST['email'];
+          $pwd = sha1($_POST['password']);
+
+          if(!empty($fname) && !empty($lname) && !empty($email) && !empty($pwd)){
+            require_once '../components/connect.php';
+            date_default_timezone_set("Africa/Casablanca");
+            $date = date('Y-m-d H:i:s');
+            $sqlState = $conn->prepare('INSERT INTO users VALUES(null,?,?,?,?,?)');
+            $sqlState->execute([$fname,$lname,$email,$pwd,$date]);
+          }else{
+            echo "required";
+          }
+        }
+      
+      ?>
       <form method="post">
         <header>
           <h1>SIGN UP</h1>
@@ -98,7 +124,8 @@ if (isset($_POST['submit'])) {
           <p>I accept the <a href="#">privacy policy</a></p>
         </div>
         <div class="cta">
-          <input type="submit" value="Create my account" name="submit">
+
+          <input type="submit" value="Create my account" name="register">
           <p>Already have an account?<a href="./login.php">Log in</a></p>
         </div>
       </form>
