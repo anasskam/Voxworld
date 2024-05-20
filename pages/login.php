@@ -1,15 +1,20 @@
 <?php
 
 if (isset($_POST['submit'])) {
+
     $email = $_POST['email'];
     $password = $_POST['password'];
 
     // Empty fields check //
     if (empty($email)) {
         echo "Email is required.";
-    } elseif (empty($password)) {
+    } 
+
+    elseif (empty($password)) {
         echo "Password is required.";
-    } else {
+    } 
+
+    else {
 
         // DB connection //
         require_once '../components/connect.php';
@@ -27,10 +32,14 @@ if (isset($_POST['submit'])) {
                 session_start();
                 $_SESSION['user'] = $user;
                 header('Location: ../index.php');
-            } else {
+            } 
+
+            else {
                 echo "Incorrect password.";
             }
-        } else {
+        } 
+
+        else {
             echo "Email not found.";
         }
     }
@@ -50,7 +59,9 @@ if (isset($_POST['submit'])) {
 
   <!-- custom js -->
   <script src="../js/theme.js" defer></script>
+  <script src="../js/auth.js" defer></script>
 </head>
+
 <body>
   <div class="container">
   <div class="two-cols">
@@ -59,41 +70,41 @@ if (isset($_POST['submit'])) {
     </div>
     <div class="right">
       <header>
-       <img src="../assets/images/logo.svg" alt="logo" class="logo">
+       <img src="../assets/images/logo-dark.svg" alt="logo" class="logo">
       </header>
 
-      <form action="" class="container-auth"  method="post">
-        <header>
+      <form class="form-container" method="post">
+        <header class="center">
           <h1 class="center sm">LOGIN</h1>
           <p class="center">The best place to discover news for free</p>
         </header>
+
         <div class="inputs">
           <div class="email-input">
             <img src="../assets/icons/email.svg" alt="email icon" class="opacity-40">
-            <input type="email" placeholder="Enter your email" required>
+            <input type="email" placeholder="Enter your email" name="email" required>
           </div>
 
           <div class="password-input">
             <img src="../assets/icons/password.svg" alt="password icon" class="opacity-40">
-            <input type="password" placeholder="Enter your password" required>
-            <img src="../assets/icons/eye.svg" alt="show toggle icon" class="opacity-40">
+            <input type="password" placeholder="Enter your password" name="password" class="password" required>
+            <img src="../assets/icons/show-pass.svg" alt="show toggle icon" class="password-toggle opacity-40">
           </div>
         </div>
-        <div class="cta">
-          <input type="submit" value="Login to my account">
+
+        <div class="cta full center">
+          <input type="submit" value="Login to my account" name="submit" class="primary-btn full">
           <p class="text-caption1">Don’t have an account? <a href="./register.php">Sign up</a></p>
         </div>
       </form>
+
       <footer>
-        <div class="two-cols">
-          <p>© Copyright, 2024 All rights reserved to Voxworld </p>
-          <div class="right">
+          <p class="text-button">© Copyright, 2024 All rights reserved to Voxworld</p>
             <ul>
-              <li><a href="">Contact</a></li>
-              <li><a href="">Help</a></li>
+              <li ><a href="#" class="text-button">Contact</a></li>
+              <li ><a href="#" class="text-button">Help</a></li>
+
             </ul>
-          </div>
-        </div>
       </footer>
     </div>
     

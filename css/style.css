@@ -5,13 +5,16 @@
 ========================================================================== */
 
 .left img {
-  width: 320px;
+  /* width: 320px; */
+  width: 100%;
+  transform: translateX(-50%);
 }
 
 .right{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding-block: var(--spacing-8);
   
 }
 
@@ -22,6 +25,7 @@
   display: flex;
   flex-direction: column;
   gap:var(--spacing-05);
+  margin-bottom: var(--spacing-13);;
 }
 
 .right .logo{
@@ -32,8 +36,10 @@
 .right form {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
+
 }
+
 
 .right form h1{
   color: var(--white);
@@ -42,24 +48,38 @@
 /*inputs*/
 .inputs{
   width: 100%;
-}
-.inputs img{
-  width: 20px;
-  
+  display: flex;
+  flex-direction: column;
+  gap:var(--spacing-6);
 }
 
+.inputs img{
+  width: 20px;
+}
 
 .inputs input{
   padding-block: var(--spacing-3);
   width: 100%;
   background-color: transparent;
+  
 }
 
-/*Email input*/
-.email-input,
-.password-input{
+.inputs div {
+  border: 1px solid transparent;
+}
+
+.full-name{
   display: flex;
-  background-color: var(--clr-bg-highlight);
+  gap: var(--spacing-6);
+}
+
+.admin-username-input,
+.email-input,
+.password-input,
+.lname-input,
+.fname-input{
+  display: flex;
+  background-color: var(--surface-container);
   border-radius: var(--spacing-2);
   overflow: hidden;
   width: 100%;
@@ -68,3 +88,50 @@
   color:var(--white)
 }
 
+.inputs div:not(.full-name):hover{
+  border: 1px solid var(--primary);
+  transition: all .25s ease;
+}
+
+/* password input */
+.password-toggle{
+  cursor: pointer;
+
+}
+
+/* privacy check */
+.privacy-check{
+  display: flex;
+  align-items: center;
+  gap:var(--spacing-2);
+  margin-block: var(--spacing-5);
+}
+
+/*cta part*/
+.cta{
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  margin-top:var(--spacing-8);;
+}
+
+.cta a, 
+.privacy-check a{
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* footer part */
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+footer p{
+  color: var(--clr-gray-600);
+}
+
+ul {
+  display: flex;
+  gap: var(--spacing-6);
+} 

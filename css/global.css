@@ -8,6 +8,8 @@
  * import font "SF display pro"  /*![not a normalize code]
  */
  @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+ @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 
 /**
  * reset all  /*![not a normalize code]
@@ -18,8 +20,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'SF Pro Display', sans-serif;
-  /* font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu; */
+  font-family: "Inter", sans-serif;
 }
 
 /**
@@ -199,9 +200,15 @@ textarea {
  */
 
 button,
-input { /* 1 */
+input{ /* 1 */
   overflow: visible;
+  font-size: var(--fs-button);
 }
+
+input::placeholder{
+  font-size: var(--fs-button) !important;
+}
+
 
 /**
  * Remove the inheritance of text transform in Edge, Firefox, and IE.
@@ -534,6 +541,7 @@ template {
   --on-surface-container:var(--clr-gray-900);
   --primary:var(--clr-primary);
   --border:var(--clr-dark-border);
+  --login-on-surface-text:var(--clr-gray-600);
 }
 
 [data-theme="light"]{
@@ -546,6 +554,8 @@ template {
   --on-surface-container:var(--clr-gray-150);
   --primary:var(--clr-primary);
   --border:var(--clr-gray-150);
+  --login-on-surface-text:var(--clr-gray-600);
+
 }
 
 body{
@@ -687,16 +697,18 @@ p,
   margin-inline: auto;
 }
 
-.container-auth{
-  width: min(1440px, 60%);
+.form-container{
+  /* width: min(1440px, 60%); */
+  width: clamp(60%,10%,1440px);
   margin-inline: auto;
 }
 
 .two-cols{
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 45% 50%;
+  justify-content: space-between;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
 }
 .right,
 .left{
@@ -748,3 +760,34 @@ p,
 }
 
 
+/**
+  * Buttons calsses
+*/
+.primary-btn{
+  background-color: var(--primary);
+  padding: var(--spacing-3);
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--clr-white);
+}
+
+
+/**
+  * paddings & margins, widths...
+*/
+
+.full{
+  width:100%;
+}
+
+.margin-0{
+  margin: 0 !important;
+}
+
+/**
+  * focus, hover, transitions...
+*/
+.focus,
+.hover{
+  border: 1px solid var(--primary) !important;
+}
