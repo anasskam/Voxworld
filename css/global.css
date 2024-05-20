@@ -3,8 +3,16 @@
 /* Document
    ========================================================================== */
 
+
 /**
- * reset all 
+ * import font "SF display pro"  /*![not a normalize code]
+ */
+ @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+ @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+
+/**
+ * reset all  /*![not a normalize code]
  */
 *,
 *::before,
@@ -12,6 +20,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Inter", sans-serif;
 }
 
 /**
@@ -26,14 +35,6 @@
 
 /* Sections
    ========================================================================== */
-
-/**
- * Remove the margin in all browsers.
- */
-
-body {
-  margin: 0;
-}
 
 /**
  * Render the `main` element consistently in IE.
@@ -81,11 +82,20 @@ pre {
    ========================================================================== */
 
 /**
- * Remove the gray background on active links in IE 10.
+ * Remove the gray background on active links in IE 10, and reset the link
  */
 
 a {
   background-color: transparent;
+  text-decoration: none;
+  color: inherit;
+}
+/**
+ * Remove the bullets form the li
+ */
+
+li {
+  list-style-type: none;
 }
 
 /**
@@ -153,12 +163,14 @@ sup {
    ========================================================================== */
 
 /**
- * Remove the border on images inside links in IE 10.
+ * Remove the border on images inside links in IE 10, and set it to fit 
  */
 
 img {
   border-style: none;
   display: block;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 /* Forms
@@ -178,6 +190,8 @@ textarea {
   font-size: 100%; /* 1 */
   line-height: 1.15; /* 1 */
   margin: 0; /* 2 */
+  outline: none;
+  border: none;
 }
 
 /**
@@ -186,9 +200,15 @@ textarea {
  */
 
 button,
-input { /* 1 */
+input{ /* 1 */
   overflow: visible;
+  font-size: var(--fs-button);
 }
+
+input::placeholder{
+  font-size: var(--fs-button) !important;
+}
+
 
 /**
  * Remove the inheritance of text transform in Edge, Firefox, and IE.
@@ -380,10 +400,18 @@ template {
   --fs-caption2:0.6875rem;
   --fs-button:0.875;
 
+    /* Font weight variables
+   ========================================================================== */
+   --fw-regular:400;
+   --fw-md:500;
+   --fw-sm:600;
+   --fw-bold:700;
+
+
   /* Color variables
    ========================================================================== */
   /**
-   * primary color
+   * primary shades
   */
   --clr-primary-50:#ECEEFF;
   --clr-primary-100:#D9DDFF;
@@ -399,21 +427,367 @@ template {
   --clr-primary-900:#0D1247;
 
   /**
-   * primary color
+   * Black&White shades
   */
-  --clr-primary-50:#ECEEFF;
-  --clr-primary-100:#D9DDFF;
-  --clr-primary-150:#C7CBFF;
-  --clr-primary-200:#B4BAFF;
-  --clr-primary-300:#8E98FE;
-  --clr-primary-400:#6975FE;
-  --clr-primary:#4353FE;
-  --clr-primary-600:#3643D0;
-  --clr-primary-700:#2833A2;
-  --clr-primary-800:#1B2275;
-  --clr-primary-850:#141A5E;
-  --clr-primary-900:#0D1247;
+  --clr-white:#FFFFFF;
+  --clr-black:#000000;
 
 
+  /**
+   * Gray shades
+  */
+  --clr-gray-50:#F5F5F5;
+  --clr-gray-100:#EBEBEB;
+  --clr-gray-150:#E1E1E1;
+  --clr-gray-200:#D7D7D7;
+  --clr-gray-300:#C4C4C4;
+  --clr-gray-400:#B0B0B0;
+  --clr-gray:#9C9C9C;
+  --clr-gray-600:#7D7D7D;
+  --clr-gray-700:#5E5E5E;
+  --clr-gray-800:#3E3E3E;
+  --clr-gray-850:#2F2F2F;
+  --clr-gray-900:#1F1F1F;
+  --clr-gray-950:#101010;
+  --clr-dark-border:#3F3F3F;
+  --clr-bg:#141414;
+  --clr-bg-highlight:#171717;
 
+  
+  /**
+   * Red shades
+  */
+  --clr-error-50:#FFECEC;
+  --clr-error-100:#FFD9D9;
+  --clr-error-150:#FFC7C7;
+  --clr-error-200:#FFB4B4;
+  --clr-error-300:#FE8E8E;
+  --clr-error-400:#FE6969;
+  --clr-error:#FE4343;
+  --clr-error-600:#D03636;
+  --clr-error-700:#A22828;
+  --clr-error-800:#751B1B;
+  --clr-error-850:#5E1414;
+  --clr-error-900:#470D0D;
+
+  /**
+   * Green shades
+  */
+  --clr-success-50:#C9EEDB;
+  --clr-success-100:#B6E3CD;
+  --clr-success-150:#A2D9BE;
+  --clr-success-200:#8FCEAF;
+  --clr-success-300:#69BA92;
+  --clr-success-400:#42A574;
+  --clr-success:#1C9057;
+  --clr-success-600:#167346;
+  --clr-success-700:#115634;
+  --clr-success-800:#0B3A23;
+  --clr-success-850:#082B1A;
+  --clr-success-900:#061D11;
+
+  /**
+   * Orange shades
+  */
+  --clr-warning-50:#FFF6EC;
+  --clr-warning-100:#FFEED9;
+  --clr-warning-150:#FFE5C7;
+  --clr-warning-200:#FFDCB4;
+  --clr-warning-300:#FECB8E;
+  --clr-warning-400:#FEB969;
+  --clr-warning:#FEA843;
+  --clr-warning-600:#D08936;
+  --clr-warning-700:#A26A28;
+  --clr-warning-800:#754C1B;
+  --clr-warning-850:#5E3C14;
+  --clr-warning-900:#472D0D;
+
+  /* Spacing variables
+  ========================================================================== */
+  --base-space:0.25em;
+  --spacing-05:calc(var(--base-space) * .5); /* 2px */
+  --spacing-1:calc(var(--base-space) * 1);  /* 4px */
+  --spacing-2:calc(var(--base-space) * 2);  /* 8px */
+  --spacing-3:calc(var(--base-space) * 3);  /* 12px */
+  --spacing-4:calc(var(--base-space) * 4);  /* 16px */
+  --spacing-5:calc(var(--base-space) * 5);  /* 20px */
+  --spacing-6:calc(var(--base-space) * 6);  /* 24px */
+  --spacing-7:calc(var(--base-space) * 7);  /* 28px */
+  --spacing-8:calc(var(--base-space) * 8);  /* 32px */
+  --spacing-9:calc(var(--base-space) * 9);  /* 36px */
+  --spacing-10:calc(var(--base-space) * 10);  /* 40px */
+  --spacing-11:calc(var(--base-space) * 11);  /* 44px */
+  --spacing-12:calc(var(--base-space) * 12);  /* 48px */
+  --spacing-13:calc(var(--base-space) * 13);  /* 52px */
+  --spacing-14:calc(var(--base-space) * 14);  /* 56px */
+  --spacing-15:calc(var(--base-space) * 15);  /* 60px */
+  --spacing-16:calc(var(--base-space) * 16);  /* 64px */
+  --spacing-17:calc(var(--base-space) * 17);  /* 68px */
+  --spacing-18:calc(var(--base-space) * 18);  /* 72px */
+  --spacing-19:calc(var(--base-space) * 19);  /* 76px */
+  --spacing-20:calc(var(--base-space) * 20);  /* 80px */
+
+}
+
+/* Light& dark mode 
+========================================================================== */
+[data-theme="dark"]{
+
+  color-scheme: dark;
+  --background:var(--clr-bg);
+  --background-text:var(--clr-white);
+  --surface-container:var(--clr-bg-highlight);
+  --surface-container-text-low:var(--clr-gray);
+  --on-surface-container:var(--clr-gray-900);
+  --primary:var(--clr-primary);
+  --border:var(--clr-dark-border);
+  --login-on-surface-text:var(--clr-gray-600);
+}
+
+[data-theme="light"]{
+
+  color-scheme: light;
+  --background:var(--clr-white);
+  --background-text:var(--clr-black);
+  --surface-container:var(--clr-gray-50);
+  --surface-container-text-low:var(--clr-gray-600);
+  --on-surface-container:var(--clr-gray-150);
+  --primary:var(--clr-primary);
+  --border:var(--clr-gray-150);
+  --login-on-surface-text:var(--clr-gray-600);
+
+}
+
+body{
+  background-color: var(--background);
+  color: var(--background-text);
+  min-height: 100vh;
+}
+
+
+/* Style headings
+========================================================================== */
+
+/**
+  * common headings styles
+*/
+.display,
+h1,
+h2,
+h3{
+  font-weight:var(--fw-regular);
+  color: inherit;
+  color:var(--background);
+}
+
+/**
+  * Style display
+*/
+.display{
+  font-size: var(--fs-display);
+  letter-spacing: 0.4%;
+  line-height: 41;
+}
+
+/**
+  * Style h1
+*/
+h1{
+  font-size: var(--fs-h1);
+  letter-spacing: 0.38%;
+  line-height: 34px;
+}
+
+/**
+  * Style h2
+*/
+h2{
+  font-size: var(--fs-h2);
+  letter-spacing: -0.26%;
+  line-height: 28px;
+}
+/**
+  * Style h3
+*/
+h3{
+  font-size: var(--fs-h3);
+  letter-spacing: -0.45%;
+  line-height: 25px;
+}
+
+/* Style headlines & body text typo
+========================================================================== */
+/**
+  * Style text headline
+*/
+.text-headline{
+  font-size: var(--fs-body1);
+  font-weight: var(--fw-sm);
+  letter-spacing: -0.43%;
+  line-height: 22px;
+}
+
+/**
+  * Style text body 1
+*/
+p, 
+.text-body1{
+  font-size: var(--fs-body1);
+  letter-spacing: -0.43%;
+  line-height: 22px;
+  font-weight: var(--fw-regular);
+}
+
+/**
+  * Style text body 2
+*/
+.text-body2{
+  font-size: var(--fs-body2);
+  letter-spacing: -0.31%;
+  line-height: 22px;
+  font-weight: var(--fw-regular);
+}
+
+
+/* Style captions text typo
+========================================================================== */
+
+/**
+  * Style text caption 1
+*/
+.text-caption1{
+  font-size: var(--fs-caption1);
+  letter-spacing: 0%;
+  line-height: 16px;
+  font-weight: var(--fw-regular);
+}
+
+/**
+  * Style text caption 2
+*/
+.text-caption2{
+  font-size: var(--fs-caption2);
+  letter-spacing: 0.06%;
+  line-height: 13px;
+  font-weight: var(--fw-regular);
+}
+
+
+/* Style buttons text typo
+========================================================================== */
+.text-button{
+  font-size: var(--fs-button);
+  letter-spacing: -0.08%;
+  line-height: 18px;
+  font-weight: var(--fw-regular);
+}
+
+/* Utilities calsses
+========================================================================== */
+/**
+  * Containers & layout
+*/
+.container{
+  width: min(1440px, 85%);
+  margin-inline: auto;
+}
+
+.container-admin{
+  width: min(1440px, 95%);
+  margin-inline: auto;
+}
+
+.form-container{
+  /* width: min(1440px, 60%); */
+  width: clamp(60%,10%,1440px);
+  margin-inline: auto;
+}
+
+.two-cols{
+  display: grid;
+  grid-template-columns: 45% 50%;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 100vh;
+}
+.right,
+.left{
+  width: 100%;
+  height: 100%;
+}
+
+
+/**
+  * typography calsses
+*/
+.center{
+  text-align: center;
+}
+
+
+/**
+  * Font calsses
+*/
+.text-md{
+  font-weight: var(--fw-md);
+}
+
+.text-sm{
+  font-weight: var(--fw-sm);
+}
+
+.text-bold{
+  font-weight: var(--fw-bold);
+}
+
+
+/**
+  * opacity calsses
+*/
+.opacity-full{
+  opacity:1;
+}
+
+.opacity-half{
+  opacity:0.5;
+}
+.opacity-40{
+  opacity:0.4;
+}
+
+.no-opacity{
+  opacity:0;
+}
+
+
+/**
+  * Buttons calsses
+*/
+.primary-btn{
+  background-color: var(--primary);
+  padding: var(--spacing-3);
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--clr-white);
+}
+
+
+/**
+  * paddings & margins, widths...
+*/
+
+.full{
+  width:100%;
+}
+
+.margin-0{
+  margin: 0 !important;
+}
+
+/**
+  * focus, hover, transitions...
+*/
+.focus,
+.hover{
+  border: 1px solid var(--primary) !important;
 }

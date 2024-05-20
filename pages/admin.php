@@ -7,9 +7,13 @@ if (isset($_POST['submit'])) {
     // Empty fields check //
     if (empty($username)) {
         echo "username is required.";
-    } elseif (empty($password)) {
+    } 
+
+    elseif (empty($password)) {
         echo "Password is required.";
-    } else {
+    } 
+
+    else {
 
         // DB connection //
         require_once '../components/connect.php';
@@ -23,66 +27,78 @@ if (isset($_POST['submit'])) {
             session_start();
             $_SESSION['user'] = $user;
             header('Location: dashboard.php');
-        } else {
+        } 
+
+        else {
             echo "Incorrect username or password.";
         }
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Log in</title>
+  <title>Admin Log in</title>
+
+  <!-- custom css links -->
+  <link rel="shortcut icon" href="../assets/images/favicon32.png" type="image/x-icon">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- custom js -->
+  <script src="../js/theme.js" defer></script>
+  <script src="../js/auth.js" defer></script>
 </head>
+
 <body>
+  <div class="container">
   <div class="two-cols">
     <div class="left">
-      <img src="#" alt="illustration">
+      <img src="../assets/images/login-illustration.svg" alt="illustration">
     </div>
-    
     <div class="right">
       <header>
-       <img src="../assets/images/logo.svg" alt="logo">
+      <img src="../assets/images/logo-dark.svg" alt="logo" class="logo">
       </header>
 
-      <form method="post">
-        <header>
-          <h1>LOGIN</h1>
-          <p>Welcome back to your account!</p>
+      <form class="form-container" method="post">
+        <header class="center">
+          <h1 class="center sm">LOGIN</h1>
+          <p class="center">Welcome back to your account!</p>
         </header>
+
         <div class="inputs">
           <div class="admin-username-input">
-            <img src="../assets/icons/user1.svg" alt="username icon">
-            <input type="text" placeholder="Enter your username" required name="username">
+            <img src="../assets/icons/user1.svg" alt="email icon" class="opacity-40">
+            <input type="text" placeholder="Enter your username" name="username" required>
           </div>
 
           <div class="password-input">
-            <img src="../assets/icons/password.svg" alt="password icon">
-            <input type="password" placeholder="Enter your password" required name="password">
-            <img src="../assets/icons/eye.svg" alt="show toggle icon">
+            <img src="../assets/icons/password.svg" alt="password icon" class="opacity-40">
+            <input type="password" placeholder="Enter your password" name="password" class="password" required>
+            <img src="../assets/icons/show-pass.svg" alt="show toggle icon" class="password-toggle opacity-40">
           </div>
-
         </div>
-        <div class="cta">
-          <input type="submit" value="Login to my account" name="submit">
+
+        <div class="cta full center">
+          <input type="submit" value="Access my dashboard" name="submit" class="primary-btn full">
         </div>
       </form>
+
       <footer>
-        <div class="two-cols">
-          <p>© Copyright, 2024 All rights reserved to Voxworld </p>
-          <div class="right">
+          <p class="text-button">© Copyright, 2024 All rights reserved to Voxworld</p>
             <ul>
-              <li><a href="">Contact</a></li>
-              <li><a href="">Help</a></li>
+              <li ><a href="#" class="text-button">Contact</a></li>
+              <li ><a href="#" class="text-button">Help</a></li>
+
             </ul>
-          </div>
-        </div>
       </footer>
     </div>
     
-
   </div>
+  </div>
+
 </body>
 </html>
