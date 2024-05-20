@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
     // Password pattern for validation //
     $passwordPattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/';
 
-    // Empty fields check
+    // Empty fields check //
     if (empty($fname)) {
         echo "First name is required.";
     } elseif (empty($lname)) {
@@ -21,16 +21,16 @@ if (isset($_POST['submit'])) {
         echo  "Password must have at least 8 characters, including at least 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.";       
     } else {
       
-        // DB connection
+        // DB connection //
         require_once '../components/connect.php';
 
-        // Email existence check
+        // Email existence check //
         $sqlCheck = $conn->prepare('SELECT * FROM users WHERE email = ?');
         $sqlCheck->execute([$email]);
         if ($sqlCheck->rowCount() > 0) {
             echo "Email already exists. Please use a different email.";
         } else {
-            // Hash the password after validation
+            // Hash the password after validation //
             $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
             date_default_timezone_set("Africa/Casablanca");
