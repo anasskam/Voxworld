@@ -72,6 +72,9 @@
   display: flex;
   gap: var(--spacing-6);
 }
+.input-validation p{
+  margin-top: var(--spacing-1);
+}
 
 .admin-username-input,
 .email-input,
@@ -85,10 +88,11 @@
   width: 100%;
   gap:var(--spacing-2);
   padding-inline: var(--spacing-3);
-  color:var(--white)
+  color:var(--white);
+  align-items: center;
 }
 
-.inputs div:not(.full-name):hover{
+.inputs div:not(.full-name, .input-validation):hover{
   border: 1px solid var(--primary);
   transition: all .25s ease;
 }
