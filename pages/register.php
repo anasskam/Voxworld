@@ -1,4 +1,18 @@
 <?php
+//inti error msg
+$errorMessages = ['fname'=> '', 'lname' => '', 'email'=> '', 'pwd' => ''];
+
+function errorTemplate($error) {
+  $template = "
+  <div class='error-wrapper hide'>
+    <img src='../assets/icons/alert.svg'>
+    <p class='text-button email-validation-text error'>" .$error ."</p>
+  </div>
+  ";
+
+  return $template;
+}
+
 if (isset($_POST['submit'])) {
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
@@ -10,23 +24,28 @@ if (isset($_POST['submit'])) {
 
     // Empty fields check
     if (empty($fname)) {
-        echo "First name is required.";
+      $errorMessages['fname'] = errorTemplate("First name is required.");
+      
     } 
 
     elseif (empty($lname)) {
-        echo "Last name is required.";
+      $errorMessages['lname'] = errorTemplate("Last name is required.");
+
     } 
 
     elseif (empty($email)) {
-        echo "Email is required.";
+      $errorMessages['email'] = errorTemplate("Email address is required.");
+      
     } 
 
     elseif (empty($pwd)) {
-        echo "Password is required.";
+      $errorMessages['pwd'] = errorTemplate("Password is required.");
+
     } 
 
     elseif (!preg_match($passwordPattern, $pwd)) {
-        echo  "Password must have at least 8 characters, including at least 1 uppercase/lowercase letter, 1 number, and 1 special character.";       
+      $errorMessages['pwd'] = errorTemplate("Password must have at least 8 characters, including at least 1 uppercase/lowercase letter, 1 number, and 1 special character.");
+
     } 
 
     else {
@@ -81,9 +100,8 @@ if (isset($_POST['submit'])) {
       <img src="../assets/images/login-illustration.svg" alt="illustration">
     </div>
     <div class="right">
-      <header>
-      <img src="../assets/images/logo-dark.svg" alt="logo" class="logo">
-      </header>
+      <?php include '../components/auth-header.php'; ?>
+
       <form method="post" class="form-container">
         <header class="center">
           <h1>SIGN UP</h1>
@@ -92,7 +110,9 @@ if (isset($_POST['submit'])) {
         <div class="inputs">
           <div class="full-name">
 
-            <div class="fname-input">
+            <div class="input-validation">
+
+              <div class="fname-input">
 
               <!-- user icon -->
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-40">
@@ -100,11 +120,20 @@ if (isset($_POST['submit'])) {
                 <path d="M7.16021 14.5595C4.74021 16.1795 4.74021 18.8195 7.16021 20.4295C9.91021 22.2695 14.4202 22.2695 17.1702 20.4295C19.5902 18.8095 19.5902 16.1695 17.1702 14.5595C14.4302 12.7295 9.92021 12.7295 7.16021 14.5595Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
 
-              <input type="text" placeholder="First name" required name="fname">
+              <input type="text" placeholder="First name" name="fname">
 
+              </div>
+
+              <?php
+                if(isset($_POST['submit']) && !empty($errorMessages)){
+                  echo $errorMessages['fname']; 
+                }
+              ?>
             </div>
 
-            <div class="lname-input">
+            <div class="input-validation">
+
+              <div class="lname-input">
       
               <!-- user icon -->
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-40">
@@ -112,43 +141,68 @@ if (isset($_POST['submit'])) {
                 <path d="M7.16021 14.5595C4.74021 16.1795 4.74021 18.8195 7.16021 20.4295C9.91021 22.2695 14.4202 22.2695 17.1702 20.4295C19.5902 18.8095 19.5902 16.1695 17.1702 14.5595C14.4302 12.7295 9.92021 12.7295 7.16021 14.5595Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
 
-              <input type="text" placeholder="Last name" required name="lname">
+              <input type="text" placeholder="Last name" name="lname">
+
+              </div>
+
+              <?php
+                if(isset($_POST['submit']) && !empty($errorMessages)){
+                  echo $errorMessages['lname']; 
+                }
+              ?>
 
             </div>
-
           </div>
 
-          <div class="email-input">
+          <div class="input-validation">
 
-            <!-- email icon -->
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-40">
-              <path d="M17 20.5H7C4 20.5 2 19 2 15.5V8.5C2 5 4 3.5 7 3.5H17C20 3.5 22 5 22 8.5V15.5C22 19 20 20.5 17 20.5Z" stroke="currentcolor" stroke-width="1.25" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M17 9L13.87 11.5C12.84 12.32 11.15 12.32 10.12 11.5L7 9" stroke="currentcolor" stroke-width="1.25" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>  
-
-          <input type="email" placeholder="Enter your email" required name="email">
-
-          </div>
-
-          <div class="password-input">
-
-              <!-- password icon -->
+            <div class="email-input">
+              <!-- email icon -->
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-40">
-                <path d="M6 10V8C6 4.69 7 2 12 2C17 2 18 4.69 18 8V10" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M12 18.5C13.3807 18.5 14.5 17.3807 14.5 16C14.5 14.6193 13.3807 13.5 12 13.5C10.6193 13.5 9.5 14.6193 9.5 16C9.5 17.3807 10.6193 18.5 12 18.5Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M17 22H7C3 22 2 21 2 17V15C2 11 3 10 7 10H17C21 10 22 11 22 15V17C22 21 21 22 17 22Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+                <path d="M17 20.5H7C4 20.5 2 19 2 15.5V8.5C2 5 4 3.5 7 3.5H17C20 3.5 22 5 22 8.5V15.5C22 19 20 20.5 17 20.5Z" stroke="currentcolor" stroke-width="1.25" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M17 9L13.87 11.5C12.84 12.32 11.15 12.32 10.12 11.5L7 9" stroke="currentcolor" stroke-width="1.25" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>  
 
-            <input type="password" placeholder="Enter your password" name="password" class="password" required>
+              <input type="email" placeholder="Enter your email" name="email">
 
-            <!-- toggle password icon -->
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="password-toggle opacity-40">
-              <path d="M15.58 12C15.58 13.98 13.98 15.58 12 15.58C10.02 15.58 8.41998 13.98 8.41998 12C8.41998 10.02 10.02 8.42001 12 8.42001C13.98 8.42001 15.58 10.02 15.58 12Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M12 20.27C15.53 20.27 18.82 18.19 21.11 14.59C22.01 13.18 22.01 10.81 21.11 9.4C18.82 5.8 15.53 3.72 12 3.72C8.47003 3.72 5.18003 5.8 2.89003 9.4C1.99003 10.81 1.99003 13.18 2.89003 14.59C5.18003 18.19 8.47003 20.27 12 20.27Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            </div>
             
+            <?php
+              if(isset($_POST['submit']) && !empty($errorMessages)){
+                echo $errorMessages['email']; 
+              }
+              
+            ?> 
           </div>
+ 
 
+          <div class="input-validation">
+            <div class="password-input">
+
+                <!-- password icon -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-40">
+                  <path d="M6 10V8C6 4.69 7 2 12 2C17 2 18 4.69 18 8V10" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M12 18.5C13.3807 18.5 14.5 17.3807 14.5 16C14.5 14.6193 13.3807 13.5 12 13.5C10.6193 13.5 9.5 14.6193 9.5 16C9.5 17.3807 10.6193 18.5 12 18.5Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M17 22H7C3 22 2 21 2 17V15C2 11 3 10 7 10H17C21 10 22 11 22 15V17C22 21 21 22 17 22Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+              <input type="password" placeholder="Enter your password" name="password" class="password">
+
+              <!-- toggle password icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="password-toggle opacity-40">
+                <path d="M15.58 12C15.58 13.98 13.98 15.58 12 15.58C10.02 15.58 8.41998 13.98 8.41998 12C8.41998 10.02 10.02 8.42001 12 8.42001C13.98 8.42001 15.58 10.02 15.58 12Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 20.27C15.53 20.27 18.82 18.19 21.11 14.59C22.01 13.18 22.01 10.81 21.11 9.4C18.82 5.8 15.53 3.72 12 3.72C8.47003 3.72 5.18003 5.8 2.89003 9.4C1.99003 10.81 1.99003 13.18 2.89003 14.59C5.18003 18.19 8.47003 20.27 12 20.27Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              
+            </div>
+
+            <?php
+              if(isset($_POST['submit']) && !empty($errorMessages)){
+                echo $errorMessages['pwd']; 
+              }
+              
+            ?> 
+          </div>
         </div>
 
         <div class="privacy-check">

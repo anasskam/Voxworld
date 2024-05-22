@@ -18,14 +18,18 @@
   
 }
 
-.right header p{
-  font-size: var(--fs-body1);
-}
+/* header styling */
 .right header {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap:var(--spacing-05);
-  margin-bottom: var(--spacing-13);;
+  margin-bottom: var(--spacing-13);
+  align-items: center;
+
+}
+
+.right header p{
+  font-size: var(--fs-body1);
 }
 
 .right .logo{
@@ -33,17 +37,43 @@
   margin-inline: auto;
 }
 
+.theme-toggle-icon{
+  display: flex;
+  background-color: var(--surface-container);
+  border-radius: 1000px;
+  gap: var(--spacing-4);
+  padding: var(--spacing-1);
+  align-items: center;
+  cursor: pointer;
+}
+
+.theme-icons{
+  padding: var(--spacing-1);
+  border-radius: 100px;
+}
+
+.active-icon{
+  background-color: var(--on-surface-container);
+
+}
+
+
 .right form {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-
+}
+.right form header{
+  display: flex;
+  flex-direction: column;
+  gap:var(--spacing-05);
+  margin-bottom: var(--spacing-13);
 }
 
 
 .right form h1{
   color: var(--white);
 }
+
 
 /*inputs*/
 .inputs{
@@ -53,7 +83,8 @@
   gap:var(--spacing-6);
 }
 
-.inputs img{
+.inputs img, 
+.error-wrapper img{
   width: 20px;
 }
 
@@ -72,9 +103,6 @@
   display: flex;
   gap: var(--spacing-6);
 }
-.input-validation p{
-  margin-top: var(--spacing-1);
-}
 
 .admin-username-input,
 .email-input,
@@ -92,9 +120,16 @@
   align-items: center;
 }
 
-.inputs div:not(.full-name, .input-validation):hover{
+.inputs div:not(.full-name, .input-validation, .error-wrapper):hover{
   border: 1px solid var(--primary);
   transition: all .25s ease;
+}
+
+.error-wrapper{
+  margin-top: var(--spacing-1);
+  display: flex;
+  gap: var(--spacing-1);
+  align-items: center;
 }
 
 /* password input */

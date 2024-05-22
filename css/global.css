@@ -784,10 +784,20 @@ p,
   margin: 0 !important;
 }
 
+.hide{
+  display: none;
+}
+
 /**
   * focus, hover, transitions...
 */
 .focus,
 .hover{
   border: 1px solid var(--primary) !important;
+}
+
+.error {
+  display: block;
+  color: var(--clr-error);
+  
 }
