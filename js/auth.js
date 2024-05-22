@@ -51,7 +51,6 @@ const removeAllfocuses = (inputs) => {
   })  
 }
 
-
 document.addEventListener("DOMContentLoaded", app);
 
 

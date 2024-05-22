@@ -684,6 +684,7 @@ p,
 
 /* Utilities calsses
 ========================================================================== */
+
 /**
   * Containers & layout
 */
@@ -799,5 +800,5 @@ p,
 .error {
   display: block;
   color: var(--clr-error);
-  
+
 }
