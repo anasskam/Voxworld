@@ -1,15 +1,17 @@
 <?php
 session_start();
-include '../components/permissions.php';
-
-// Check if the user has the 'admin' role
-checkPermission('admin');
-
-//logout
+// Session Test //
+if (!isset($_SESSION['adminId'])) {
+    // Redirect to login page //
+    header('Location: ../pages/admin.php'); 
+    exit();
+  }
+  $adminId = $_SESSION['adminId'];
+// Logout //
 if (isset($_POST['submit'])) {
 
     session_destroy();
-    header('Location: admin.php');
+    header('Location: ../pages/admin.php');
     exit();
 }
 

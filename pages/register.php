@@ -1,5 +1,6 @@
 <?php
-//inti error msg
+session_start();
+// inti error msg //
 $errorMessages = ['fname'=> '', 'lname' => '', 'email'=> '', 'pwd' => ''];
 
 function errorTemplate($error) {
@@ -68,9 +69,8 @@ if (isset($_POST['submit'])) {
             $sqlState = $conn->prepare('INSERT INTO users (id, FirstName, LastName, email, password, CreationDate) VALUES (null, ?, ?, ?, ?, ?)');
             $sqlState->execute([$fname, $lname, $email, $hashedPwd, $date]);
 
-            // Redirection to login page
+            // Redirection to login page //
             header('Location: login.php');
-            exit();
         }
     }
 }
@@ -102,7 +102,7 @@ if (isset($_POST['submit'])) {
 
       <form method="post" class="form-container">
         <header class="center">
-          <h1>SIGN UP</h1>
+          <h1 class="center text-sm">SIGN UP</h1>
           <p>Explore the world from your bed with a single click</p>
         </header>
         <div class="inputs">

@@ -1,6 +1,6 @@
 <?php
-
-//inti error msg
+session_start();
+//inti error msg//
 $errorMessages = ['password' => '','username' => ''];
 
 function errorTemplate($error) {
@@ -33,23 +33,25 @@ if (isset($_POST['submit'])) {
         // DB connection //
         require_once '../components/connect.php';
 
-        $selectAdmin = $conn->prepare('SELECT * FROM admin WHERE username = ? AND password = ?');
-        $selectAdmin->execute([$username, $password]);
+        $selectAdmin = $conn->prepare('SELECT * FROM admin WHERE username = ?');
+        $selectAdmin->execute([$username]);
 
-        // Auth check //
         if ($selectAdmin->rowCount() > 0) {
-            $admin = $selectAdmin->fetch(PDO::FETCH_ASSOC);
-            session_start();
-            $_SESSION['role'] = $admin['username'];
-            header('Location: ../dashboard/overview.php');
+          $admin = $selectAdmin->fetch(PDO::FETCH_ASSOC);
 
-        } 
-
-        else {
-          $errorMessages['password'] = errorTemplate("Incorrect username or password.");
-
+          // Password verification
+          if (password_verify($password, $admin['password'])) {
+              $_SESSION['adminId'] = $admin['id_admin'];
+              header('Location: ../dashboard/overview.php');
+            } else {
+                $errorMessages['password'] = errorTemplate("Incorrect password.");
+            }
+        } else {
+            $errorMessages['username'] = errorTemplate("Username not found.");
         }
-    }
+  }
+  // Store the email in the session to retain it in the form
+  $_SESSION['username'] = $username;  
 }
 ?>
 
@@ -95,7 +97,14 @@ if (isset($_POST['submit'])) {
                 <path d="M7.16021 14.5595C4.74021 16.1795 4.74021 18.8195 7.16021 20.4295C9.91021 22.2695 14.4202 22.2695 17.1702 20.4295C19.5902 18.8095 19.5902 16.1695 17.1702 14.5595C14.4302 12.7295 9.92021 12.7295 7.16021 14.5595Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
 
-              <input type="text" placeholder="Enter your username" name="username">
+              <input type="text" placeholder="Enter your username" name="username" 
+              value="<?php 
+                      if (isset($_SESSION['username'])) {
+                          echo htmlspecialchars($_SESSION['username']);
+                      } else {
+                          echo '';
+                      }
+                      ?>">
             </div>
 
             <?php 
