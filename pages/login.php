@@ -6,7 +6,7 @@ $errorMessages = ['password'=> '', 'email' => ''];
 
 function errorTemplate($error) {
   $template = "
-  <div class='error-wrapper hide'>
+  <div class='error-wrapper'>
     <img src='../assets/icons/alert.svg'>
     <p class='text-button email-validation-text error'>" .$error ."</p>
   </div>
@@ -77,15 +77,15 @@ if (isset($_POST['submit'])) {
       <div class="right">
         <?php include '../components/auth-header.php'; ?>
 
-        <form class="form-container" method="post">
-          <header class="center">
-            <h1 class="center text-sm">LOGIN</h1>
-            <p class="center">The best place to discover news for free</p>
-          </header>
+      <form class="form-container" method="post">
+        <header class="center">
+          <h1 class="center text-sm">LOGIN</h1>
+          <p class="center">The best place to discover news for free</p>
+        </header>
 
           <div class="inputs">
             <div class="input-validation">
-              <div class="email-input">
+              <div class="email-input input-field">
                 <!-- email icon -->
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-40">
                   <path d="M17 20.5H7C4 20.5 2 19 2 15.5V8.5C2 5 4 3.5 7 3.5H17C20 3.5 22 5 22 8.5V15.5C22 19 20 20.5 17 20.5Z" stroke="currentcolor" stroke-width="1.25" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
@@ -108,7 +108,7 @@ if (isset($_POST['submit'])) {
             </div>
 
             <div class="input-validation">
-              <div class="password-input">
+              <div class="password-input input-field">
                 <!-- password icon -->
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-40">
                   <path d="M6 10V8C6 4.69 7 2 12 2C17 2 18 4.69 18 8V10" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>

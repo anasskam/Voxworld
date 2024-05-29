@@ -5,7 +5,7 @@ $errorMessages = ['password' => '','username' => ''];
 
 function errorTemplate($error) {
   $template = "
-  <div class='error-wrapper hide'>
+  <div class='error-wrapper'>
     <img src='../assets/icons/alert.svg'>
     <p class='text-button email-validation-text error'>" .$error ."</p>
   </div>
@@ -82,14 +82,14 @@ if (isset($_POST['submit'])) {
 
       <form class="form-container" method="post">
         <header class="center">
-          <h1 class="center sm">LOGIN</h1>
+          <h1 class="center text-sm">LOGIN</h1>
           <p class="center">Welcome back to your account!</p>
         </header>
 
         <div class="inputs">
 
           <div class="input-validation">
-            <div class="admin-username-input">
+            <div class="admin-username-input input-field">
 
               <!-- user icon -->
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-40">
@@ -116,7 +116,7 @@ if (isset($_POST['submit'])) {
           </div>
 
           <div class="input-validation">
-            <div class="password-input">
+            <div class="password-input input-field">
 
               <!-- password icon -->
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-40">

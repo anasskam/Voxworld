@@ -527,6 +527,9 @@ template {
   --spacing-19:calc(var(--base-space) * 19);  /* 76px */
   --spacing-20:calc(var(--base-space) * 20);  /* 80px */
 
+    /* Other varibales
+  ========================================================================== */
+  --border-line: 1px solid var(--border);
 }
 
 /* Light& dark mode 
@@ -800,5 +803,13 @@ p,
 .error {
   display: block;
   color: var(--clr-error);
+}
 
+.active{
+  opacity: 1;
+}
+
+.smooth{
+  transition: all .4s ease;
+  
 }
