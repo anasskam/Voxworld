@@ -16,10 +16,21 @@
 </head>
 <body>
 
-    <!-- side bar --> 
-    <?php
-        include "../components/sidebar.php"
-    ?>
+    <div class="dashboard-container">
+        <!-- side bar --> 
+        <?php
+            include "../components/sidebar.php"
+        ?>
+
+        <main>
+            <!-- header bar -->
+            <?php
+                include "../components/dashboard-header.php"
+            ?>
+
+            <div class="content-container"></div>
+        </main>
+    </div>
 
 </body>
 </html>

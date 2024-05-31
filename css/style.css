@@ -115,7 +115,7 @@
   align-items: center;
 }
 
-.inputs div:not(.full-name, .input-validation, .error-wrapper):hover{
+.inputs div:not(.full-name, .input-validation, .error-wrapper, .upload-label):hover{
   border: 1px solid var(--primary);
   transition: all .25s ease;
 }
@@ -146,7 +146,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-3);
-  margin-top:var(--spacing-8);;
+  margin-top:var(--spacing-8);
+  transition:background-color .4s ease;
 }
 
 .cta a, 
@@ -176,6 +177,26 @@ footer p{
 .dashboard-container{
   display: flex;
 }
+
+.content-container{
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-4);
+}
+
+.dashboard-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: var(--spacing-5);
+  border-bottom: 1px solid var(--border);
+}
+
+.dashboard-header a {
+  text-decoration: none;
+}
+
+
 main{
   width: 100%;
 }
@@ -284,6 +305,7 @@ main{
 .dropDown-wrapper{
   background-color: var(--surface-container);
   padding: var(--spacing-3);
+  border-radius: 8px;
 }
 
 .dropHeader {
@@ -313,4 +335,47 @@ main{
   display: flex;
   flex-direction: column;
   gap: var(--spacing-6);
+}
+
+/* 
+  * Create post page 
+*/
+.categories-dropDown{
+  width: 100%;
+  /* padding: ; */
+}
+
+
+.upload-field{
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.custom-file-upload{
+  font-size: var(--fs-caption1);
+  border-radius: 1000px;
+  padding-inline: var(--spacing-3);
+  padding-block: var(--spacing-2);
+  white-space: nowrap;
+  display: inline-block;
+  background-color: var(--on-surface-container);
+  cursor: pointer;
+}
+
+#file-upload{
+  display: none;
+}
+
+.upload-label{
+  display: flex;
+  gap: var(--spacing-2);
+}
+
+
+/* 
+  *editor rich text 
+*/
+.editor-container{
+  max-width: 100%;
+  background-color: var(--surface-container);
 }

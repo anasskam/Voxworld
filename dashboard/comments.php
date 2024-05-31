@@ -21,5 +21,16 @@
         include "../components/sidebar.php"
     ?>
 
+    <main>
+            <!-- header bar --> 
+        <?php
+            include "../components/dashboard-header.php"
+        ?>
+        
+        <div class="content-container">
+
+        </div>
+    </main>
+
 </body>
 </html>
