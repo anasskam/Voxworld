@@ -63,9 +63,9 @@ if (isset($_POST['submit'])) {
   <div class="container">
     <div class="two-cols">
       <div class="left">
-        <img src="../assets/images/login-illustration.svg" alt="illustration">
+        <img src="../assets/images/login-illustration.svg" alt="illustration" class="fit-viewport-height">
       </div>
-      <div class="right">
+      <div class="right fit-viewport-height">
         <?php include '../components/auth-header.php'; ?>
 
       <form class="form-container" method="post">

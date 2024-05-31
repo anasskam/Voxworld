@@ -22,10 +22,7 @@ const properties =  {
   toolbar: {
       items: [
           'undo', 'redo', 'heading', 'fontFamily', 'fontSize', '|',
-          'bold', 'italic', 'underline', 'strikethrough', 'code', 'fontColor', 'fontBackgroundColor', 'highlight', 'removeFormat', '|', 'link', 'uploadImage', 'blockQuote', 'mediaEmbed','|',
-          '-',
-          'bulletedList', 'numberedList', 'todoList', '|', 'alignment', '|', 'outdent', 'indent', '|',
-          'specialCharacters', 'horizontalLine', 
+          'bold', 'italic', 'underline', 'strikethrough', 'fontColor', 'fontBackgroundColor', '|', 'link', 'uploadImage', 'blockQuote', '|','bulletedList', 'numberedList', 'todoList', '|', 'alignment', '|', 'outdent', 'indent', '|',
           
       ],
 

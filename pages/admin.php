@@ -3,16 +3,7 @@ session_start();
 //inti error msg//
 $errorMessages = ['password' => '','username' => ''];
 
-function errorTemplate($error) {
-  $template = "
-  <div class='error-wrapper'>
-    <img src='../assets/icons/alert.svg'>
-    <p class='text-button email-validation-text error'>" .$error ."</p>
-  </div>
-  ";
-
-  return $template;
-}
+include '../components/errorTemplate.php';
 
 
 if (isset($_POST['submit'])) {
