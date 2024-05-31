@@ -725,11 +725,14 @@ p,
 }
 
 .form-container{
-  /* width: min(1440px, 60%); */
-  width: clamp(60%,10%,1440px);
+  width: clamp(65%, 25%, 400px);
   margin-inline: auto;
 }
-
+.content-container{
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
 .two-cols{
   display: grid;
   grid-template-columns: 45% 50%;
@@ -752,6 +755,10 @@ p,
 
 .flex-align-center{
   align-items: center;
+}
+
+.fit-viewport-height{
+  max-height: 100vh;
 }
 
 /**

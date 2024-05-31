@@ -9,12 +9,12 @@
     <!-- custom css links -->
     <link rel="shortcut icon" href="../assets/images/favicon32.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
+    
 
     <!-- custom js -->
     <script src="../js/theme.js" defer></script>
     <script src="../js/sidebar.js" defer></script>
     <script src="../js/createPost.js" type="module" defer></script>
-    <!-- <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script> -->
     <script src="../assets/ckeditor5/build/ckeditor.js"></script>
 
 </head>
@@ -34,98 +34,99 @@
             ?>
             <div class="content-container">
                 <p class="text-body1">Create a new post</p>
-                <form method="post">
-                    <div class="inputs">
-                        <div class="input-validation">
-                            <div class="title-field input-field">
+                <form method="post" >
+                    <div class="create-post-inputs-wrapper">
+                        <div class="inputs">
+                            <div class="input-validation">
+                                <div class="title-field input-field">
 
-                                <!-- title icon -->
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-half">
-                                    <path d="M2.67 7.17V5.35C2.67 4.2 3.6 3.28 4.74 3.28H19.26C20.41 3.28 21.33 4.21 21.33 5.35V7.17" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M12 20.72V4.10999" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M8.06 20.72H15.94" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-
-                                <input type="text" placeholder="Title" name="title">
-                            </div>
-
-                            <?php
-                                // if(isset($_POST['submit']) && !empty($errorMessages)){
-                                // echo $errorMessages['fname']; 
-                                // }
-                            ?>
-
-                        </div>
-
-                        <div class="input-validation">
-                            <div class="categories-field input-field">
-
-                                <!-- category icon -->
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-half">
-                                    <path d="M22 8.27V4.23C22 2.64 21.36 2 19.77 2H15.73C14.14 2 13.5 2.64 13.5 4.23V8.27C13.5 9.86 14.14 10.5 15.73 10.5H19.77C21.36 10.5 22 9.86 22 8.27Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M10.5 8.52V3.98C10.5 2.57 9.86 2 8.27 2H4.23C2.64 2 2 2.57 2 3.98V8.51C2 9.93 2.64 10.49 4.23 10.49H8.27C9.86 10.5 10.5 9.93 10.5 8.52Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M10.5 19.77V15.73C10.5 14.14 9.86 13.5 8.27 13.5H4.23C2.64 13.5 2 14.14 2 15.73V19.77C2 21.36 2.64 22 4.23 22H8.27C9.86 22 10.5 21.36 10.5 19.77Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M15 15.5H21" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round"/>
-                                    <path d="M15 19.5H21" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round"/>
-                                </svg>
-
-                                <select name="categories" id="categories" class="categories-dropDown">
-                                    <option value="Politics">Politics</option>
-                                    <option value="Economy">Economy</option>
-                                    <option value="Society">Society</option>
-                                    <option value="Culture">Culture</option>
-                                    <option value="Science & Tech">Science & Tech</option>
-                                    <option value="Business">Business</option>
-                                    <option value="Sports">Sports</option>
-                                    <option value="Ents & Arts">Ents & Arts</option>
-                                    <option value="Mena">Mena</option>
-                                    <option value="Health">Health</option>
-                                    <option value="International">International</option>
-                                </select>
-
-                                <!-- arrow -->
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class= "drop-arrow">
-                                    <path d="M8.95 4.08L15.47 10.6C16.24 11.37 16.24 12.63 15.47 13.4L8.95 19.92" stroke="currentcolor" stroke-width="1.25" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-
-                            </div>
-                        </div>
-
-                        <div class="input-validation">
-                            <div class="upload-field input-field">
-                                <div class="upload-label">
-                                    <!-- image upload icon -->
+                                    <!-- title icon -->
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-half">
-                                        <path d="M9 10C10.1046 10 11 9.10457 11 8C11 6.89543 10.1046 6 9 6C7.89543 6 7 6.89543 7 8C7 9.10457 7.89543 10 9 10Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M13 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22H15C20 22 22 20 22 15V10" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                        <path d="M15.75 5H21.25" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round"/>
-                                        <path d="M18.5 7.75V2.25" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round"/>
-                                        <path d="M2.67 18.95L7.6 15.64C8.39 15.11 9.53 15.17 10.24 15.78L10.57 16.07C11.35 16.74 12.61 16.74 13.39 16.07L17.55 12.5C18.33 11.83 19.59 11.83 20.37 12.5L22 13.9" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M2.67 7.17V5.35C2.67 4.2 3.6 3.28 4.74 3.28H19.26C20.41 3.28 21.33 4.21 21.33 5.35V7.17" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M12 20.72V4.10999" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M8.06 20.72H15.94" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                                     </svg>
-                                    <p class="text-body2 opacity-half file-info">Upload image</p>
+
+                                    <input type="text" placeholder="Title" name="title">
                                 </div>
-                                
-                                <input type="file" id="file-upload" name="file-upload" value="upload img">
-                                <label for="file-upload" class="custom-file-upload">Uplaod image</label>
-                                
+
+                                <?php
+                                    // if(isset($_POST['submit']) && !empty($errorMessages)){
+                                    // echo $errorMessages['fname']; 
+                                    // }
+                                ?>
+
                             </div>
-                            <script>
-                                document.querySelector(".upload-field").style.height = 
-                                `${document.querySelector('.title-field').getBoundingClientRect().height}px`;
 
-                            </script>
+                            <div class="input-validation">
+                                <div class="categories-field input-field">
+
+                                    <!-- category icon -->
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-half">
+                                        <path d="M22 8.27V4.23C22 2.64 21.36 2 19.77 2H15.73C14.14 2 13.5 2.64 13.5 4.23V8.27C13.5 9.86 14.14 10.5 15.73 10.5H19.77C21.36 10.5 22 9.86 22 8.27Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M10.5 8.52V3.98C10.5 2.57 9.86 2 8.27 2H4.23C2.64 2 2 2.57 2 3.98V8.51C2 9.93 2.64 10.49 4.23 10.49H8.27C9.86 10.5 10.5 9.93 10.5 8.52Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M10.5 19.77V15.73C10.5 14.14 9.86 13.5 8.27 13.5H4.23C2.64 13.5 2 14.14 2 15.73V19.77C2 21.36 2.64 22 4.23 22H8.27C9.86 22 10.5 21.36 10.5 19.77Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M15 15.5H21" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round"/>
+                                        <path d="M15 19.5H21" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round"/>
+                                    </svg>
+
+                                    <select name="categories" id="categories" class="categories-dropDown">
+                                        <option value="Politics">Politics</option>
+                                        <option value="Economy">Economy</option>
+                                        <option value="Society">Society</option>
+                                        <option value="Culture">Culture</option>
+                                        <option value="Science & Tech">Science & Tech</option>
+                                        <option value="Business">Business</option>
+                                        <option value="Sports">Sports</option>
+                                        <option value="Ents & Arts">Ents & Arts</option>
+                                        <option value="Mena">Mena</option>
+                                        <option value="Health">Health</option>
+                                        <option value="International">International</option>
+                                    </select>
+
+                                    <!-- arrow -->
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class= "drop-arrow">
+                                        <path d="M8.95 4.08L15.47 10.6C16.24 11.37 16.24 12.63 15.47 13.4L8.95 19.92" stroke="currentcolor" stroke-width="1.25" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+
+                                </div>
+                            </div>
+
+                            <div class="input-validation">
+                                <div class="upload-field input-field">
+                                    <div class="upload-label">
+                                        <!-- image upload icon -->
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-half">
+                                            <path d="M9 10C10.1046 10 11 9.10457 11 8C11 6.89543 10.1046 6 9 6C7.89543 6 7 6.89543 7 8C7 9.10457 7.89543 10 9 10Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M13 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22H15C20 22 22 20 22 15V10" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path d="M15.75 5H21.25" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round"/>
+                                            <path d="M18.5 7.75V2.25" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round"/>
+                                            <path d="M2.67 18.95L7.6 15.64C8.39 15.11 9.53 15.17 10.24 15.78L10.57 16.07C11.35 16.74 12.61 16.74 13.39 16.07L17.55 12.5C18.33 11.83 19.59 11.83 20.37 12.5L22 13.9" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        <p class="text-body2 opacity-half file-info">Upload image</p>
+                                    </div>
+                                    
+                                    <input type="file" id="file-upload" name="file-upload" value="upload img">
+                                    <label for="file-upload" class="custom-file-upload">Uplaod image</label>
+                                    
+                                </div>
+                                <script>
+                                    document.querySelector(".upload-field").style.height = 
+                                    `${document.querySelector('.title-field').getBoundingClientRect().height}px`;
+
+                                </script>
+                            </div>
+
+
+                        </div>  
+
+                        <div class="editor-container">
+                            <textarea name="editor-content" id="editor"></textarea>
                         </div>
-
-
-                    </div>  
-
-                    <div class="editor-container">
-                        <div id="editor"></div>
-                        <!-- <textarea name="editor" id="editor"></textarea> -->
-                    </div>
-                        
-                    <div class="cta margin-0">
-                    <input type="submit" value="Update changes" name="update-username" class="primary-btn">
+                            
+                        <div class="cta margin-0">
+                        <input type="submit" value="Publish" name="update-username" class="primary-btn">
+                        </div>
                     </div>
                 </form>
             </div>

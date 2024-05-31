@@ -5,8 +5,8 @@
 ========================================================================== */
 
 .left img {
-  /* width: 320px; */
-  width: 100%;
+  max-width: 100%;
+  object-fit: cover;
   transform: translateX(-50%);
 }
 
@@ -15,15 +15,14 @@
   flex-direction: column;
   justify-content: space-between;
   padding-block: var(--spacing-8);
-  
 }
+
 
 /* header styling */
 .right header {
   display: flex;
   flex-direction: row;
   gap:var(--spacing-05);
-  margin-bottom: var(--spacing-13);
   align-items: center;
 
 }
@@ -208,9 +207,9 @@ main{
 .side-bar{
   display: flex;
   flex-direction: column;
-  width: min(25%, 250px);
+  min-width: min(25%, 250px);
   border-right: var(--border-line);
-  height: 100vh;
+  min-height: 100vh;
   color: var(--background-text);
 
 }
@@ -273,6 +272,15 @@ main{
   
 }
 
+/* 
+*Settings page
+*/
+
+.dropDowns-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+}
 .drop-arrow{
   transition: transform 0.4s ease;
 }
@@ -345,7 +353,11 @@ main{
   /* padding: ; */
 }
 
-
+.create-post-inputs-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
 .upload-field{
   justify-content: space-between;
   cursor: pointer;
@@ -378,4 +390,70 @@ main{
 .editor-container{
   max-width: 100%;
   background-color: var(--surface-container);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.ck .ck-editor {
+  color: var(--color);
+  background-color: var(--surface-container) !important;
+  max-width: 100% !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.ck .ck-editor__editable_inline {
+  background-color: var(--surface-container) !important;
+  color:var(--background-text) !important;
+  border: none !important;
+  min-height: 300px;
+  max-width: 100% !important;
+  padding: var(--spacing-2);
+}
+.ck .ck-editor__editable_inline li{
+  list-style-type:circle !important;
+}
+
+.ck.ck-toolbar {
+  background-color: var(--surface-container) !important;
+  color: #fff;
+  border: none;
+  outline: none;
+}
+
+.ck.ck-toolbar button {
+  color:var(--background-text) !important; ;
+}
+
+.ck.ck-toolbar button:hover {
+  background-color: var(--on-surface-container) !important;
+}
+
+.ck .ck-sticky-panel__content{
+  border: none !important;
+  border-bottom: 1px solid var(--border) !important;
+  padding-bottom: var(--spacing-2) !important;
+}
+
+.ck.ck-toolbar .ck-button__label {
+  color: var(--background-text);
+}
+
+.ck .ck-dropdown__panel{
+  background-color: var(--surface-container) !important;
+}
+
+.ck .ck-dropdown__panel .ck-list{
+  background-color: var(--surface-container) !important;
+}
+
+.ck .ck-on{
+  border: none !important;
+  outline: none !important;
+  background-color: var(--on-surface-container) !important;
+}
+
+.ck .ck-list__item{
+  border: none !important;
+  outline: none !important;
+  border-collapse: none !important;
 }
