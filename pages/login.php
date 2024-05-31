@@ -3,16 +3,7 @@ session_start();
 
 // Initialize error messages //
 $errorMessages = ['password'=> '', 'email' => ''];
-
-function errorTemplate($error) {
-  $template = "
-  <div class='error-wrapper'>
-    <img src='../assets/icons/alert.svg'>
-    <p class='text-button email-validation-text error'>" .$error ."</p>
-  </div>
-  ";
-  return $template;
-}
+include '../components/errorTemplate.php';
 
 // Check if form is submitted //
 if (isset($_POST['submit'])) {
@@ -47,7 +38,7 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    // Store the email in the session to retain it in the form
+    // Store the email in the session to retain it in the form //
     $_SESSION['email'] = $email;
 }
 ?>

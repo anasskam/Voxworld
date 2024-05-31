@@ -1,3 +1,10 @@
+<?php
+session_start();
+// Session Test //
+include '../components/session-check.php';
+$adminId = checkAdminSession();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +27,17 @@
     <?php
         include "../components/sidebar.php"
     ?>
+
+    <main>
+            <!-- header bar --> 
+        <?php
+            include "../components/dashboard-header.php"
+        ?>
+        
+        <div class="content-container">
+
+        </div>
+    </main>
 
 </body>
 </html>

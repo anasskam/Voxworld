@@ -1,13 +1,8 @@
 <?php
 session_start();
 // Session Test //
-
-if (!isset($_SESSION['adminId'])) {
-    // Redirect to login page //
-    header('Location: ../pages/admin.php'); 
-    exit();
-  }
-   $adminId = $_SESSION['adminId'];
+include '../components/session-check.php';
+$adminId = checkAdminSession();
 
 ?>
 
@@ -29,10 +24,22 @@ if (!isset($_SESSION['adminId'])) {
 </head>
 <body>
 
-    <!-- side bar --> 
-    <?php
-        include "../components/sidebar.php";
-    ?>
+    <div class="dashboard-container">
+        <!-- side bar --> 
+        <?php
+            include "../components/sidebar.php"
+        ?>
+
+        <main>
+            <!-- header bar -->
+            <?php
+                include "../components/dashboard-header.php"
+            ?>
+
+            <div class="content-container"></div>
+        </main>
+    </div>
+
 
 </body>
 </html>

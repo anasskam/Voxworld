@@ -3,7 +3,6 @@ const dropHeaders = document.querySelectorAll(".dropHeader");
 const spacers = document.querySelectorAll(".spacer");
 
 
-
 dropHeaders.forEach(header => {
   header.addEventListener("click", (e) =>{
     toggleDrop(e);
@@ -31,15 +30,3 @@ function toggleDrop(e){
   })
 
 }
-// dropContent.classList.toggle("expanded");
-// if(dropContent.classList.contains("expanded")){
-//   dropArrow.style.transform = 'rotate(90deg)';
-//   spacer.style.display= "block";
-// }
-// else{
-//   dropArrow.style.transform = 'rotate(0deg)';
-//   setTimeout(() => {
-//     spacer.style.display= "none";
-    
-//   }, 245);
-

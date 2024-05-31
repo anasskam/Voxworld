@@ -90,6 +90,7 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
 /**
  * Remove the bullets form the li
  */
@@ -192,6 +193,7 @@ textarea {
   margin: 0; /* 2 */
   outline: none;
   border: none;
+  
 }
 
 /**
@@ -199,10 +201,14 @@ textarea {
  * 1. Show the overflow in Edge.
  */
 
-button,
-input{ /* 1 */
+button{ /* 1 */
   overflow: visible;
   font-size: var(--fs-button);
+}
+
+input{
+  overflow: visible;
+  font-size: var(--fs-body2);
 }
 
 input::placeholder{
@@ -218,6 +224,24 @@ input::placeholder{
 button,
 select { /* 1 */
   text-transform: none;
+}
+
+
+select::-ms-expand {
+  display: none;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-overflow: '';
+  padding-block: var(--spacing-3);
+  background-color: transparent;
+}
+select *{
+
+  background-color: var(--surface-container);
+  padding: var(--spacing-4);
 }
 
 /**
@@ -580,7 +604,6 @@ h2,
 h3{
   font-weight:var(--fw-regular);
   color: inherit;
-  color:var(--background);
 }
 
 /**
@@ -720,6 +743,16 @@ p,
   height: 100%;
 }
 
+.flex{
+  display: flex;
+}
+.flex-justify-center{
+  justify-content: center;
+}
+
+.flex-align-center{
+  align-items: center;
+}
 
 /**
   * typography calsses
@@ -773,8 +806,20 @@ p,
   border-radius: 8px;
   cursor: pointer;
   color: var(--clr-white);
+  transition: background-color .35s ease;
+  gap: var(--spacing-1);
+  font-size: var(--fs-button);
 }
 
+.primary-btn:hover{
+  background-color: var(--clr-primary-600);
+
+}
+
+.header-btn{
+  padding-block: var(--spacing-2);
+  padding-inline: var(--spacing-3);
+}
 
 /**
   * paddings & margins, widths...
@@ -812,4 +857,7 @@ p,
 .smooth{
   transition: all .4s ease;
   
+}
+.full-rounded{
+  border-radius: 1000px;
 }
