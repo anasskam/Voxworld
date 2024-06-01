@@ -119,8 +119,8 @@ if (isset($_POST['update-password'])) {
   <link rel="stylesheet" href="../css/style.css">
 
   <!-- custom js -->
-  <script src="../js/theme.js" defer></script>
-  <script src="../js/sidebar.js" defer></script>
+  <script src="../js/theme.js" type="module" defer></script>
+  <script src="../js/toggleTheme.js" type="module" defer></script>
   <script src="../js/settings.js" defer></script>
   <script src="../js/auth.js" defer></script>
 </head>
@@ -322,6 +322,55 @@ if (isset($_POST['update-password'])) {
 
                   </div>
                 </form>
+              </div>
+
+            </div>
+          </div> 
+
+          <div class="dropDown-wrapper">
+
+            <!-- update appearence -->
+            <div class="dropDown">
+
+              <!-- drop down header -->
+              <div class="dropHeader" data-for="appearence"> <!-- appearence -->
+                <div class="headerContent">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21.81 3.94C20.27 7.78 16.41 13 13.18 15.59L11.21 17.17C10.96 17.35 10.71 17.51 10.43 17.62C10.43 17.44 10.42 17.24 10.39 17.05C10.28 16.21 9.9 15.43 9.23 14.76C8.55 14.08 7.72 13.68 6.87 13.57C6.67 13.56 6.47 13.54 6.27 13.56C6.38 13.25 6.55 12.96 6.76 12.72L8.32 10.75C10.9 7.52 16.14 3.64 19.97 2.11C20.56 1.89 21.13 2.05 21.49 2.42C21.87 2.79 22.05 3.36 21.81 3.94Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10.43 17.62C10.43 18.72 10.01 19.77 9.22 20.57C8.61 21.18 7.78 21.6 6.79 21.73L4.33 22C2.99 22.15 1.84 21.01 2 19.65L2.27 17.19C2.51 15 4.34 13.6 6.28 13.56C6.48 13.55 6.69 13.56 6.88 13.57C7.73 13.68 8.56 14.07 9.24 14.76C9.91 15.43 10.29 16.21 10.4 17.05C10.41 17.24 10.43 17.43 10.43 17.62Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M14.24 14.47C14.24 11.86 12.12 9.73999 9.51 9.73999" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                  <p>Appearance</p>
+                </div>
+
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class= "drop-arrow">
+                <path d="M8.95 4.08L15.47 10.6C16.24 11.37 16.24 12.63 15.47 13.4L8.95 19.92" stroke="currentcolor" stroke-width="1.25" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+              </div>
+              
+              <div class="spacer"></div>
+              
+              <!-- drop down content -->
+              <div class="dropContent" data-for="appearence">
+                <div class="appearence-dropDown-wrapper">
+
+                  <div class="appearence-option-wrapper appearence-light-option opacity-half" data-icon="light">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 18.5C15.5899 18.5 18.5 15.5899 18.5 12C18.5 8.41015 15.5899 5.5 12 5.5C8.41015 5.5 5.5 8.41015 5.5 12C5.5 15.5899 8.41015 18.5 12 18.5Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M19.14 19.14L19.01 19.01M19.01 4.99L19.14 4.86L19.01 4.99ZM4.86 19.14L4.99 19.01L4.86 19.14ZM12 2.08V2V2.08ZM12 22V21.92V22ZM2.08 12H2H2.08ZM22 12H21.92H22ZM4.99 4.99L4.86 4.86L4.99 4.99Z" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Light
+                  </div>
+
+                  <div class="appearence-option-wrapper appearence-dark-option opacity-half" data-icon="dark">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M2.03 12.42C2.39 17.57 6.76 21.76 11.99 21.99C15.68 22.15 18.98 20.43 20.96 17.72C21.78 16.61 21.34 15.87 19.97 16.12C19.3 16.24 18.61 16.29 17.89 16.26C13 16.06 9 11.97 8.98 7.13999C8.97 5.83999 9.24 4.60999 9.73 3.48999C10.27 2.24999 9.62 1.65999 8.37 2.18999C4.41 3.85999 1.7 7.84999 2.03 12.42Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Dark
+                  </div>
+
+                </div>
               </div>
 
             </div>

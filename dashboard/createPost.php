@@ -69,7 +69,7 @@ if (isset($_POST['submit'])) {
     
 
     <!-- custom js -->
-    <script src="../js/theme.js" defer></script>
+    <script src="../js/theme.js" type="module" defer></script>
     <script src="../js/sidebar.js" defer></script>
     <script src="../js/createPost.js" type="module" defer></script>
     <script src="../assets/ckeditor5/build/ckeditor.js"></script>
@@ -87,11 +87,11 @@ if (isset($_POST['submit'])) {
         <!-- main content -->
         <main>
             <?php
-                include "../components/dashboard-header.php"
+                include "../components/dashboard-header2.php"
             ?>
             <div class="content-container">
                 <p class="text-body1">Create a new post</p>
-                <form method="post" enctype="multipart/form-data" >
+                <form method="post" enctype="multipart/form-data">
                     <div class="create-post-inputs-wrapper">
                         <div class="inputs">
                             <div class="input-validation">
@@ -183,33 +183,30 @@ if (isset($_POST['submit'])) {
                                     `${document.querySelector('.title-field').getBoundingClientRect().height}px`;
                                 </script>
                             </div>
-
-
                         </div>  
 
-                    <div class="editor-container">
+                   
                         <div class="input-validation">
-                            <textarea name="editor-content" id="editor">
-                                <?php
-                                if (isset($_SESSION['editor-content'])) {
-                                    echo htmlspecialchars($_SESSION['editor-content']);
-                                } else {
-                                    echo '';
-                                }                            
-                                ?>
-                            </textarea>
-
+                            <div class="editor-container">
+                                <textarea name="editor-content" id="editor">
+                                    <?php
+                                    if (isset($_SESSION['editor-content'])) {
+                                        echo htmlspecialchars($_SESSION['editor-content']);
+                                    } else {
+                                        echo '';
+                                    }                            
+                                    ?>
+                                </textarea>
+                            </div>
                             <?php
                                 if(isset($_POST['submit']) && !empty($errorMessages)){
                                     echo $errorMessages['content']; 
                                 }
                             ?>
-
                         </div>
-                    </div>
                         
                     <div class="cta margin-0">
-                    <input type="submit" value="Update changes" name="submit" class="primary-btn">
+                    <input type="submit" value="Update changes" name="submit" class="primary-btn publish-form-btn">
                     </div>
                 </form>
             </div>
