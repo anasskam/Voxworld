@@ -17,30 +17,32 @@ if (isset($_POST['submit'])) {
     $category = $_POST['categories'];
     date_default_timezone_set("Africa/Casablanca");
     $image = "";
-    if (isset($_FILES['file-upload'])) {
-        $image = $_FILES['file-upload']['name'];
-        $filename = uniqid().$image;
-        $destination = '../assets/hostedImages/' . $filename;
-        move_uploaded_file($_FILES['file-upload']['tmp_name'], $destination);
-    }
-
-
+    
     if (empty($title)) {
         $errorMessages['title'] = errorTemplate("Title is required.");
     }
 
-    elseif (empty($image)) {
+    if (empty($_FILES['file-upload']['name'])) {
         $errorMessages['image'] = errorTemplate("Image is required.");
+    } else {
+        $image = $_FILES['file-upload']['name'];
     }
 
-    elseif (empty($content)) {
+    if (empty($content)) {
         $errorMessages['content'] = errorTemplate("Content is required.");
     }
 
-    else {
-
-        $createPost = $conn->prepare('INSERT INTO posts VALUES (NULL, ?, ?, ?, ?, ?, NULL)');
-        $createPost->execute([$title, $content, $filename, $category, $postDate]);
+    // Only proceed if there are no error messages //
+    if (empty(array_filter($errorMessages))) {
+        
+        $filename = uniqid() . $image;
+        $destination = '../assets/hostedImages/' . $filename;
+        if (move_uploaded_file($_FILES['file-upload']['tmp_name'], $destination)) {
+            $createPost = $conn->prepare('INSERT INTO posts VALUES (NULL, ?, ?, ?, ?, ?, NULL)');
+            $createPost->execute([$title, $content, $filename, $category, $postDate]);
+        } else {
+            $errorMessages['image'] = errorTemplate("Failed to upload image.");
+        }
     }
     
     // Store the inputs in the session to retain it in the form //
@@ -48,8 +50,6 @@ if (isset($_POST['submit'])) {
      $_SESSION['categories'] = $category;
      $_SESSION['file-upload'] = $image;
      $_SESSION['editor-content'] = $content;
-     
-
 }
 
 

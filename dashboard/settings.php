@@ -8,11 +8,12 @@ $adminId = checkAdminSession();
 require_once '../components/connect.php';
 
 // init error msg //
-$errorMessages = ['username'=> '','password' => ''];
+$errorMessages = ['current-username'=> '', 'new-username'=> '', 'current-password' => '', 'new-password' => '',];
+include '../components/errorTemplate.php';
 
 
 //----------------------- USERNAME UPDATE START -----------------------//
-if (isset($_POST['update-username1'])) {
+if (isset($_POST['update-username'])) {
   
   $currentusername = $_POST['current-username'];
   $newusername = $_POST['new-username'];
@@ -32,18 +33,23 @@ if (isset($_POST['update-username1'])) {
         if ($checkNewUsername->rowCount() == 0) {
           $updateUsername = $conn->prepare('UPDATE admin SET username = ? WHERE id_admin = ?');
           if ($updateUsername->execute([$newusername, $adminId])) {
+
+            // TODO: add success and failure popups //
+
+            // TODO: keep dropdown open when page reloads //
+
             echo 'Username updated successfully';
           } else {
             echo 'Error updating username';
           }
         } else {
-          echo 'Username already taken';
+          $errorMessages['new-username'] = errorTemplate("Username already taken");
         }
       } else {
-        echo 'New username cannot be the same as the current username';
+        $errorMessages['new-username'] = errorTemplate("New username cannot be the same as the current username");
       }
     } else {
-      echo 'Invalid current username';
+      $errorMessages['current-username'] = errorTemplate("Invalid current username");
     }
   }
 } 
@@ -71,15 +77,26 @@ if (isset($_POST['update-password'])) {
           $hashed_password = password_hash($newpwd, PASSWORD_DEFAULT);
           $updatePwd = $conn->prepare('UPDATE admin SET password = ? WHERE id_admin = ?');
           if ($updatePwd->execute([$hashed_password, $adminId])) {
+            
+            // TODO: add success and failure popups //
+
             echo 'Password updated successfully.';
+            // Destroy all session data //
+            session_unset();
+            session_destroy();
+
+            // Redirect to the login page //
+            header("Location: ../pages/admin.php"); 
+            exit();
+
           } else {
             echo 'Error updating password.';
           }
         } else {
-          echo 'Password already exists';
+          $errorMessages['new-password'] = errorTemplate("Password already exists");
         }
       } else {
-        echo 'Invalid current password';
+        $errorMessages['current-password'] = errorTemplate("Invalid current password");
       }
     } else {
       echo 'Admin not found.';
@@ -173,8 +190,8 @@ if (isset($_POST['update-password'])) {
                         </div>
 
                         <?php
-                          if(isset($_POST['submit']) && !empty($errorMessages)){
-                            echo $errorMessages['fname']; 
+                          if(isset($_POST['update-username']) && !empty($errorMessages)){
+                            echo $errorMessages['current-username']; 
                           }
                         ?>
 
@@ -195,8 +212,8 @@ if (isset($_POST['update-password'])) {
                         </div>
 
                         <?php
-                          if(isset($_POST['submit']) && !empty($errorMessages)){
-                            echo $errorMessages['fname']; 
+                          if(isset($_POST['update-username']) && !empty($errorMessages)){
+                            echo $errorMessages['new-username']; 
                           }
                         ?>
 
@@ -205,7 +222,7 @@ if (isset($_POST['update-password'])) {
                     </div>
 
                   <div class="cta full margin-0">
-                    <input type="submit" value="Update changes" name="update-username1" class="primary-btn full">
+                    <input type="submit" value="Update changes" name="update-username" class="primary-btn full">
                   </div>
 
                   </div>
@@ -265,8 +282,8 @@ if (isset($_POST['update-password'])) {
                   
                       </div>
                       <?php
-                        if(isset($_POST['submit']) && !empty($errorMessages)){
-                          echo  $errorMessages['password']; 
+                        if(isset($_POST['update-password']) && !empty($errorMessages)){
+                          echo  $errorMessages['current-password']; 
                         }
                       ?> 
 
@@ -295,8 +312,8 @@ if (isset($_POST['update-password'])) {
                   
                       </div>
                       <?php
-                        if(isset($_POST['submit']) && !empty($errorMessages)){
-                          echo  $errorMessages['password']; 
+                        if(isset($_POST['update-password']) && !empty($errorMessages)){
+                          echo  $errorMessages['new-password']; 
                         }
                       ?> 
 
