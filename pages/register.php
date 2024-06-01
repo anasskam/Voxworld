@@ -79,7 +79,8 @@ if (isset($_POST['submit'])) {
   <link rel="stylesheet" href="../css/style.css">
 
   <!-- custom js -->
-  <script src="../js/theme.js" defer></script>
+  <script src="../js/theme.js" type="module" defer></script>
+  <script src="../js/toggleTheme.js" type="module" defer></script>
   <script src="../js/auth.js" defer></script>
 </head>
 <body>

@@ -28,7 +28,7 @@
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 
- html {
+html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
 }
@@ -422,7 +422,7 @@ template {
   --fs-body2:1rem;
   --fs-caption1:0.75rem;
   --fs-caption2:0.6875rem;
-  --fs-button:0.875;
+  --fs-button:0.875rem;
 
     /* Font weight variables
    ========================================================================== */
@@ -566,6 +566,7 @@ template {
   --surface-container:var(--clr-bg-highlight);
   --surface-container-text-low:var(--clr-gray);
   --on-surface-container:var(--clr-gray-900);
+  --hover-on-surface-container:var(--clr-gray-850);
   --primary:var(--clr-primary);
   --border:var(--clr-dark-border);
   --login-on-surface-text:var(--clr-gray-600);
@@ -579,6 +580,7 @@ template {
   --surface-container:var(--clr-gray-50);
   --surface-container-text-low:var(--clr-gray-600);
   --on-surface-container:var(--clr-gray-150);
+  --hover-on-surface-container:var(--clr-gray-200);
   --primary:var(--clr-primary);
   --border:var(--clr-gray-150);
   --login-on-surface-text:var(--clr-gray-600);
@@ -818,9 +820,27 @@ p,
   font-size: var(--fs-button);
 }
 
+.delete-btn{
+  font-size: var(--fs-button);
+  background-color: var(--on-surface-container);
+  color: var(--clr-error);
+  padding-inline: var(--spacing-3);
+  padding-block: var(--spacing-2);
+  border-radius: 1000px;
+  cursor: pointer;
+  gap: var(--spacing-1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color .35s ease;
+}
+
 .primary-btn:hover{
   background-color: var(--clr-primary-600);
+}
 
+.delete-btn:hover{
+  background-color: var(--hover-on-surface-container);
 }
 
 .header-btn{

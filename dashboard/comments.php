@@ -18,26 +18,27 @@ $adminId = checkAdminSession();
     <link rel="stylesheet" href="../css/style.css">
 
     <!-- custom js -->
-    <script src="../js/theme.js" defer></script>
+    <script src="../js/theme.js" type="module" defer></script>
     <script src="../js/sidebar.js" defer></script>
 </head>
 <body>
-
-    <!-- side bar --> 
-    <?php
-        include "../components/sidebar.php"
-    ?>
-
-    <main>
-            <!-- header bar --> 
+    
+    <div class="dashboard-container">
+        <!-- side bar --> 
         <?php
-            include "../components/dashboard-header.php"
+            include "../components/sidebar.php"
         ?>
-        
-        <div class="content-container">
 
-        </div>
-    </main>
+        <main>
+                <!-- header bar --> 
+            <?php
+                include "../components/dashboard-header.php"
+            ?>
+            
+            <div class="content-container">
 
+            </div>
+        </main>
+    </div>
 </body>
 </html>

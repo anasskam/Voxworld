@@ -1,6 +1,27 @@
 @import url("./global.css");
 
 
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--on-surface-container); 
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  opacity: 0.5;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  opacity: 1;
+}
+
+
 /* LOGIN & SIGN UP PAGES STYLING
 ========================================================================== */
 
@@ -197,7 +218,7 @@ footer p{
 
 
 main{
-  width: 100%;
+  width: calc(100% - (100% / 6));
 }
 
 /*
@@ -207,7 +228,8 @@ main{
 .side-bar{
   display: flex;
   flex-direction: column;
-  min-width: min(25%, 250px);
+  /* min-width: min(25%, 250px); */
+  width: calc(100% / 6);
   border-right: var(--border-line);
   min-height: 100vh;
   color: var(--background-text);
@@ -289,13 +311,16 @@ main{
   transition: grid-template-rows 0.4s ease;
   display: grid;
   grid-template-rows: 0fr;
+  width: clamp(35%, 15%, 250px);
   
 }
 .spacer{
   height: var(--spacing-6);
   display: none;
 }
-.dropContent form{
+
+.dropContent form,
+.dropContent .appearence-dropDown-wrapper{
   overflow: hidden;
 }
 
@@ -307,7 +332,6 @@ main{
 .dropDown{
   display: flex;
   flex-direction: column;
-  /* gap: var(--spacing-6); */
 }
 
 .dropDown-wrapper{
@@ -344,6 +368,26 @@ main{
   flex-direction: column;
   gap: var(--spacing-6);
 }
+
+.appearence-dropDown-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap:var(--spacing-2);
+}
+
+.appearence-option-wrapper{
+  display: flex;
+  gap:var(--spacing-2);
+  padding: var(--spacing-2);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all .3s ease;
+}
+.appearence-option-wrapper:hover{
+  background-color: var(--on-surface-container);
+  opacity: 1;
+}
+
 
 /* 
   * Create post page 
@@ -383,12 +427,16 @@ main{
   gap: var(--spacing-2);
 }
 
+.publish-form-btn{
+  /* hide the submit button */
+  display: none;
+
+}
 
 /* 
   *editor rich text 
 */
 .editor-container{
-  max-width: 100%;
   background-color: var(--surface-container);
   border-radius: 8px;
   overflow: hidden;
@@ -396,7 +444,6 @@ main{
 .ck .ck-editor {
   color: var(--color);
   background-color: var(--surface-container) !important;
-  max-width: 100% !important;
   border: none !important;
   outline: none !important;
 }
@@ -406,7 +453,6 @@ main{
   color:var(--background-text) !important;
   border: none !important;
   min-height: 300px;
-  max-width: 100% !important;
   padding: var(--spacing-2);
 }
 .ck .ck-editor__editable_inline li{
@@ -456,4 +502,41 @@ main{
   border: none !important;
   outline: none !important;
   border-collapse: none !important;
+}
+
+
+
+/* 
+  * Manage users page 
+*/
+
+.table-wrapper{
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  word-wrap: break-word;
+  border-radius: 8px;
+}
+
+th, td {
+  padding: var(--spacing-3);
+  text-align: left;
+  width: 25%;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--fs-body2);
+}
+
+td{
+  padding-block: var(--spacing-2);
+
+}
+
+th {
+  background-color: var(--on-surface-container);
+  font-weight: var(--fw-sm);
 }

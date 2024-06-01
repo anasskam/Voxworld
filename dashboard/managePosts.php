@@ -17,7 +17,7 @@ $adminId = checkAdminSession();
     <link rel="stylesheet" href="../css/style.css">
 
     <!-- custom js -->
-    <script src="../js/theme.js" defer></script>
+    <script src="../js/theme.js" type="module" defer></script>
     <script src="../js/sidebar.js" defer></script>
 </head>
 <body>
