@@ -510,10 +510,23 @@ main{
   * Manage users page 
 */
 
+
 .table-wrapper{
   overflow: hidden;
   border-radius: 8px;
   border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.empty-state-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-block: var(--spacing-8);
+  gap:var(--spacing-4)
 }
 
 table {
@@ -526,7 +539,7 @@ table {
 th, td {
   padding: var(--spacing-3);
   text-align: left;
-  width: 25%;
+  /* width: 25%; */
   border-bottom: 1px solid var(--border);
   font-size: var(--fs-body2);
 }
