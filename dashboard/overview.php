@@ -3,7 +3,6 @@ session_start();
 // Session Test //
 include '../components/session-check.php';
 $adminId = checkAdminSession();
-
 ?>
 
 <!DOCTYPE html>

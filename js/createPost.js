@@ -22,7 +22,7 @@ const properties =  {
   toolbar: {
       items: [
           'undo', 'redo', 'heading', 'fontFamily', 'fontSize', '|',
-          'bold', 'italic', 'underline', 'strikethrough', 'fontColor', 'fontBackgroundColor', '|', 'link', 'uploadImage', 'blockQuote', '|','bulletedList', 'numberedList', 'todoList', '|', 'alignment', '|', 'outdent', 'indent', '|',
+          'bold', 'italic', 'underline', 'strikethrough', 'fontColor', 'fontBackgroundColor', '|', 'link', 'blockQuote', '|','bulletedList', 'numberedList', 'todoList', '|', 'alignment', '|', 'outdent', 'indent', '|',
           
       ],
 
@@ -99,6 +99,20 @@ ClassicEditor.create(editor, properties).then(editor =>{
 }).catch( error => {
   console.error(error.stack);
 })
+
+
+
+// IMAGE INSIDE RICH TEXT FEATURE //
+
+// ClassicEditor.create(editor, properties, {
+//     ckfinder: {
+//         uploadUrl: '../assets/ckeditor5/ckUpload.php'
+//     }
+// }).then(editor =>{
+//     console.log("Editor was initialized", editor );
+//   }).catch( error => {
+//     console.error(error.stack);
+//   })
 
 
 file.addEventListener("change", updateFileInfo)
