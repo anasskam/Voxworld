@@ -550,6 +550,6 @@ td{
 }
 
 th {
-  background-color: var(--on-surface-container);
+  background-color: var(--surface-container);
   font-weight: var(--fw-sm);
 }
