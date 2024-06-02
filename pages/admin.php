@@ -1,9 +1,17 @@
 <?php
 session_start();
+
 //inti error msg//
 $errorMessages = ['password' => '','username' => ''];
 
 include '../components/errorTemplate.php';
+
+// Check if already logged-in //
+if (isset($_SESSION['adminId'])) {
+  // Redirect to dashboard page //
+  header('Location: ../dashboard/overview.php');
+  exit();
+}
 
 
 if (isset($_POST['submit'])) {

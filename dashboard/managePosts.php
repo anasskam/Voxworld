@@ -3,6 +3,12 @@ session_start();
 // Session Test //
 include '../components/session-check.php';
 $adminId = checkAdminSession();
+
+// DB Connection //
+require_once '../components/connect.php';
+$posts = $conn->query('SELECT * FROM posts')->fetchAll(PDO::FETCH_ASSOC);
+$postsCount = $conn->query('SELECT COUNT(id) AS NumPosts FROM posts')->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,44 +42,51 @@ $adminId = checkAdminSession();
 
             <div class="content-container">
                 <p class="text-body1">
-                    Manage posts(10)
+                    Manage posts(<?php echo $postsCount[0]['NumPosts'];?>)
                 </p>
             
                 <div class="posts-wrapper">
                     <div class="post-wrapper">
                         <!-- post image -->
-                        <img src="#" alt="post image">
+                        <?php
+                            foreach ($posts as $post) {
+                                ?>
+                                    <img src="../assets/hostedImages/<?php echo $post['image']?>" alt="post image">
 
-                        <div class="post-content">
-                            <p class="text-body1 text-md" value>The unseen of spending three years at Pixelgrade...</p>
+                                    <div class="post-content">
+                                        <p class="text-body1 text-md" value><?php echo $post['title']?></p>
 
-                            <div class="post-category-date">
-                                <span class="chip1 category">Politics</span>
-                                <span class="divider"></span>
-                                <p class="text-caption1 post-date">Feb 2, 2024 19:28 <span>(Updated: Feb 4, 2024 20:51)</span></p>
-                            </div>
+                                        <div class="post-category-date">
+                                            <span class="chip1 category"><?php echo $post['category']?></span>
+                                            <span class="divider"></span>
+                                            <p class="text-caption1 post-date"><?php echo $post['CreationDate']?> <span><?php echo $post['UpdateDate']?></span></p>
+                                        </div>
 
-                            <div class="post-intractions-wrapper">
-                                <div class="post-views-wrapper">
-                                    <img src="../assets/icons/show-pass.svg" alt="views">
-                                    <span class="post-views" name="post-views">2,423 </span>views
-                                </div>
+                                        <div class="post-intractions-wrapper">
+                                            <div class="post-views-wrapper">
+                                                <img src="../assets/icons/show-pass.svg" alt="views">
+                                                <span class="post-views" name="post-views">2,423 </span>views
+                                            </div>
 
-                                <div class="post-likes-wrapper">
-                                    <img src="../assets/icons/like.svg" alt="likes">
-                                    <span class="post-likes" name="post-likes">215 </span>likes
-                                </div>
+                                            <div class="post-likes-wrapper">
+                                                <img src="../assets/icons/like.svg" alt="likes">
+                                                <span class="post-likes" name="post-likes">215 </span>likes
+                                            </div>
 
-                                <div class="post-comments-wrapper">
-                                    <img src="../assets/icons/comment.svg" alt="views">
-                                    <span class="post-comments" name="post-comments">6 </span>comments
-                                </div>
-                            </div>
-                        </div>
+                                            <div class="post-comments-wrapper">
+                                                <img src="../assets/icons/comment.svg" alt="views">
+                                                <span class="post-comments" name="post-comments">6 </span>comments
+                                            </div>
+                                        </div>
+                                    </div>
 
-                        <div class="post-actions">
-                            
-                        </div>
+                                    <div class="post-actions">
+                                        
+                                    </div>
+                                <?php
+                            }
+                        ?>
+
                     </div>
                 </div>
 
