@@ -38,7 +38,6 @@
   padding-block: var(--spacing-8);
 }
 
-
 /* header styling */
 .right header {
   display: flex;
@@ -88,11 +87,9 @@
   margin-bottom: var(--spacing-13);
 }
 
-
 .right form h1{
   color: var(--white);
 }
-
 
 /*inputs*/
 .inputs{
@@ -150,7 +147,6 @@
 /* password input */
 .password-toggle{
   cursor: pointer;
-
 }
 
 /* privacy check */
@@ -182,6 +178,7 @@ footer {
   justify-content: space-between;
   align-items: center;
 }
+
 footer p{
   color: var(--clr-gray-600);
 }
@@ -190,7 +187,6 @@ footer p{
   display: flex;
   gap: var(--spacing-6);
 } 
-
 
 /* DASHBOAD STYLING
 ========================================================================== */
@@ -216,7 +212,6 @@ footer p{
   text-decoration: none;
 }
 
-
 main{
   width: calc(100% - (100% / 6));
 }
@@ -233,7 +228,6 @@ main{
   border-right: var(--border-line);
   min-height: 100vh;
   color: var(--background-text);
-
 }
 
 .side-bar-header{
@@ -277,7 +271,6 @@ main{
   display: flex;
   align-items: center;
   gap:var(--spacing-2);
-  
 }
 
 .side-bar-footer{
@@ -291,7 +284,6 @@ main{
 
 .side-bar-footer p{
   font-size: var(--fs-caption1);
-  
 }
 
 /* 
@@ -303,6 +295,7 @@ main{
   flex-direction: column;
   gap: var(--spacing-5);
 }
+
 .drop-arrow{
   transition: transform 0.4s ease;
 }
@@ -314,6 +307,7 @@ main{
   width: clamp(35%, 15%, 250px);
   
 }
+
 .spacer{
   height: var(--spacing-6);
   display: none;
@@ -353,6 +347,7 @@ main{
   gap:var(--spacing-1);
   pointer-events: none;
 }
+
 .dropHeader h3{
   color: var(--background-text);
 }
@@ -360,7 +355,6 @@ main{
 .dropDown .input-field{
   background-color: var(--on-surface-container);
 }
-
 
 .update-username-wrapper,
 .update-password-wrapper{
@@ -383,18 +377,17 @@ main{
   border-radius: 6px;
   transition: all .3s ease;
 }
+
 .appearence-option-wrapper:hover{
   background-color: var(--on-surface-container);
   opacity: 1;
 }
-
 
 /* 
   * Create post page 
 */
 .categories-dropDown{
   width: 100%;
-  /* padding: ; */
 }
 
 .create-post-inputs-wrapper{
@@ -402,6 +395,7 @@ main{
   flex-direction: column;
   gap: var(--spacing-4);
 }
+
 .upload-field{
   justify-content: space-between;
   cursor: pointer;
@@ -430,7 +424,6 @@ main{
 .publish-form-btn{
   /* hide the submit button */
   display: none;
-
 }
 
 /* 
@@ -441,6 +434,7 @@ main{
   border-radius: 8px;
   overflow: hidden;
 }
+
 .ck .ck-editor {
   color: var(--color);
   background-color: var(--surface-container) !important;
@@ -455,6 +449,7 @@ main{
   min-height: 300px;
   padding: var(--spacing-2);
 }
+
 .ck .ck-editor__editable_inline li{
   list-style-type:circle !important;
 }
@@ -467,7 +462,7 @@ main{
 }
 
 .ck.ck-toolbar button {
-  color:var(--background-text) !important; ;
+  color:var(--background-text) !important;
 }
 
 .ck.ck-toolbar button:hover {
@@ -504,12 +499,9 @@ main{
   border-collapse: none !important;
 }
 
-
-
 /* 
   * Manage users page 
 */
-
 
 .table-wrapper{
   overflow: hidden;
@@ -539,17 +531,95 @@ table {
 th, td {
   padding: var(--spacing-3);
   text-align: left;
-  /* width: 25%; */
   border-bottom: 1px solid var(--border);
   font-size: var(--fs-body2);
 }
 
 td{
   padding-block: var(--spacing-2);
-
 }
 
 th {
   background-color: var(--surface-container);
   font-weight: var(--fw-sm);
+}
+
+/* 
+  * Manage posts page 
+*/
+.post-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--spacing-5);
+  margin-bottom: var(--spacing-5);
+  border-bottom: 1px solid var(--border);
+}
+
+.post-wrapper:last-child{
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.post-wrapper .image-content-wrapper{
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.post-wrapper img {
+  aspect-ratio: 1;
+  width: 75px;
+  border-radius: 8px;
+}
+
+.post-wrapper .post-category-date {
+  display: flex;
+  align-items: center;
+  gap:var(--spacing-2);
+}
+
+.post-wrapper .divider{
+  width: 1px;
+  height: 12px;
+  background-color: var(--background-text);
+  border-radius: 10px;
+  display: inline-block;
+  opacity: .4;
+}
+
+.post-wrapper .post-content{
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.post-wrapper .post-intractions-wrapper{
+  display: flex;
+  gap: var(--spacing-2);
+}
+
+.post-wrapper .post-intractions-wrapper img{
+  display: flex;
+  width: 18px;
+}
+
+.post-intraction-wrapper{
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.chip1{
+  border-radius: 1000px;
+  background-color: var(--on-surface-container);
+  padding-inline: var(--spacing-2);
+  padding-block: var(--spacing-05);
+}
+
+.post-actions form {
+  display: flex;
+  gap: var(--spacing-2);
+  align-items: center;
 }
