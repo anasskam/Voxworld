@@ -1,4 +1,3 @@
-
 //set the empty state illustration depends on the current theme
 const app = () =>{
   const emptyStateImg = document.querySelector(".empty-state-wrapper img");
