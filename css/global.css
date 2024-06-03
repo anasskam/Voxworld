@@ -730,11 +730,13 @@ p,
   width: clamp(65%, 25%, 400px);
   margin-inline: auto;
 }
+
 .content-container{
   display: flex;
   flex-direction: column;
   gap: var(--spacing-6);
 }
+
 .two-cols{
   display: grid;
   grid-template-columns: 45% 50%;
@@ -742,6 +744,7 @@ p,
   width: 100%;
   min-height: 100vh;
 }
+
 .right,
 .left{
   width: 100%;
@@ -751,6 +754,7 @@ p,
 .flex{
   display: flex;
 }
+
 .flex-justify-center{
   justify-content: center;
 }
@@ -797,6 +801,7 @@ p,
 .opacity-half{
   opacity:0.5;
 }
+
 .opacity-40{
   opacity:0.4;
 }
@@ -820,10 +825,10 @@ p,
   font-size: var(--fs-button);
 }
 
-.delete-btn{
+.ghost-btn{
   font-size: var(--fs-button);
   background-color: var(--on-surface-container);
-  color: var(--clr-error);
+  color: var(--clr-primary);
   padding-inline: var(--spacing-3);
   padding-block: var(--spacing-2);
   border-radius: 1000px;
@@ -835,11 +840,19 @@ p,
   transition: background-color .35s ease;
 }
 
+.delete-btn{
+  color: var(--clr-error);
+}
+
+.preview-btn{
+  color: var(--background-text);
+}
+
 .primary-btn:hover{
   background-color: var(--clr-primary-600);
 }
 
-.delete-btn:hover{
+.ghost-btn:hover{
   background-color: var(--hover-on-surface-container);
 }
 
