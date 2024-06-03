@@ -586,6 +586,7 @@ th {
   aspect-ratio: 1;
   width: 75px;
   border-radius: 8px;
+  object-fit: cover;
 }
 
 .post-wrapper .post-category-date {

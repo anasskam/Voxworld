@@ -10,6 +10,20 @@ include '../components/errorTemplate.php';
 // DB Connection //
 require_once'../components/connect.php';
 
+
+
+if (isset($_SESSION['postID'])) {
+    $postID = $_SESSION['postID'];
+
+    require_once '../components/connect.php';
+    $sqlState = $conn->prepare('SELECT * FROM posts WHERE id = ?');
+    $sqlState->execute([$postID]);
+    $post = $sqlState->fetch(PDO::FETCH_ASSOC);
+}
+
+
+
+
 if (isset($_POST['submit'])) {
     $content = $_POST['editor-content'];
     $title = $_POST['contentTitle'];
@@ -38,10 +52,11 @@ if (isset($_POST['submit'])) {
         $filename = uniqid() . $image;
         $destination = '../assets/hostedImages/' . $filename;
         if (move_uploaded_file($_FILES['file-upload']['tmp_name'], $destination)) {
-            $createPost = $conn->prepare('INSERT INTO posts VALUES (NULL, ?, ?, ?, ?, ?, NULL)');
-            $createPost->execute([$title, $content, $filename, $category, $postDate]);
+            $createPost = $conn->prepare('UPDATE posts SET title = ?, content = ?, image = ?, category = ?, UpdateDate = ? WHERE id = ?');
+            $createPost->execute([$title, $content, $filename, $category, $postDate, $postID]);
             // Clear session inputs after successful post creation //
             unset($_SESSION['contentTitle'], $_SESSION['categories'], $_SESSION['file-upload'], $_SESSION['editor-content']);
+            header('location: managePosts.php');
         } else {
             $errorMessages['image'] = errorTemplate("Failed to upload image.");
         }
@@ -52,9 +67,9 @@ if (isset($_POST['submit'])) {
         $_SESSION['file-upload'] = $image;
         $_SESSION['editor-content'] = $content;
     }
-    header('location: managePosts.php');    
-
+    
 }
+
 
 
 ?>
@@ -94,7 +109,7 @@ if (isset($_POST['submit'])) {
                 include "../components/dashboard-header2.php"
             ?>
             <div class="content-container">
-                <p class="text-body1">Create a new post</p>
+                <p class="text-body1">Edit this post</p>
                 <form method="post" enctype="multipart/form-data">
                     <div class="create-post-inputs-wrapper">
                         <div class="inputs">
@@ -113,7 +128,7 @@ if (isset($_POST['submit'])) {
                                     if (isset($_SESSION['contentTitle'])) {
                                         echo htmlspecialchars($_SESSION['contentTitle']);
                                     } else {
-                                        echo '';
+                                        echo htmlspecialchars($post['title']);
                                     }
                                     ?>">
                             </div>
@@ -143,7 +158,7 @@ if (isset($_POST['submit'])) {
                                 ?>
                                 <select name="categories" id="categories" class="categories-dropDown">
                                     <?php foreach ($categories as $category): ?>
-                                        <option value="<?= $category ?>" <?php if (isset($_SESSION['categories']) && $_SESSION['categories'] == $category) { echo 'selected'; } ?>>
+                                        <option value="<?= $category ?>" <?php if (isset($_SESSION['categories']) && $_SESSION['categories'] == $category || $post['category'] == $category) { echo 'selected'; } ?>>
                                             <?= $category ?>
                                         </option>
                                     <?php endforeach; ?>
@@ -197,7 +212,7 @@ if (isset($_POST['submit'])) {
                                     if (isset($_SESSION['editor-content'])) {
                                         echo htmlspecialchars($_SESSION['editor-content']);
                                     } else {
-                                        echo '';
+                                        echo htmlspecialchars($post['content']);
                                     }                            
                                     ?>
                                 </textarea>
