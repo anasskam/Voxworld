@@ -122,6 +122,12 @@ document.addEventListener("DOMContentLoaded",()=>{
 //     console.error(error.stack);
 //   })
 
+window.addEventListener("beforeunload",()=>{
+    confirm('The changes you have made may not be recorded.');
+})
 
+// window.onbeforeunload =()=>{
+//     // confirm('The changes you have made may not be recorded.');
+// }
 file.addEventListener("change", updateFileInfo)
 uploadField.addEventListener("click", ()=> {file.click()});
