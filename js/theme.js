@@ -6,12 +6,29 @@ const toggleIcons = document.querySelectorAll(".theme-icons");
 // for settings page
 const themeToggleIcon_settings = document.querySelectorAll(".appearence-option-wrapper");
 
+const initLogo = (theme) => {
+  const currentLocation = location.pathname;
+  let logoSrc;
+
+  if(currentLocation === '/Voxworld/index.php' || currentLocation === '/Voxworld/') {
+    logoSrc = theme === "dark" ? "./assets/images/logo-dark.svg" : "./assets/images/logo-light.svg";
+  } 
+  else {
+    logoSrc = theme === "dark" ? "../assets/images/logo-dark.svg" : "../assets/images/logo-light.svg";
+  }
+
+  return logoSrc;
+
+}
+
+
 export const theme = () =>{
   const storedTheme = localStorage.getItem("theme");
   const is_BrowserThemeDark = window.matchMedia('(prefers-color-scheme:dark)').matches;
   const initTheme = storedTheme ?? (is_BrowserThemeDark ? "dark" : "light")
   document.documentElement.setAttribute("data-theme", initTheme);
-  logo.src = initTheme === "dark" ? "../assets/images/logo-dark.svg" : "../assets/images/logo-light.svg";
+  // logo.src = initTheme === "dark" ? "../assets/images/logo-dark.svg" : "../assets/images/logo-light.svg";
+  logo.src =  initLogo(initTheme);
   toggleIcon(toggleIcons, initTheme);
   toggleIcon(themeToggleIcon_settings, initTheme);
 }

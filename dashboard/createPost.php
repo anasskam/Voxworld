@@ -35,7 +35,7 @@ if (isset($_POST['submit'])) {
     // Only proceed if there are no error messages //
     if (empty(array_filter($errorMessages))) {
         
-        $filename = uniqid() . $image;
+        $filename = uniqid() . $image; //date.now() 
         $destination = '../assets/hostedImages/' . $filename;
         if (move_uploaded_file($_FILES['file-upload']['tmp_name'], $destination)) {
             $createPost = $conn->prepare('INSERT INTO posts VALUES (NULL, ?, ?, ?, ?, ?, NULL)');

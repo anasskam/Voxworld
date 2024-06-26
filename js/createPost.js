@@ -103,49 +103,9 @@ ClassicEditor.create(editor, properties).then(editor =>{
 const formPublishBtn = document.querySelector(".publish-form-btn");
 const headerPublishBtn = document.querySelector(".publish-header-btn");
 
-const post = {
-    title:"",
-    category:"",
-    content:""
-}
-
-function update(field, newVal){
-    post[field] = newVal;
-    localStorage.setItem("post", JSON.stringify(post));
-}
-
 document.addEventListener("DOMContentLoaded",()=>{
-    headerPublishBtn.addEventListener("click" , ()=> {formPublishBtn.click()});
-    const postTitle = document.querySelector(".title-field input");
-    const postCateogry = document.querySelector(".categories-field select");
-    const postContent = document.querySelector("[role='textbox']");
-    const form = document.getElementById("createPostForm");
-
-    if(localStorage.getItem("post")){
-        const post = JSON.parse(localStorage.getItem("post"));
-        postTitle.value = post.title;
-        postCateogry.value = post.category;
-        postContent.textContent = post.content;
-    }
-
-    postTitle.addEventListener("input", function(e){
-        update("title", postTitle.value)
-    })
-    
-    postCateogry.addEventListener("input", function(e){
-        update("category", postCateogry.value)
-    })
-    
-    //update the content input
-    postContent.addEventListener("keyup", function(e){
-        update("content", postContent.innerHTML);
-    })
-    postContent.addEventListener("blur", function(e){
-        update("content", postContent.innerHTML);
-    })
-
-})
-
+    headerPublishBtn.addEventListener("click" , ()=> {formPublishBtn.click()});  
+})  
 
 file.addEventListener("change", updateFileInfo)
 uploadField.addEventListener("click", ()=> {file.click()});
