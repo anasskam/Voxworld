@@ -122,6 +122,7 @@ if (isset($_POST['update-password'])) {
   <script src="../js/theme.js" type="module" defer></script>
   <script src="../js/toggleTheme.js" type="module" defer></script>
   <script src="../js/settings.js" defer></script>
+  <script src="../js/sidebar.js" type="module" defer></script>
   <script src="../js/auth.js" defer></script>
 </head>
 <body>

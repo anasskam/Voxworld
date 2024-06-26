@@ -63,7 +63,7 @@ else {
 
     <!-- custom js -->
     <script src="../js/theme.js" type="module" defer></script>
-    <script src="../js/sidebar.js" defer></script>
+    <script src="../js/sidebar.js" type="module" defer></script>
     <script src="../js/manageUsers.js" defer></script>
 </head>
 <body>

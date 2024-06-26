@@ -218,6 +218,7 @@ footer p{
 
 main{
   width: calc(100% - (100% / 6));
+  margin-left: calc(100% / 6);
 }
 
 /*
@@ -231,7 +232,7 @@ main{
   border-right: var(--border-line);
   height: 100vh;
   color: var(--background-text);
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 10;
 }

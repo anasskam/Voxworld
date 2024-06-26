@@ -10,8 +10,6 @@ include '../components/errorTemplate.php';
 // DB Connection //
 require_once'../components/connect.php';
 
-
-
 if (isset($_SESSION['postID'])) {
     $postID = $_SESSION['postID'];
 
@@ -20,9 +18,6 @@ if (isset($_SESSION['postID'])) {
     $sqlState->execute([$postID]);
     $post = $sqlState->fetch(PDO::FETCH_ASSOC);
 }
-
-
-
 
 if (isset($_POST['submit'])) {
     $content = $_POST['editor-content'];
@@ -70,8 +65,6 @@ if (isset($_POST['submit'])) {
     
 }
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -89,7 +82,7 @@ if (isset($_POST['submit'])) {
 
     <!-- custom js -->
     <script src="../js/theme.js" type="module" defer></script>
-    <script src="../js/sidebar.js" defer></script>
+    <script src="../js/sidebar.js" type="module" defer></script>
     <script src="../js/createPost.js" type="module" defer></script>
     <script src="../assets/ckeditor5/build/ckeditor.js"></script>
 
