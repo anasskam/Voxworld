@@ -43,6 +43,7 @@ if (isset($_POST['submit'])) {
             // Clear session inputs after successful post creation //
             unset($_SESSION['contentTitle'], $_SESSION['categories'], $_SESSION['file-upload'], $_SESSION['editor-content']);
             header('location: managePosts.php');
+            header('location: managePosts.php');
         } else {
             $errorMessages['image'] = errorTemplate("Failed to upload image.");
         }
@@ -53,7 +54,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['file-upload'] = $image;
         $_SESSION['editor-content'] = $content;
     }
-    
+    header('location: managePosts.php');    
 
 }
 
@@ -96,7 +97,7 @@ if (isset($_POST['submit'])) {
             ?>
             <div class="content-container">
                 <p class="text-body1">Create a new post</p>
-                <form method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data" id="createPostForm">
                     <div class="create-post-inputs-wrapper">
                         <div class="inputs">
                             <div class="input-validation">

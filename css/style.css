@@ -206,6 +206,10 @@ footer p{
   justify-content: space-between;
   padding-inline: var(--spacing-5);
   border-bottom: 1px solid var(--border);
+  background-color: var(--background);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .dashboard-header a {
@@ -223,11 +227,13 @@ main{
 .side-bar{
   display: flex;
   flex-direction: column;
-  /* min-width: min(25%, 250px); */
   width: calc(100% / 6);
   border-right: var(--border-line);
-  min-height: 100vh;
+  height: 100vh;
   color: var(--background-text);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .side-bar-header{
@@ -450,8 +456,16 @@ main{
   padding: var(--spacing-2);
 }
 
-.ck .ck-editor__editable_inline li{
-  list-style-type:circle !important;
+.ck .ck-editor__editable_inline ul li{
+  list-style-type:disc !important;
+}
+.ck .ck-editor__editable_inline ol li{
+  list-style-type:decimal !important;
+}
+
+.ck .ck-editor__editable_inline ul,
+.ck .ck-editor__editable_inline ol{
+  padding-left:var(--spacing-4);
 }
 
 .ck.ck-toolbar {

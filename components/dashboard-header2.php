@@ -12,8 +12,10 @@
   </div>
 
   <script>
-    document.querySelector(".dashboard-header").style.height = 
-    `${document.querySelector(".side-bar-header").getBoundingClientRect().height +1}px`
+    document.addEventListener("DOMContentLoaded", ()=>{
+      document.querySelector(".dashboard-header").style.height = 
+      `${document.querySelector(".side-bar-header").getBoundingClientRect().height +1}px`
+    })
   </script>
 
 </header>
