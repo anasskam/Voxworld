@@ -103,17 +103,6 @@ ClassicEditor.create(editor, properties).then(editor =>{
 const formPublishBtn = document.querySelector(".publish-form-btn");
 const headerPublishBtn = document.querySelector(".publish-header-btn");
 
-const post = {
-    title:"",
-    category:"",
-    content:""
-}
-
-function update(field, newVal){
-    post[field] = newVal;
-    localStorage.setItem("post", JSON.stringify(post));
-}
-
 document.addEventListener("DOMContentLoaded",()=>{
     headerPublishBtn.addEventListener("click" , ()=> {formPublishBtn.click()});
     const postTitle = document.querySelector(".title-field input");

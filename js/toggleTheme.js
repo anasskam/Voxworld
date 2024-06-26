@@ -20,11 +20,28 @@ const toggleIcon = (icons, theme) =>{
   })
 }
 
+const toggleLogo = (theme) => {
+  const currentLocation = location.pathname;
+  let logoSrc;
+
+  if(currentLocation === '/Voxworld/index.php' || currentLocation === '/Voxworld/') {
+    logoSrc = theme === "dark" ? "./assets/images/logo-dark.svg" : "./assets/images/logo-light.svg";
+  } 
+  else {
+    logoSrc = theme === "dark" ? "../assets/images/logo-dark.svg" : "../assets/images/logo-light.svg";
+  }
+
+  return logoSrc;
+
+}
+
 const toggleTheme = (e, mode = null) => {
   const currentTheme = document.documentElement.getAttribute("data-theme");
   const newTheme = mode ?? (currentTheme === 'light' ? 'dark' : 'light');
   document.documentElement.setAttribute("data-theme", newTheme);
-  logo.src = newTheme === "dark" ? "../assets/images/logo-dark.svg" : "../assets/images/logo-light.svg";
+  // logo.src = newTheme === "dark" ? "../assets/images/logo-dark.svg" : "../assets/images/logo-light.svg";
+  logo.src = toggleLogo(newTheme);
+  console.log(logo.src);
   toggleIcon(toggleIcons, newTheme);
   toggleIcon(themeToggleIcon_settings, newTheme);
   localStorage.setItem('theme', newTheme);
