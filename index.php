@@ -63,8 +63,9 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
             <h3>TOP NEWS</h3>
             <div class="cards-wrapper">
                 <?php foreach ($selectTopPosts as $post): ?>
+                <?php $topPostId = $post['id']; ?>
                 <div class="card main-card">
-                    <a href="#">
+                    <a href="readPost.php?postID=<?= $topPostId; ?>">
                         <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="">
                         <div class="card-content">
                             <div class="post-category-date">
@@ -103,19 +104,15 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
             <h3>LATEST NEWS</h3>
             <div class="cards-wrapper">
                 <?php foreach ($selectLatestPosts as $post): ?>
+                <?php $latestPostId = $post['id']; ?>
                 <div class="card">
-                    <a href="#">
+                    <a href="readPost.php?postID=<?= $latestPostId; ?>">
                         <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="" class="post-img">
                         <div class="card-content">
                             <div class="post-category-date">
                                 <span class="chip1 category text-caption1"><?php echo htmlspecialchars($post['category']); ?></span>
                                 <span class="divider"></span>
-                                <p class="text-caption1 post-date">
-                                    <?php echo date('M j, Y H:i', strtotime($post['CreationDate'])); ?>
-                                    <?php if ($post['UpdateDate'] && $post['UpdateDate'] != $post['CreationDate']): ?>
-                                        <span>(Updated: <?php echo date('M j, Y H:i', strtotime($post['UpdateDate'])); ?>)</span>
-                                    <?php endif; ?>
-                                </p>
+                                <p class="text-caption1 post-date"><?php echo date('M j, Y H:i', strtotime($post['CreationDate'])); ?></p>
                             </div>
                             <h3 class="text-md home-post-title"><?php echo htmlspecialchars($post['title']); ?></h3>
                             <div class="divider horizontal"></div>
