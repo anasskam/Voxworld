@@ -41,13 +41,13 @@ require_once 'components/connect.php';
 
 
 // Fetch latest posts sorted by creation date //
-$selectLatestPosts = $conn->prepare('SELECT p.*, 
+$selectPosts = $conn->prepare('SELECT p.*, 
                                 (SELECT COUNT(*) FROM likes WHERE id_post = p.id) AS total_likes,
                                 (SELECT COUNT(*) FROM views WHERE id_post = p.id) AS total_views,
                                 (SELECT COUNT(*) FROM comments WHERE id_post = p.id) AS total_comments
                                 FROM posts p WHERE category = ?
                                 ORDER BY CreationDate DESC');
-$selectLatestPosts->execute([$category]);
+$selectPosts->execute([$category]);
 
 // Check if no posts //
 $postsCount = $conn->query('SELECT COUNT(id) AS NumPosts FROM posts')->fetch(PDO::FETCH_ASSOC);
@@ -69,22 +69,25 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
     <script src="./js/theme.js" type="module" defer></script>
     <script src="./js/toggleTheme.js" type="module" defer></script>
     <script src="./js/index.js" type="module" defer></script>
-    <script src="./js/header.js" type="module" defer></script>
+    <script src="./js/category.js" type="module" defer></script>
 </head>
+
 <body>
     <div class="container">
         
         <!-- header -->
         <?php include './components/header.php'; ?>
 
-
-
         <section class="latest-news">
             <h3 style="text-transform:uppercase"><?php echo htmlspecialchars($displayCategory); ?></h3>
             <div class="cards-wrapper">
-                <?php foreach ($selectLatestPosts as $post): ?>
+                <?php foreach ($selectPosts as $post): ?>
+                <?php 
+                    $PostId = $post['id'];
+                    $category = $post['category'];
+                ?>
                 <div class="card">
-                    <a href="#">
+                    <a href="post.php?postID=<?= $PostId; ?>?category=<?= $category; ?>">
                         <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="" class="post-img">
                         <div class="card-content">
                             <div class="post-category-date">

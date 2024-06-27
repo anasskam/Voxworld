@@ -9,6 +9,9 @@ const themeToggleIcon_auth = document.querySelector(".theme-toggle-icon");
 // for settings page
 const themeToggleIcon_settings = document.querySelectorAll(".appearence-option-wrapper");
 
+const locations = ['/Voxworld/index.php', '/Voxworld/post.php', '/Voxworld/category.php', '/Voxworld/'];
+
+
 const toggleIcon = (icons, theme) =>{
 
   icons.forEach(icon =>{
@@ -22,14 +25,17 @@ const toggleIcon = (icons, theme) =>{
 
 const toggleLogo = (theme) => {
   const currentLocation = location.pathname;
+  console.log(currentLocation);
   let logoSrc;
 
-  if(currentLocation === '/Voxworld/index.php' || currentLocation === '/Voxworld/') {
-    logoSrc = theme === "dark" ? "./assets/images/logo-dark.svg" : "./assets/images/logo-light.svg";
-  } 
-  else {
-    logoSrc = theme === "dark" ? "../assets/images/logo-dark.svg" : "../assets/images/logo-light.svg";
-  }
+  locations.forEach(location =>{
+    
+    if(currentLocation === location)
+      logoSrc = theme === "dark" ? "./assets/images/logo-dark.svg" : "./assets/images/logo-light.svg";
+  
+    else
+      logoSrc = theme === "dark" ? "../assets/images/logo-dark.svg" : "../assets/images/logo-light.svg";
+  });
 
   return logoSrc;
 

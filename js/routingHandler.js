@@ -17,11 +17,9 @@ export function hoverOut(items, className){
 
 }
 
-export function setRoute(items, className, from){
-  const route = window.location.pathname.slice(from, -4) || 'index';
+export function setRoute(route, items, className){
 
   items.forEach(item => {
-
     if(route === item.getAttribute("data-relation")) {
       item.setAttribute("data-active-item",'');
       item.classList.add(className);

@@ -6,17 +6,22 @@ const toggleIcons = document.querySelectorAll(".theme-icons");
 // for settings page
 const themeToggleIcon_settings = document.querySelectorAll(".appearence-option-wrapper");
 
+const locations = ['/Voxworld/index.php', '/Voxworld/post.php', '/Voxworld/category.php', '/Voxworld/'];
+
 const initLogo = (theme) => {
   const currentLocation = location.pathname;
   let logoSrc;
 
-  if(currentLocation === '/Voxworld/index.php' || currentLocation === '/Voxworld/') {
-    logoSrc = theme === "dark" ? "./assets/images/logo-dark.svg" : "./assets/images/logo-light.svg";
-  } 
-  else {
-    logoSrc = theme === "dark" ? "../assets/images/logo-dark.svg" : "../assets/images/logo-light.svg";
-  }
+  locations.forEach(location => {
+    if(currentLocation === location) {
+      logoSrc = theme === "dark" ? "./assets/images/logo-dark.svg" : "./assets/images/logo-light.svg";
+    } 
 
+    else {
+      logoSrc = theme === "dark" ? "../assets/images/logo-dark.svg" : "../assets/images/logo-light.svg";
+    }
+  });
+  
   return logoSrc;
 
 }

@@ -63,9 +63,12 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
             <h3>TOP NEWS</h3>
             <div class="cards-wrapper">
                 <?php foreach ($selectTopPosts as $post): ?>
-                <?php $topPostId = $post['id']; ?>
+                <?php 
+                    $topPostId = $post['id'];
+                    $category = $post['category'];
+                ?>
                 <div class="card main-card">
-                    <a href="readPost.php?postID=<?= $topPostId; ?>">
+                    <a href="post.php?postID=<?= $topPostId; ?>?category=<?= $category; ?>">
                         <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="">
                         <div class="card-content">
                             <div class="post-category-date">
@@ -104,9 +107,12 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
             <h3>LATEST NEWS</h3>
             <div class="cards-wrapper">
                 <?php foreach ($selectLatestPosts as $post): ?>
-                <?php $latestPostId = $post['id']; ?>
+                <?php 
+                    $latestPostId = $post['id'];
+                    $category = $post['category'];
+                ?>
                 <div class="card">
-                    <a href="readPost.php?postID=<?= $latestPostId; ?>">
+                    <a href="post.php?postID=<?= $latestPostId; ?>?category=<?= $category; ?>">
                         <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="" class="post-img">
                         <div class="card-content">
                             <div class="post-category-date">

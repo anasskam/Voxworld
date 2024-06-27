@@ -841,7 +841,7 @@ p,
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color .35s ease;
+  transition: all .35s ease;
 }
 
 .delete-btn{

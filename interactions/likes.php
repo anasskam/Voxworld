@@ -19,7 +19,7 @@ if(isset($POST['like'])){
         }
     }
     else {
-        echo "Not logged in";
+        header('location: ../pages/login.php');
     }
 }
 

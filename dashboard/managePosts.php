@@ -87,6 +87,9 @@ else {
                 <div class="posts-wrapper">
                     <?php
                         foreach ($posts as $post) {
+                            $PostId = $post['id'];
+                            $category = $post['category'];
+                       
                             ?>
                             <div class="post-wrapper">
 
@@ -161,14 +164,14 @@ else {
                                             Delete
                                         </button>
 
-                                        <button class="ghost-btn preview-btn" type="submit" name="post-preview" value="">
+                                        <a class="ghost-btn preview-btn" type="submit" name="post-preview" href="../post.php?postID=<?= $PostId; ?>?category=<?= $category; ?>">
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M13 11L21.2 2.79999" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                                                 <path d="M22 6.8V2H17.2" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                                                 <path d="M11 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22H15C20 22 22 20 22 15V13" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
                                             Preview
-                                        </button>
+                                        </a>
 
                                     </form>
                                 </div>
