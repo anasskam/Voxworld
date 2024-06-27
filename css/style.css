@@ -218,6 +218,7 @@ footer p{
 
 main{
   width: calc(100% - (100% / 6));
+  margin-left: calc(100% / 6);
 }
 
 /*
@@ -231,7 +232,7 @@ main{
   border-right: var(--border-line);
   height: 100vh;
   color: var(--background-text);
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 10;
 }
@@ -706,6 +707,10 @@ th {
 
 .cards-wrapper{
   display: grid;
+  gap: var(--spacing-10);
+}
+
+.top-news .cards-wrapper{
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "left-item right-top" "left-item right-bottom";
@@ -742,11 +747,6 @@ th {
 
 .main-card:last-child{
   grid-area: right-bottom;
-}
-
-
-.top-news .cards-wrapper{
-  grid-template-columns: repeat(2, 1fr);
 }
 
 .latest-news .cards-wrapper{

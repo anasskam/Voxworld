@@ -68,6 +68,8 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
     <!-- custom js -->
     <script src="./js/theme.js" type="module" defer></script>
     <script src="./js/toggleTheme.js" type="module" defer></script>
+    <script src="./js/index.js" type="module" defer></script>
+    <script src="./js/header.js" type="module" defer></script>
 </head>
 <body>
     <div class="container">

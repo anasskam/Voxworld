@@ -57,7 +57,6 @@ if (isset($_POST['submit'])) {
 
 }
 
-
 ?>
 
 <!DOCTYPE html>
@@ -75,7 +74,7 @@ if (isset($_POST['submit'])) {
 
     <!-- custom js -->
     <script src="../js/theme.js" type="module" defer></script>
-    <script src="../js/sidebar.js" defer></script>
+    <script src="../js/sidebar.js" type="module" defer></script>
     <script src="../js/createPost.js" type="module" defer></script>
     <script src="../assets/ckeditor5/build/ckeditor.js"></script>
 

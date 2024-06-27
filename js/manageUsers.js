@@ -1,9 +1,14 @@
 //set the empty state illustration depends on the current theme
-const app = () =>{
-  const emptyStateImg = document.querySelector(".empty-state-wrapper img");
+const pathOfDarkImg = "../assets/images/empty-state-dark.svg";
+const pathOfLightImg = "../assets/images/empty-state-light.svg";
+
+export function setEmptyImageTheme(darkImagePath, lightImagePath) {
+  const emptyStateImgs = document.querySelectorAll(".empty-state-wrapper img");
   const currentTheme = document.documentElement.getAttribute("data-theme");
 
-  emptyStateImg.src = currentTheme === "dark" ? "../assets/images/empty-state-dark.svg" :"../assets/images/empty-state-light.svg" ;
+  emptyStateImgs.forEach(img => {
+    img.src = currentTheme === "dark" ? darkImagePath : lightImagePath;
+  })
 }
 
-document.addEventListener("DOMContentLoaded", app);
+document.addEventListener("DOMContentLoaded", () => {setEmptyImageTheme(pathOfDarkImg, pathOfLightImg)});
