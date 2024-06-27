@@ -27,7 +27,6 @@ if (isset($_POST['post-delete'])) {
     }
 }
 
-
 // Redirect to edit page //
 if (isset($_POST['post-edit'])) {
     $postID = $_POST['post-edit'];
@@ -64,7 +63,7 @@ else {
     <!-- custom js -->
     <script src="../js/theme.js" type="module" defer></script>
     <script src="../js/sidebar.js" type="module" defer></script>
-    <script src="../js/manageUsers.js" defer></script>
+    <script src="../js/manageUsers.js" type="module" defer></script>
 </head>
 <body>
 

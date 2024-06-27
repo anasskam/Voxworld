@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
             // Password verification
             if (password_verify($password, $user['password'])) {
                 // Start session and store user information
-                $_SESSION['role'] = $user;
+                $_SESSION['userID'] = $user;
                 header('Location: ../index.php');
             } else {
                 $errorMessages['password'] = errorTemplate("Incorrect password.");
