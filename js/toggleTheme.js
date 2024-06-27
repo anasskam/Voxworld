@@ -1,6 +1,6 @@
 import { theme } from "./theme.js";
 
-const logo = document.querySelector(".logo");
+const logos = document.querySelectorAll(".logo");
 const toggleIcons = document.querySelectorAll(".theme-icons");
 
 // for auth pages
@@ -8,9 +8,6 @@ const themeToggleIcon_auth = document.querySelector(".theme-toggle-icon");
 
 // for settings page
 const themeToggleIcon_settings = document.querySelectorAll(".appearence-option-wrapper");
-
-const locations = ['/Voxworld/index.php', '/Voxworld/post.php', '/Voxworld/category.php', '/Voxworld/'];
-
 
 const toggleIcon = (icons, theme) =>{
 
@@ -25,29 +22,30 @@ const toggleIcon = (icons, theme) =>{
 
 const toggleLogo = (theme) => {
   const currentLocation = location.pathname;
-  console.log(currentLocation);
   let logoSrc;
 
-  locations.forEach(location =>{
-    
-    if(currentLocation === location)
-      logoSrc = theme === "dark" ? "./assets/images/logo-dark.svg" : "./assets/images/logo-light.svg";
-  
-    else
-      logoSrc = theme === "dark" ? "../assets/images/logo-dark.svg" : "../assets/images/logo-light.svg";
-  });
+  if(currentLocation === '/Voxworld/index.php' || 
+  currentLocation === '/Voxworld/post.php' || 
+  currentLocation === '/Voxworld/category.php' || 
+  currentLocation === '/Voxworld/') {
+    logoSrc = theme === "dark" ? "./assets/images/logo-dark.svg" : "./assets/images/logo-light.svg";
+  } 
+
+  else {
+    logoSrc = theme === "dark" ? "../assets/images/logo-dark.svg" : "../assets/images/logo-light.svg";
+  }
 
   return logoSrc;
-
 }
 
 const toggleTheme = (e, mode = null) => {
   const currentTheme = document.documentElement.getAttribute("data-theme");
   const newTheme = mode ?? (currentTheme === 'light' ? 'dark' : 'light');
   document.documentElement.setAttribute("data-theme", newTheme);
-  // logo.src = newTheme === "dark" ? "../assets/images/logo-dark.svg" : "../assets/images/logo-light.svg";
-  logo.src = toggleLogo(newTheme);
-  console.log(logo.src);
+  
+  logos.forEach(logo => {
+    logo.src = toggleLogo(newTheme);
+  })
   toggleIcon(toggleIcons, newTheme);
   toggleIcon(themeToggleIcon_settings, newTheme);
   localStorage.setItem('theme', newTheme);

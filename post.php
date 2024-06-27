@@ -187,6 +187,10 @@ $posts->execute([$getID]);
         <?php endforeach; ?>
         </div>
 
+        <!-- footer -->
+        <?php include './components/footer.php'; ?>
+        
+
     </div>
 </body>
 </html>
