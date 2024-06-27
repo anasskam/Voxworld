@@ -67,13 +67,13 @@
 }
 
 .theme-icons{
-  padding: var(--spacing-1);
+  padding-inline: var(--spacing-05);
+  padding-block: 0;
   border-radius: 100px;
 }
 
 .active-icon{
   background-color: var(--on-surface-container);
-
 }
 
 .right form {
@@ -663,20 +663,25 @@ th {
   border-bottom: 1px solid var(--border);
 }
 
-.upper-header .auth-buttons{
+.upper-header .auth-buttons,
+.upper-header .upper-header-actions{
   display: flex;
   gap: var(--spacing-5);
+  align-items: center;
 }
 
-.upper-header .auth-buttons > a{
+.upper-header .auth-buttons a{
   padding-inline: var(--spacing-3);
   padding-block: var(--spacing-2);
   border-radius: 100px;
 }
 
-.upper-header .auth-buttons > a:first-child{
+.upper-header .auth-buttons a:first-child{
   background-color: transparent;
   color: var(--background-text);
+}
+.upper-header .auth-buttons a:first-child:hover{
+  color: var(--primary);
 }
 
 .main-header .home-logo{

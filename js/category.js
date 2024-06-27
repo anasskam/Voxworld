@@ -7,6 +7,7 @@ allNavs.forEach(item => {
   item.addEventListener("mouseleave", () => {hoverOut(allNavs, 'active-nav')});
 })
 
-const route = window.location.pathname.slice(10,-4) || 'index';
+const route = window.location.search;
+const from = route.indexOf('=');
 
-document.addEventListener("load", setRoute(route, allNavs, 'active-nav'));
+document.addEventListener("load", setRoute(route.slice(from+1), allNavs, 'active-nav'));
