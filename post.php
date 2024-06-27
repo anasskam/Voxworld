@@ -127,6 +127,10 @@ require_once 'components/connect.php';
           </div>
         </div>
 
+        <!-- footer -->
+        <?php include './components/footer.php'; ?>
+        
+
     </div>
 </body>
 </html>

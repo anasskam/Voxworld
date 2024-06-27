@@ -27,9 +27,8 @@ if (isset($_SESSION['userID'])) {
 
 <header class="main-header">
   <div class="upper-header">
-    <a href="../index.php"><img alt="logo" class="logo home-logo"></a>
+    <a href="./index.php"><img alt="logo" class="logo home-logo"></a>
     
-
     <?php 
       if($userID){
           echo '
