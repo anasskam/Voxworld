@@ -54,7 +54,7 @@ if (isset($_POST['submit'])) {
         if (move_uploaded_file($_FILES['file-upload']['tmp_name'], $destination)) {
             $createPost = $conn->prepare('UPDATE posts SET title = ?, content = ?, image = ?, category = ?, UpdateDate = ? WHERE id = ?');
             $createPost->execute([$title, $content, $filename, $category, $postDate, $postID]);
-            // Clear session inputs after successful post creation //
+            //Clear session inputs after successful post creation //
             unset($_SESSION['contentTitle'], $_SESSION['categories'], $_SESSION['file-upload'], $_SESSION['editor-content']);
             header('location: managePosts.php');
         } else {
@@ -67,10 +67,13 @@ if (isset($_POST['submit'])) {
         $_SESSION['file-upload'] = $image;
         $_SESSION['editor-content'] = $content;
     }
+
     
+
+
 }
 
-
+var_dump($_SESSION['contentTitle']);
 
 ?>
 

@@ -11,18 +11,18 @@
 
   <nav>
       <ul>
-          <li class="active-nav"><a href="/">Home</a></li>
-          <li><a href="#">Politics</a></li>
-          <li><a href="#">Economy</a></li>
-          <li><a href="#">Society</a></li>
-          <li><a href="#">Culture</a></li>
-          <li><a href="#">Science & Tech</a></li>
-          <li><a href="#">Business</a></li>
-          <li><a href="#">Sports</a></li>
-          <li><a href="#">Ents & Arts</a></li>
-          <li><a href="#">Mena</a></li>
-          <li><a href="#">Health</a></li>
-          <li><a href="#">International</a></li>
+          <li class="active-nav"><a href="./index.php">Home</a></li>
+          <li><a href="category.php?category=politics">Politics</a></li>
+          <li><a href="category.php?category=economy">Economy</a></li>
+          <li><a href="category.php?category=society">Society</a></li>
+          <li><a href="category.php?category=culture">Culture</a></li>
+          <li><a href="category.php?category=scienceandtech">Science & Tech</a></li>
+          <li><a href="category.php?category=business">Business</a></li>
+          <li><a href="category.php?category=sports">Sports</a></li>
+          <li><a href="category.php?category=entsandarts">Ents & Arts</a></li>
+          <li><a href="category.php?category=mena">Mena</a></li>
+          <li><a href="category.php?category=health">Health</a></li>
+          <li><a href="category.php?category=international">International</a></li>
       </ul>
   </nav>
 
