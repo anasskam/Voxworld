@@ -125,10 +125,10 @@ $posts->execute([$getID]);
 
               <form method="post">
              
-                <button name="like" class="post-likes-wrapper post-intraction-wrapper text-body2">
+                <a name="like" class="post-likes-wrapper post-intraction-wrapper text-body2">
                   <img src="./assets/icons/like.svg" alt="likes">
                   <span class="post-likes" name="post-likes">6</span>likes
-                </button>
+                </a>
               </form>
           </div>
 
