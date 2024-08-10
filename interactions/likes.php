@@ -1,38 +1,30 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
+// DB connection
+require_once 'components/connect.php'; 
+if(isset($_POST['like_post'])){
+
+   if($user_id != ''){
+      
+      $post_id = $_POST['post_id'];
+      $post_id = filter_var($post_id, FILTER_SANITIZE_STRING);
+      
+      $select_post_like = $conn->prepare("SELECT * FROM `likes` WHERE post_id = ? AND user_id = ?");
+      $select_post_like->execute([$post_id, $user_id]);
+
+      if($select_post_like->rowCount() > 0){
+         $remove_like = $conn->prepare("DELETE FROM `likes` WHERE post_id = ?");
+         $remove_like->execute([$post_id]);
+         $message[] = 'removed from likes';
+      }else{
+         $add_like = $conn->prepare("INSERT INTO `likes`(user_id, post_id) VALUES(?,?)");
+         $add_like->execute([$user_id, $post_id]);
+         $message[] = 'added to likes';
+      }
+      
+   }else{
+         $message[] = 'please login first!';
+   }
+
 }
 
-if (isset($_SESSION['userID'])) {
-    $userID = $_SESSION['userID'];
-} else {
-    $userID = '';
-}
-
-if (isset($_POST['like'])) {
-    if ($userID != '') {
-        // Define base path
-        define('BASE_PATH', dirname(__DIR__)); // Set base path to the parent directory of the current directory
-
-        // Database connection
-        require_once BASE_PATH . '/components/connect.php';
-
-        $postID = $_POST['id_post'];
-
-        $selectLikes = $conn->prepare('SELECT * FROM likes WHERE id_post = ? AND id_user = ?');
-        $selectLikes->execute([$postID, $userID]);
-
-        if ($selectLikes->rowCount() > 0) {
-            $removeLikes = $conn->prepare('DELETE FROM likes WHERE id_user = ? AND id_post = ?');
-            $removeLikes->execute([$userID, $postID]);
-            echo "unliked";
-        } else {
-            $addLikes = $conn->prepare('INSERT INTO likes (id_user, id_post) VALUES (?, ?)');
-            $addLikes->execute([$userID, $postID]);
-            echo "liked";
-        }
-    } else {
-        echo "no";
-    }
-}
 ?>

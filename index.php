@@ -15,18 +15,18 @@ $emptyIllustration = "";
 
 // Fetch top posts sorted by likes, views, and comments //
 $selectTopPosts = $conn->query("SELECT p.*, 
-                                (SELECT COUNT(*) FROM likes WHERE id_post = p.id) AS total_likes,
-                                (SELECT COUNT(*) FROM views WHERE id_post = p.id) AS total_views,
-                                (SELECT COUNT(*) FROM comments WHERE id_post = p.id) AS total_comments
+                                (SELECT COUNT(*) FROM likes WHERE post_id = p.id) AS total_likes,
+                                (SELECT COUNT(*) FROM views WHERE post_id = p.id) AS total_views,
+                                (SELECT COUNT(*) FROM comments WHERE post_id = p.id) AS total_comments
                                 FROM posts p
                                 ORDER BY total_likes DESC, total_views DESC, total_comments DESC
                                 LIMIT 3")->fetchAll(PDO::FETCH_ASSOC);
 
 // Fetch latest posts sorted by creation date //
 $selectLatestPosts = $conn->query('SELECT p.*, 
-                                (SELECT COUNT(*) FROM likes WHERE id_post = p.id) AS total_likes,
-                                (SELECT COUNT(*) FROM views WHERE id_post = p.id) AS total_views,
-                                (SELECT COUNT(*) FROM comments WHERE id_post = p.id) AS total_comments
+                                (SELECT COUNT(*) FROM likes WHERE post_id = p.id) AS total_likes,
+                                (SELECT COUNT(*) FROM views WHERE post_id = p.id) AS total_views,
+                                (SELECT COUNT(*) FROM comments WHERE post_id = p.id) AS total_comments
                                 FROM posts p
                                 ORDER BY CreationDate DESC')->fetchAll(PDO::FETCH_ASSOC);
 
@@ -42,7 +42,7 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voxworld | Discover world news here</title>
     <meta name="description" content="The only place you need to know what happen in the world right now!!">
-    
+
     <!-- custom css links -->
     <link rel="shortcut icon" href="./assets/images/favicon32.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/style.css">
@@ -69,7 +69,7 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
                     $category = $post['category'];
                 ?>
                 <div class="card main-card">
-                    <a href="post.php?postID=<?= $topPostId; ?>?category=<?= $category; ?>">
+                    <a href="post.php?post_id=<?= $topPostId; ?>?category=<?= $category; ?>">
                         <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="">
                         <div class="card-content">
                             <div class="post-category-date">
@@ -113,7 +113,7 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
                     $category = $post['category'];
                 ?>
                 <div class="card">
-                    <a href="post.php?postID=<?= $latestPostId; ?>?category=<?= $category; ?>">
+                    <a href="post.php?post_id=<?= $latestPostId; ?>?category=<?= $category; ?>">
                         <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="" class="post-img">
                         <div class="card-content">
                             <div class="post-category-date">
