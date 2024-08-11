@@ -32,7 +32,6 @@ require_once 'components/connect.php';
 </head>
 <body>
     <div class="container">
-
         <!-- header -->
         <?php include './components/header.php'; ?>
 
