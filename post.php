@@ -11,6 +11,7 @@ if (isset($_SESSION['userID'])) {
 require_once 'components/connect.php';
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
