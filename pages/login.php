@@ -5,11 +5,12 @@ session_start();
 $errorMessages = ['password'=> '', 'email' => ''];
 include '../components/errorTemplate.php';
 
-if (isset($_SESSION['userID'])) {
-  $userID = $_SESSION['userID'];
-} else {
-  $userID = '';
-}
+
+if(isset($_SESSION['user_id'])){
+  $user_id = $_SESSION['user_id'];
+}else{
+  $user_id = '';
+};
 
 // Check if form is submitted //
 if (isset($_POST['submit'])) {
@@ -34,7 +35,7 @@ if (isset($_POST['submit'])) {
             // Password verification
             if (password_verify($password, $user['password'])) {
                 // Start session and store user information
-                $_SESSION['userID'] = $user['id'];
+                $_SESSION['user_id'] = $user['id'];
                 header('Location: ../index.php');
             } else {
                 $errorMessages['password'] = errorTemplate("Incorrect password.");

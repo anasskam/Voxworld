@@ -2,12 +2,13 @@
 include 'components/emptyStateTemplate.php';
 // Session start //
 session_start();
-if (isset($_SESSION['userID'])) {
-    $userID = $_SESSION['userID'];
-} else {
-    $userID = '';
-}
+if(isset($_SESSION['user_id'])){
+  $user_id = $_SESSION['user_id'];
+}else{
+  $user_id = '';
+};
 
+include 'interactions/likes.php';
 // DB connection
 require_once 'components/connect.php';
 

@@ -14,11 +14,11 @@ $emptyIllustration = "";
 // Delete User //
 if (isset($_POST['user-delete'])) {
 
-    $userID = $_POST['user-delete'];
+    $user_id = $_POST['user-delete'];
 
     // Prepare and execute the query //
     $userDelete = $conn->prepare('DELETE FROM users WHERE id = ?');
-    $userDelete->execute([$userID]);
+    $userDelete->execute([$user_id]);
 
     if ($userDelete) {
         header('location: manageUsers.php');

@@ -14,15 +14,16 @@ if(isset($_POST['like_post'])){
       if($select_post_like->rowCount() > 0){
          $remove_like = $conn->prepare("DELETE FROM `likes` WHERE post_id = ?");
          $remove_like->execute([$post_id]);
-         $message[] = 'removed from likes';
+         // $message[] = 'removed from likes';
       }else{
          $add_like = $conn->prepare("INSERT INTO `likes`(user_id, post_id) VALUES(?,?)");
          $add_like->execute([$user_id, $post_id]);
-         $message[] = 'added to likes';
+         // $message[] = 'added to likes';
       }
       
    }else{
-         $message[] = 'please login first!';
+         // $message[] = 'please login first!';
+         header("Location: ./pages/login.php"); 
    }
 
 }

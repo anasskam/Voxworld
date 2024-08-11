@@ -2,11 +2,11 @@
 include 'components/emptyStateTemplate.php';
 // Session start //
 session_start();
-if (isset($_SESSION['userID'])) {
-    $userID = $_SESSION['userID'];
-} else {
-    $userID = '';
-}
+if(isset($_SESSION['user_id'])){
+  $user_id = $_SESSION['user_id'];
+}else{
+  $user_id = '';
+};
 
 if (isset($_GET['category'])) {
     $category = $_GET['category'];
@@ -42,9 +42,9 @@ require_once 'components/connect.php';
 
 // Fetch latest posts sorted by creation date //
 $selectPosts = $conn->prepare('SELECT p.*, 
-                                (SELECT COUNT(*) FROM likes WHERE id_post = p.id) AS total_likes,
-                                (SELECT COUNT(*) FROM views WHERE id_post = p.id) AS total_views,
-                                (SELECT COUNT(*) FROM comments WHERE id_post = p.id) AS total_comments
+                                (SELECT COUNT(*) FROM likes WHERE post_id = p.id) AS total_likes,
+                                (SELECT COUNT(*) FROM views WHERE post_id = p.id) AS total_views,
+                                (SELECT COUNT(*) FROM comments WHERE post_id = p.id) AS total_comments
                                 FROM posts p WHERE category = ?
                                 ORDER BY CreationDate DESC');
 $selectPosts->execute([$category]);
