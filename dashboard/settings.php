@@ -38,9 +38,20 @@ if (isset($_POST['update-username'])) {
 
             // TODO: keep dropdown open when page reloads //
 
-            echo 'Username updated successfully';
+            // echo 'Username updated successfully';
+            ?>
+              <script defer>
+                setTimeout(()=> {
+                  swal("Success", "Username updated successfully", "success", {
+                    buttons:false
+                  })
+                }, 500)
+              </script>
+            <?php
+    
+            
           } else {
-            echo 'Error updating username';
+            $errorMessages['new-username'] = errorTemplate("Error updating username");
           }
         } else {
           $errorMessages['new-username'] = errorTemplate("Username already taken");
@@ -78,19 +89,30 @@ if (isset($_POST['update-password'])) {
           $updatePwd = $conn->prepare('UPDATE admin SET password = ? WHERE id_admin = ?');
           if ($updatePwd->execute([$hashed_password, $adminId])) {
             
-            // TODO: add success and failure popups //
+            ?>
+            <script defer>
+              setTimeout(()=> {
+                swal("Success", "Password updated successfully", "success", {
+                  buttons:false
+                }).then(()=>{
+                  // window.location.href = "http://localhost/Voxworld/pages/admin.php";
+                  window.location.href = "../pages/admin.php";
+                })
+              }, 500)
+            </script>
+          <?php
 
-            echo 'Password updated successfully.';
-            // Destroy all session data //
+            // Destroy all session data
             session_unset();
             session_destroy();
 
-            // Redirect to the login page //
-            header("Location: ../pages/admin.php"); 
-            exit();
+            // // Redirect to the login page //
+            // header("Location: ../pages/admin.php"); 
+            // exit();
 
           } else {
             echo 'Error updating password.';
+            
           }
         } else {
           $errorMessages['new-password'] = errorTemplate("Password already exists");
@@ -124,11 +146,12 @@ if (isset($_POST['update-password'])) {
   <script src="../js/settings.js" defer></script>
   <script src="../js/sidebar.js" type="module" defer></script>
   <script src="../js/auth.js" defer></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 <body>
 
   <!-- //TODO: add a global variable for error messages "$errorMessages" -->
-
   <div class="dashboard-container">
 
     <!-- side bar -->

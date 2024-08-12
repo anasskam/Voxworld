@@ -28,6 +28,7 @@ if(isset($_POST['add_comment'])){
   $comment = filter_var($comment, FILTER_SANITIZE_STRING);
 
   $verify_comment = $conn->prepare("SELECT * FROM `comments` WHERE post_id = ? AND user_id = ? AND FirstName = ? AND LastName = ? AND comment = ?");
+
   $verify_comment->execute([$get_id, $user_id, $fname, $lname, $comment]);
 
   if($verify_comment->rowCount() > 0){
@@ -39,10 +40,8 @@ if(isset($_POST['add_comment'])){
   }
 
 }
-
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -136,7 +135,15 @@ if(isset($_POST['add_comment'])){
 
 
                     <button name="like_post" class="post-likes-wrapper post-intraction-wrapper text-body2">
-                      <img src="./assets/icons/like.svg" alt="likes">
+                     
+                    <?php if($confirm_likes->rowCount() > 0){
+                        echo '<img src="./assets/icons/like_filled.svg" alt="likes">';
+
+                     } else {
+                      echo '<img src="./assets/icons/like.svg" alt="likes">';
+                     }
+                     ?>
+
                       <span class="post-likes" name="post-likes"><?= $total_post_likes; ?></span>likes
                     </button>
                     
@@ -177,8 +184,15 @@ if(isset($_POST['add_comment'])){
                       }else{
                     ?>
                       <div class="add-comment">
-                          <p>Please login to add your comment</p>
-                          <a href="pages/login.php" >Login now</a>
+                        <div class= "empty"> 
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12 9V14" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                              <path d="M12 21.41H5.93999C2.46999 21.41 1.01999 18.93 2.69999 15.9L5.81999 10.28L8.75999 5C10.54 1.79 13.46 1.79 15.24 5L18.18 10.29L21.3 15.91C22.98 18.94 21.52 21.42 18.06 21.42H12V21.41Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                              <path d="M11.9945 17H12.0035" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+
+                            <p>Please <a href="pages/login.php" style="text-decoration:underline">login</a> to add your comment</p>
+                        </div>
                       </div>
                     <?php
                       }
@@ -220,14 +234,21 @@ if(isset($_POST['add_comment'])){
                     </div>
 
                   </div>
-                  <?php
-                   }
-                  ?>
 
                   <?php
-                        }
+                    }
+                  }
                     else{
-                        echo '<p class="empty">no comments added yet!</p>';
+                      echo '
+                      <div class= "empty"> 
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 9V14" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 21.41H5.93999C2.46999 21.41 1.01999 18.93 2.69999 15.9L5.81999 10.28L8.75999 5C10.54 1.79 13.46 1.79 15.24 5L18.18 10.29L21.3 15.91C22.98 18.94 21.52 21.42 18.06 21.42H12V21.41Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M11.9945 17H12.0035" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+
+                        <p>No comments added yet!</p>
+                      <div>';
                     }
                   ?>
 

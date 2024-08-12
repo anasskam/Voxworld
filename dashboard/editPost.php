@@ -10,8 +10,8 @@ include '../components/errorTemplate.php';
 // DB Connection //
 require_once'../components/connect.php';
 
-if (isset($_SESSION['postID'])) {
-    $postID = $_SESSION['postID'];
+if (isset($_SESSION['post_id'])) {
+    $postID = $_SESSION['post_id'];
 
     require_once '../components/connect.php';
     $sqlState = $conn->prepare('SELECT * FROM posts WHERE id = ?');

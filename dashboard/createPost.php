@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
         $filename = uniqid() . $image; //date.now() 
         $destination = '../assets/hostedImages/' . $filename;
         if (move_uploaded_file($_FILES['file-upload']['tmp_name'], $destination)) {
-            $createPost = $conn->prepare('INSERT INTO posts VALUES (NULL, ?, ?, ?, ?, ?, NULL)');
+            $createPost = $conn->prepare('INSERT INTO posts VALUES (NULL, ?, ?, ?, ?, NULL, ?, NULL)');
             $createPost->execute([$title, $content, $filename, $category, $postDate]);
             // Clear session inputs after successful post creation //
             unset($_SESSION['contentTitle'], $_SESSION['categories'], $_SESSION['file-upload'], $_SESSION['editor-content']);
