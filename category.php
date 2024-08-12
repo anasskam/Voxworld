@@ -8,6 +8,8 @@ if(isset($_SESSION['user_id'])){
   $user_id = '';
 };
 
+
+
 if (isset($_GET['category'])) {
     $category = $_GET['category'];
 } else {
@@ -38,7 +40,6 @@ if (isset($categoryMapping[$category])) {
 
 // DB connection
 require_once 'components/connect.php';
-
 
 // Fetch latest posts sorted by creation date //
 $selectPosts = $conn->prepare('SELECT p.*, 
@@ -87,7 +88,7 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
                     $category = $post['category'];
                 ?>
                 <div class="card">
-                    <a href="post.php?postID=<?= $PostId; ?>?category=<?= $category; ?>">
+                    <a href="post.php?post_id=<?= $PostId; ?>?category=<?= $category; ?>">
                         <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="" class="post-img">
                         <div class="card-content">
                             <div class="post-category-date">

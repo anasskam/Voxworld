@@ -218,10 +218,11 @@ if(isset($_POST['add_comment'])){
 
                       <div class="comment-content text-button"><?= $fetch_comments['comment']; ?></div>
                     </div>
+
+                  </div>
                   <?php
                    }
                   ?>
-                  </div>
 
                   <?php
                         }
