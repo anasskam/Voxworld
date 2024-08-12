@@ -536,6 +536,16 @@ footer p{
   gap:var(--spacing-4)
 }
 
+.empty {
+  background-color: var(--surface-container);
+  color: var(--clr-warning);
+  padding: var(--spacing-3);
+  border-radius: var(--spacing-2);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -562,13 +572,19 @@ th {
 /* 
   * Manage posts page 
 */
-.post-wrapper{
+.post-wrapper, 
+.comment-wrapper.manage-comment{
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-bottom: var(--spacing-5);
   margin-bottom: var(--spacing-5);
   border-bottom: 1px solid var(--border);
+}
+
+.comment-wrapper.manage-comment {
+  margin-bottom:0px;
+  gap:var(--spacing-4);
 }
 
 .post-wrapper:last-child{
@@ -925,11 +941,18 @@ th {
 .post-page-wrapper .post-intraction-wrapper {
   padding: var(--spacing-2);
   border-radius: 100px;
+  background-color: transparent;
 }
-.post-page-wrapper .post-intraction-wrapper:hover {
-  background-color: var(--on-surface-container);
 
+.post-likes-wrapper {
+  cursor: pointer;
+  transition: background-color .4s ease-in-out;
 }
+
+.post-likes-wrapper:hover {
+  background-color: var(--on-surface-container);
+}
+
 .write-comment-wrapper {
   display: flex;
   flex-direction: column;
@@ -965,16 +988,17 @@ th {
   flex-direction: column;
   gap: var(--spacing-6);
 }
-.comment-wrapper {
+.comment-wrapper, .comment-body {
   display: flex;
   gap: var(--spacing-2);
   align-items: start;
 }
 .comment-wrapper .comment-img{
-  width: 48px;
   aspect-ratio: 1;
   padding: var(--spacing-1);
   border-radius: 100px;
+  flex-shrink: 0;
+  width: clamp(16px, 5%, 28px);
 }
 
 .comment-content-wrapper{
@@ -999,6 +1023,43 @@ th {
   background-color: var(--on-surface-container);
 }
 
+
+/* 
+*Popups
+*/
+.swal-modal {
+  background-color: var(--background);
+  border-radius: 20px;
+  border: none;
+  overflow: hidden;
+}
+
+.swal-button{
+  font-size: var(--fs-button);
+  background-color: var(--on-surface-container);
+  color: var(--clr-primary);
+  padding-inline: var(--spacing-3);
+  padding-block: var(--spacing-2);
+  border-radius: 1000px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .35s ease;
+}
+
+
+.swal-title,
+.swal-text,.swal-icon--success:after,
+.swal-icon--success::before {
+  color: var(--background-text);
+}
+
+.swal-icon--success:after,
+.swal-icon--success::before,
+.swal-icon--success__hide-corners {
+  background-color: var(--background);
+}
 
 /* 
 *RESPONSIVE LAYOUT

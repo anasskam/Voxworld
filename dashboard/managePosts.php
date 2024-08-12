@@ -10,6 +10,14 @@ require_once '../components/connect.php';
 $posts = $conn->query('SELECT * FROM posts')->fetchAll(PDO::FETCH_ASSOC);
 $postsCount = $conn->query('SELECT COUNT(id) AS NumPosts FROM posts')->fetchAll(PDO::FETCH_ASSOC);
 
+// Fetch latest posts sorted by creation date //
+$selectLatestPosts = $conn->query('SELECT p.*, 
+                                (SELECT COUNT(*) FROM likes WHERE post_id = p.id) AS total_likes,
+                                (SELECT COUNT(*) FROM views WHERE post_id = p.id) AS total_views,
+                                (SELECT COUNT(*) FROM comments WHERE post_id = p.id) AS total_comments
+                                FROM posts p
+                                ORDER BY CreationDate DESC')->fetchAll(PDO::FETCH_ASSOC);
+
 // Delete Post //
 if (isset($_POST['post-delete'])) {
 
@@ -86,7 +94,10 @@ else {
             
                 <div class="posts-wrapper">
                     <?php
-                        foreach ($posts as $post) {
+                        foreach ($selectLatestPosts as $post) {
+                            $PostId = $post['id'];
+                            $category = $post['category'];
+                       
                             ?>
                             <div class="post-wrapper">
 
@@ -122,17 +133,17 @@ else {
                                         <div class="post-intractions-wrapper">
                                             <div class="post-views-wrapper post-intraction-wrapper">
                                                 <img src="../assets/icons/show-pass.svg" alt="views">
-                                                <span class="post-views text-button" name="post-views">2,423 </span>views
+                                                <span class="post-views text-button" name="post-views"><?php echo htmlspecialchars($post['total_views']); ?></span>views
                                             </div>
 
                                             <div class="post-likes-wrapper post-intraction-wrapper">
                                                 <img src="../assets/icons/like.svg" alt="likes">
-                                                <span class="post-likes text-button" name="post-likes">215 </span>likes
+                                                <span class="post-likes text-button" name="post-likes"><?php echo htmlspecialchars($post['total_likes']); ?></span>likes
                                             </div>
 
                                             <div class="post-comments-wrapper post-intraction-wrapper">
                                                 <img src="../assets/icons/comment.svg" alt="views">
-                                                <span class="post-comments text-button" name="post-comments">6 </span>comments
+                                                <span class="post-comments text-button" name="post-comments"><?php echo htmlspecialchars($post['total_comments']); ?></span>comments
                                             </div>
                                         </div>
                                     </div>
@@ -161,14 +172,14 @@ else {
                                             Delete
                                         </button>
 
-                                        <button class="ghost-btn preview-btn" type="submit" name="post-preview" value="">
+                                        <a class="ghost-btn preview-btn" type="submit" name="post-preview" href="../post.php?postID=<?= $PostId; ?>?category=<?= $category; ?>">
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M13 11L21.2 2.79999" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                                                 <path d="M22 6.8V2H17.2" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                                                 <path d="M11 2H9C4 2 2 4 2 9V15C2 20 4 22 9 22H15C20 22 22 20 22 15V13" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                                             </svg>
                                             Preview
-                                        </button>
+                                        </a>
 
                                     </form>
                                 </div>

@@ -2,12 +2,13 @@
 include 'components/emptyStateTemplate.php';
 // Session start //
 session_start();
-if (isset($_SESSION['userID'])) {
-    $userID = $_SESSION['userID'];
-} else {
-    $userID = '';
-}
+if(isset($_SESSION['user_id'])){
+  $user_id = $_SESSION['user_id'];
+}else{
+  $user_id = '';
+};
 
+include 'interactions/likes.php';
 // DB connection
 require_once 'components/connect.php';
 
@@ -15,18 +16,18 @@ $emptyIllustration = "";
 
 // Fetch top posts sorted by likes, views, and comments //
 $selectTopPosts = $conn->query("SELECT p.*, 
-                                (SELECT COUNT(*) FROM likes WHERE id_post = p.id) AS total_likes,
-                                (SELECT COUNT(*) FROM views WHERE id_post = p.id) AS total_views,
-                                (SELECT COUNT(*) FROM comments WHERE id_post = p.id) AS total_comments
+                                (SELECT COUNT(*) FROM likes WHERE post_id = p.id) AS total_likes,
+                                (SELECT COUNT(*) FROM views WHERE post_id = p.id) AS total_views,
+                                (SELECT COUNT(*) FROM comments WHERE post_id = p.id) AS total_comments
                                 FROM posts p
                                 ORDER BY total_likes DESC, total_views DESC, total_comments DESC
                                 LIMIT 3")->fetchAll(PDO::FETCH_ASSOC);
 
 // Fetch latest posts sorted by creation date //
 $selectLatestPosts = $conn->query('SELECT p.*, 
-                                (SELECT COUNT(*) FROM likes WHERE id_post = p.id) AS total_likes,
-                                (SELECT COUNT(*) FROM views WHERE id_post = p.id) AS total_views,
-                                (SELECT COUNT(*) FROM comments WHERE id_post = p.id) AS total_comments
+                                (SELECT COUNT(*) FROM likes WHERE post_id = p.id) AS total_likes,
+                                (SELECT COUNT(*) FROM views WHERE post_id = p.id) AS total_views,
+                                (SELECT COUNT(*) FROM comments WHERE post_id = p.id) AS total_comments
                                 FROM posts p
                                 ORDER BY CreationDate DESC')->fetchAll(PDO::FETCH_ASSOC);
 
@@ -42,7 +43,7 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voxworld | Discover world news here</title>
     <meta name="description" content="The only place you need to know what happen in the world right now!!">
-    
+
     <!-- custom css links -->
     <link rel="shortcut icon" href="./assets/images/favicon32.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/style.css">
@@ -64,8 +65,12 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
             <h3>TOP NEWS</h3>
             <div class="cards-wrapper">
                 <?php foreach ($selectTopPosts as $post): ?>
+                <?php 
+                    $topPostId = $post['id'];
+                    $category = $post['category'];
+                ?>
                 <div class="card main-card">
-                    <a href="#">
+                    <a href="post.php?post_id=<?= $topPostId; ?>?category=<?= $category; ?>">
                         <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="">
                         <div class="card-content">
                             <div class="post-category-date">
@@ -104,19 +109,18 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
             <h3>LATEST NEWS</h3>
             <div class="cards-wrapper">
                 <?php foreach ($selectLatestPosts as $post): ?>
+                <?php 
+                    $latestPostId = $post['id'];
+                    $category = $post['category'];
+                ?>
                 <div class="card">
-                    <a href="#">
+                    <a href="post.php?post_id=<?= $latestPostId; ?>?category=<?= $category; ?>">
                         <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="" class="post-img">
                         <div class="card-content">
                             <div class="post-category-date">
                                 <span class="chip1 category text-caption1"><?php echo htmlspecialchars($post['category']); ?></span>
                                 <span class="divider"></span>
-                                <p class="text-caption1 post-date">
-                                    <?php echo date('M j, Y H:i', strtotime($post['CreationDate'])); ?>
-                                    <?php if ($post['UpdateDate'] && $post['UpdateDate'] != $post['CreationDate']): ?>
-                                        <span>(Updated: <?php echo date('M j, Y H:i', strtotime($post['UpdateDate'])); ?>)</span>
-                                    <?php endif; ?>
-                                </p>
+                                <p class="text-caption1 post-date"><?php echo date('M j, Y H:i', strtotime($post['CreationDate'])); ?></p>
                             </div>
                             <h3 class="text-md home-post-title"><?php echo htmlspecialchars($post['title']); ?></h3>
                             <div class="divider horizontal"></div>

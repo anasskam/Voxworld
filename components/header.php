@@ -3,21 +3,21 @@
 // DB connection //
 require_once 'connect.php';
 
-$userID = '';
+$user_id = '';
 $username = '';
 
-// Check if userID is set in session //
-if (isset($_SESSION['userID'])) {
-    $userID = $_SESSION['userID'];
+// Check if user_id is set in session //
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
 
     // Prepare the statement //
     $checkUser = $conn->prepare('SELECT FirstName, LastName FROM users WHERE id = ?');
-    $checkUser->execute([$userID]);
+    $checkUser->execute([$user_id]);
     $user = $checkUser->fetch(PDO::FETCH_ASSOC);
 
     // Check if a user was found //
     if ($user) {
-        $username = $user['FirstName'] . ' '. $user['LastName'];
+        $username = $user['FirstName'] . ' ' . $user['LastName'];
     } else {
         $username = 'Guest';
     }
@@ -30,7 +30,7 @@ if (isset($_SESSION['userID'])) {
     <a href="./index.php"><img alt="logo" class="logo home-logo"></a>
     
     <?php 
-      if($userID){
+      if($user_id){
           echo '
             <div class="profile-dropDown">
               <div class="profile-name">

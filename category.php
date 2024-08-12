@@ -2,11 +2,11 @@
 include 'components/emptyStateTemplate.php';
 // Session start //
 session_start();
-if (isset($_SESSION['userID'])) {
-    $userID = $_SESSION['userID'];
-} else {
-    $userID = '';
-}
+if(isset($_SESSION['user_id'])){
+  $user_id = $_SESSION['user_id'];
+}else{
+  $user_id = '';
+};
 
 if (isset($_GET['category'])) {
     $category = $_GET['category'];
@@ -41,13 +41,13 @@ require_once 'components/connect.php';
 
 
 // Fetch latest posts sorted by creation date //
-$selectLatestPosts = $conn->prepare('SELECT p.*, 
-                                (SELECT COUNT(*) FROM likes WHERE id_post = p.id) AS total_likes,
-                                (SELECT COUNT(*) FROM views WHERE id_post = p.id) AS total_views,
-                                (SELECT COUNT(*) FROM comments WHERE id_post = p.id) AS total_comments
+$selectPosts = $conn->prepare('SELECT p.*, 
+                                (SELECT COUNT(*) FROM likes WHERE post_id = p.id) AS total_likes,
+                                (SELECT COUNT(*) FROM views WHERE post_id = p.id) AS total_views,
+                                (SELECT COUNT(*) FROM comments WHERE post_id = p.id) AS total_comments
                                 FROM posts p WHERE category = ?
                                 ORDER BY CreationDate DESC');
-$selectLatestPosts->execute([$category]);
+$selectPosts->execute([$category]);
 
 // Check if no posts //
 $postsCount = $conn->query('SELECT COUNT(id) AS NumPosts FROM posts')->fetch(PDO::FETCH_ASSOC);
@@ -81,9 +81,13 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
         <section class="latest-news">
             <h3 style="text-transform:uppercase"><?php echo htmlspecialchars($displayCategory); ?></h3>
             <div class="cards-wrapper">
-                <?php foreach ($selectLatestPosts as $post): ?>
+                <?php foreach ($selectPosts as $post): ?>
+                <?php 
+                    $PostId = $post['id'];
+                    $category = $post['category'];
+                ?>
                 <div class="card">
-                    <a href="#">
+                    <a href="post.php?post_id=<?= $PostId; ?>?category=<?= $category; ?>">
                         <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="" class="post-img">
                         <div class="card-content">
                             <div class="post-category-date">
