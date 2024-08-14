@@ -574,10 +574,11 @@ template {
   --primary:var(--clr-primary);
   --border:var(--clr-dark-border);
   --login-on-surface-text:var(--clr-gray-600);
+  --light-gray:var(--clr-gray-300);
 }
 
 [data-theme="light"]{
-
+  
   color-scheme: light;
   --background:var(--clr-white);
   --background-text:var(--clr-black);
@@ -588,6 +589,7 @@ template {
   --primary:var(--clr-primary);
   --border:var(--clr-gray-150);
   --login-on-surface-text:var(--clr-gray-600);
+  --light-gray:var(--clr-gray-700);
 
 }
 
@@ -813,7 +815,9 @@ p,
 .no-opacity{
   opacity:0;
 }
-
+.light-gray {
+  color: var(--light-gray);
+}
 
 /**
   * Buttons calsses

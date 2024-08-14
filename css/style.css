@@ -663,7 +663,8 @@ th {
   padding-block: var(--spacing-05);
 }
 
-.post-actions form {
+.post-actions form,
+.comments-actions form{
   display: flex;
   gap: var(--spacing-2);
   align-items: center;
@@ -998,7 +999,7 @@ th {
   padding: var(--spacing-1);
   border-radius: 100px;
   flex-shrink: 0;
-  width: clamp(16px, 5%, 28px);
+  width: clamp(16px, 8%, 28px);
 }
 
 .comment-content-wrapper{
@@ -1059,6 +1060,111 @@ th {
 .swal-icon--success::before,
 .swal-icon--success__hide-corners {
   background-color: var(--background);
+}
+
+/* 
+*OVERVIEW PAGE
+*/
+
+.overview-cards-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+}
+.overview-card {
+  padding: var(--spacing-3);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  border: 1px solid var(--border);
+  /* min-width: 200px; */
+  flex-grow: 1;
+  background-color: var(--surface-container);
+}
+.overview-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+.overview-posts,
+.overview-cards,
+.overview-comments {
+  display: flex;
+  flex-direction: column;
+  gap:var(--spacing-4);
+
+}
+
+.overview-posts,
+.overview-comments {
+  margin-bottom: 0;
+
+}
+.see-more {
+  display: flex;
+  align-items: center;
+  gap:var(--spacing-1);
+  color: var(--primary);
+}
+
+
+.overview-posts-header,
+.overview-comments-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+.overview-posts-wrapper,
+.overview-comments-wrapper {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: var(--spacing-4);
+  max-height: 400px;
+  overflow: scroll;
+  background-color: var(--surface-container);
+}
+
+
+.overview-comments-wrapper {
+  padding-block: 0;
+  max-height: 450px;
+  overflow: scroll;
+}
+.overview-comment{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--spacing-5);
+  margin-block: var(--spacing-4);
+  border-bottom: 1px solid var(--border);
+  gap:var(--spacing-4);
+}
+
+.overview-comment:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+
+.overview-content {
+  display: flex;
+  gap:var(--spacing-4)
+}
+
+.overview-content .main-content {
+  flex-grow: 1;
+}
+
+.overview-content .overview-comments {
+  width: 30%;
 }
 
 /* 
