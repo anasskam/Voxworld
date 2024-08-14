@@ -3,6 +3,41 @@ session_start();
 // Session Test //
 include '../components/session-check.php';
 $adminId = checkAdminSession();
+
+// DB Connection //
+require_once '../components/connect.php';
+
+// Fetch top posts sorted by likes, views, and comments //
+$selectTopPosts = $conn->query("SELECT p.*, 
+                                (SELECT COUNT(*) FROM likes WHERE post_id = p.id) AS total_likes,
+                                (SELECT COUNT(*) FROM views WHERE post_id = p.id) AS total_views,
+                                (SELECT COUNT(*) FROM comments WHERE post_id = p.id) AS total_comments
+                                FROM posts p
+                                ORDER BY total_likes DESC, total_views DESC, total_comments DESC
+                                LIMIT 5")->fetchAll(PDO::FETCH_ASSOC);
+
+// Fetch only top posts total number //
+$topPostsCount = count($selectTopPosts);
+
+// Fetch posts total number //
+$postsCount = $conn->query('SELECT COUNT(id) AS NumPosts FROM posts')->fetchAll(PDO::FETCH_ASSOC);   
+
+// Fetch users total number //
+$usersCount = $conn->query('SELECT COUNT(id) AS NumUsers FROM users')->fetchAll(PDO::FETCH_ASSOC);  
+
+// Fetch likes total number //
+$likesCount = $conn->query('SELECT COUNT(id) AS NumLikes FROM likes')->fetchAll(PDO::FETCH_ASSOC);
+
+// Fetch views total number //
+$viewsCount = $conn->query('SELECT COUNT(id) AS NumViews FROM views')->fetchAll(PDO::FETCH_ASSOC);
+
+// Fetch latest comments //
+$selectLatestComments = $conn->query('SELECT c.*, p.category, u.FirstName, u.LastName 
+                                      FROM comments c 
+                                      JOIN posts p ON c.post_id = p.id 
+                                      JOIN users u ON c.user_id = u.id 
+                                      ORDER BY c.date DESC LIMIT 6')->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +88,7 @@ $adminId = checkAdminSession();
                                             <path d="M11.66 12.4L14.56 13.14" stroke="#4353FE" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
                                     </div>
-                                    <p class="overview-card-content"><span>127</span> posts</p>
+                                    <p class="overview-card-content"><span><?php echo $postsCount[0]['NumPosts'];?></span> posts</p>
                                 </div>
 
                                 <div class="overview-card">
@@ -65,7 +100,7 @@ $adminId = checkAdminSession();
                                         </svg>
 
                                     </div>
-                                    <p class="overview-card-content"><span>127</span> likes</p>
+                                    <p class="overview-card-content"><span><?php echo htmlspecialchars($likesCount[0]['NumLikes']); ?></span> likes</p>
                                 </div>
 
                                 <div class="overview-card">
@@ -77,7 +112,7 @@ $adminId = checkAdminSession();
                                         </svg>
 
                                     </div>
-                                    <p class="overview-card-content"><span>127</span> views</p>
+                                    <p class="overview-card-content"><span><?php echo htmlspecialchars($viewsCount[0]['NumViews']); ?></span> views</p>
                                 </div>
 
                                 <div class="overview-card">
@@ -91,14 +126,14 @@ $adminId = checkAdminSession();
                                         </svg>
 
                                     </div>
-                                    <p class="overview-card-content"><span>127</span> users</p>
+                                    <p class="overview-card-content"><span><?php echo $usersCount[0]['NumUsers'];?></span> users</p>
                                 </div>
                             </div>
                         </section>
 
                         <section class="overview-posts">
                             <div class="overview-posts-header">
-                                <h3>🔥Top posts <span>(5)</span></h3>
+                                <h3>🔥Top posts <span>(<?= $topPostsCount; ?>)</span></h3>
                                 <a href="./managePosts.php" class="see-more">
                                     <p class="text-caption1">See more</p>
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -109,49 +144,70 @@ $adminId = checkAdminSession();
                             </div>
 
                             <div class="posts-wrapper overview-posts-wrapper">
-                                <a class="post-wrapper" href="#">
+                                <?php foreach ($selectTopPosts as $post): ?>
+                                <?php 
+                                    $topPostId = $post['id'];
+                                    $category = $post['category'];
+                                ?>
+                                <a class="post-wrapper" href="../post.php?post_id=<?= $topPostId; ?>?category=<?= $category; ?>">
                                     <div class="image-content-wrapper">
                                     <!-- post image -->
-                                        <img src="../assets/images/test.jpg" alt="post image">
+                                        <img src="../assets/hostedImages/<?php echo $post['image']?>" alt="post image">
 
                                         <div class="post-content">
-                                            <p class="text-body1 text-md">The unseen of spending three years at Pixelgrade...</p>
+                                            <p class="text-body1 text-md"><?php echo $post['title']?></p>
 
                                             <div class="post-category-date">
-                                                <span class="chip1 category text-caption1">Politics</span>
+                                                <span class="chip1 category text-caption1"><?php echo $post['category']?></span>
                                                 <span class="divider"></span>
                                                 <p class="text-button post-date">
-                                                Feb 2, 2024 19:28 <span> (Updated: Feb 4, 2024 20:51)  </span>
+                                                    <?php                                      
+                                                        $postDate = $post['CreationDate'];
+                                                        $dateTime = new DateTime($postDate);
+                                                        echo $dateTime->format('M j, Y H:i');                             
+                                                    ?>  
+                                                    <span>
+                                                        <?php
+                                                            if ($post['UpdateDate'] && $post['UpdateDate'] != $post['CreationDate']) {
+                                                                echo '<span>(Updated: ';
+                                                                $updateDatetime = new DateTime($post['UpdateDate']);
+                                                                echo $updateDatetime->format('M j, Y H:i');
+                                                                echo ')</span>';
+                                                            }
+                                                        ?>
+                                                    </span>
                                                 </p>
                                             </div>
 
                                             <div class="post-intractions-wrapper">
                                                 <div class="post-views-wrapper post-intraction-wrapper">
                                                     <img src="../assets/icons/show-pass.svg" alt="views">
-                                                    <span class="post-views text-button" name="post-views">2,423</span>views
+                                                    <span class="post-views text-button" name="post-views"><?php echo htmlspecialchars($post['total_views']); ?></span>views
                                                 </div>
 
                                                 <div class="post-likes-wrapper post-intraction-wrapper">
                                                     <img src="../assets/icons/like.svg" alt="likes">
-                                                    <span class="post-likes text-button" name="post-likes">215</span>likes
+                                                    <span class="post-likes text-button" name="post-likes"><?php echo htmlspecialchars($post['total_likes']); ?></span>likes
                                                 </div>
 
                                                 <div class="post-comments-wrapper post-intraction-wrapper">
                                                     <img src="../assets/icons/comment.svg" alt="views">
-                                                    <span class="post-comments text-button" name="post-comments">6</span>comments
+                                                    <span class="post-comments text-button" name="post-comments"><?php echo htmlspecialchars($post['total_comments']); ?></span>comments
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </a>
+                                <?php endforeach; ?>
                             </div>
+
 
                         </section>
                     </div>
 
                     <section class="overview-comments">
                         <div class="overview-comments-header">
-                            <h3>Recent comments <span>(5)</span></h3>
+                            <h3>Recent comments <span>(<?= count($selectLatestComments); ?>)</span></h3>
                             <a href="./comments.php" class="see-more">
                                 <p class="text-caption1">See more</p>
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -161,8 +217,9 @@ $adminId = checkAdminSession();
                             </a>
                         </div>
                         <div class="overview-comments-wrapper">
+                            <?php foreach ($selectLatestComments as $comment): ?>
                             <div class="comment-wrapper overview-comment">
-                                <a class="comment-body" href="#">
+                                <a class="comment-body" href="../post.php?post_id=<?= $comment['post_id']; ?>#comments-section">
                                     <div class="comment-img">
                                     <img src="../assets/icons/user2.svg" alt="comment user image">
                                     </div>
@@ -170,15 +227,22 @@ $adminId = checkAdminSession();
                                     <div class="comment-content-wrapper">
                                     
                                     <div class="comment-header">
-                                        <p class="text-body2">Abdessamad Bih</p>
+                                        <p class="text-body2"><?= $comment['FirstName'] . ' ' . $comment['LastName']; ?></p>
                                         <span class="bullet"></span>
-                                        <p class="text-caption1 opacity-half">Mar 20, 2024 23:14</p>
+                                        <p class="text-caption1 opacity-half">                        
+                                            <?php                                      
+                                                $commentDate = $comment['date'];
+                                                $dateTime = new DateTime($commentDate);
+                                                echo $dateTime->format('M j, Y H:i');                             
+                                            ?>
+                                        </p>
                                     </div>
 
-                                    <div class="comment-content text-button">Physiological respiration involves the mechanisms that ensure that the composition of the functional...</div>
+                                    <div class="comment-content text-button"><?= $comment['comment']; ?></div>
                                     </div>
                                 </a>
                             </div>
+                            <?php endforeach; ?>
                         </div>
 
                     </section>

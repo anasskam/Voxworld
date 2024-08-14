@@ -99,7 +99,7 @@ if (isset($_POST['comment-delete'])) {
 
                             <div class="comments-actions">
                                 <form method="POST">
-                                    <a class="ghost-btn preview-btn" type="submit" name="comment-preview" href="#">
+                                    <a class="ghost-btn preview-btn" type="submit" name="comment-preview" href="../post.php?post_id=<?= $comment['post_id']; ?>#comments-section">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M13 11L21.2 2.79999" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                                             <path d="M22 6.8V2H17.2" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
