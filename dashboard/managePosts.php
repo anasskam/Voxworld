@@ -27,6 +27,14 @@ if (isset($_POST['post-delete'])) {
     $postDelete = $conn->prepare('DELETE FROM posts WHERE id = ?');
     $postDelete->execute([$postID]);
 
+    // remove likes related to deleted posts //
+    $likeDelete = $conn->prepare('DELETE FROM likes WHERE post_id = ?');
+    $likeDelete->execute([$postID]);
+
+    // remove views related to deleted posts //
+    $viewsDelete = $conn->prepare('DELETE FROM views WHERE post_id = ?');
+    $viewsDelete->execute([$postID]);
+    
     if ($postDelete) {
         header('location: managePosts.php');
     }
