@@ -20,6 +20,14 @@ if (isset($_POST['user-delete'])) {
     $userDelete = $conn->prepare('DELETE FROM users WHERE id = ?');
     $userDelete->execute([$user_id]);
 
+    // remove likes related to deleted user //
+    $likeDelete = $conn->prepare('DELETE FROM likes WHERE user_id = ?');
+    $likeDelete->execute([$user_id]);
+
+    // remove comments related to deleted user //
+    $viewsDelete = $conn->prepare('DELETE FROM comments WHERE user_id = ?');
+    $viewsDelete->execute([$user_id]);
+
     if ($userDelete) {
         header('location: manageUsers.php');
     }
