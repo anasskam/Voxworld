@@ -105,7 +105,10 @@ const headerPublishBtn = document.querySelector(".publish-header-btn");
 
 document.addEventListener("DOMContentLoaded",()=>{
     headerPublishBtn.addEventListener("click" , ()=> {formPublishBtn.click()});
+
 })
 
 file.addEventListener("change", updateFileInfo)
 uploadField.addEventListener("click", ()=> {file.click()});
+
+
