@@ -36,7 +36,18 @@ if (isset($_POST['post-delete'])) {
     $viewsDelete->execute([$postID]);
     
     if ($postDelete) {
-        header('location: managePosts.php');
+        ?>
+        <script defer>
+            setTimeout(()=> {
+                swal("Success", "Post deleted successfully", "success", {
+                    buttons: false,
+                    timer:2500,
+                }).then(()=> {
+                    window.location.href = "./managePosts.php";
+                })
+            }, 500)
+        </script>
+      <?php
     }
     else {
         echo 'Error deleting post';
@@ -80,6 +91,7 @@ else {
     <script src="../js/theme.js" type="module" defer></script>
     <script src="../js/sidebar.js" type="module" defer></script>
     <script src="../js/manageUsers.js" type="module" defer></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 

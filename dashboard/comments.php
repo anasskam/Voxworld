@@ -21,8 +21,18 @@ if (isset($_POST['comment-delete'])) {
     $commentDelete->execute([$commentID]);
 
     if ($commentDelete) {
-        // location: post.php/#comments-section
-        header('location: comments.php');
+        ?>
+        <script defer>
+            setTimeout(()=> {
+                swal("Success", "Comment deleted successfully", "success", {
+                    buttons: false,
+                    timer: 2500,
+                }).then(()=> {
+                    window.location.href = "./comments.php";
+                })
+            }, 500)
+        </script>
+      <?php
     }
     else {
         echo 'Error deleting comment';
@@ -48,6 +58,7 @@ if (isset($_POST['comment-delete'])) {
     <script src="../js/sidebar.js" type="module" defer></script>
     <script src="../js/post.js" type="module" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 <body>

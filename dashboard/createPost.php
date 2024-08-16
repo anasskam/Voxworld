@@ -42,7 +42,27 @@ if (isset($_POST['submit'])) {
             $createPost->execute([$title, $content, $filename, $category, $postDate]);
             // Clear session inputs after successful post creation //
             unset($_SESSION['contentTitle'], $_SESSION['categories'], $_SESSION['file-upload'], $_SESSION['editor-content']);
-            header('location: managePosts.php');
+
+            // popup
+            ?>
+            <script defer>
+                setTimeout(()=> {
+                    swal("Success", "Post created successfully", "success", {
+                        buttons: {
+                            redirect: {
+                                text: "Go to Post manager",
+                                className:"swal-gotoBtn",
+                            }
+                        },
+                    }).then((value)=>{
+                        if(value === "redirect") {
+                            window.location.href = "./managePosts.php";
+                        }
+                    })
+                }, 500)
+            </script>
+          <?php
+
         } else {
             $errorMessages['image'] = errorTemplate("Failed to upload image.");
         }
@@ -53,8 +73,6 @@ if (isset($_POST['submit'])) {
         $_SESSION['file-upload'] = $image;
         $_SESSION['editor-content'] = $content;
     }
-    // header('location: managePosts.php');    
-
 }
 
 ?>
@@ -71,12 +89,13 @@ if (isset($_POST['submit'])) {
     <link rel="shortcut icon" href="../assets/images/favicon32.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/style.css">
     
-
     <!-- custom js -->
     <script src="../js/theme.js" type="module" defer></script>
     <script src="../js/sidebar.js" type="module" defer></script>
     <script src="../js/createPost.js" type="module" defer></script>
     <script src="../assets/ckeditor5/build/ckeditor.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
 </head>
 <body>

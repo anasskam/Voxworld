@@ -969,8 +969,14 @@ th {
 .write-comment-input{
   display: flex;
   align-items: start;
+  transition: background-color .4s ease-in-out;
 
 }
+.write-comment-input:hover{
+  background-color: var(--on-surface-container);
+
+}
+
 .write-comment-wrapper .input-field {
   padding-block: var(--spacing-3);
 }
@@ -993,7 +999,14 @@ th {
   display: flex;
   gap: var(--spacing-2);
   align-items: start;
+  
 }
+
+.comment-body:hover  .comment-content {
+  background-color: var(--hover-on-surface-container);
+}
+
+
 .comment-wrapper .comment-img{
   aspect-ratio: 1;
   padding: var(--spacing-1);
@@ -1011,6 +1024,7 @@ th {
   display: flex;
   align-items: center;
   gap: var(--spacing-1);
+  flex-wrap: wrap;
 }
 .comment-content-wrapper .comment-header .bullet{
   width: 4px;
@@ -1022,6 +1036,7 @@ th {
   padding: var(--spacing-2);
   border-radius: var(--spacing-2);
   background-color: var(--on-surface-container);
+  transition: background-color .4s ease-in-out;
 }
 
 
@@ -1047,6 +1062,20 @@ th {
   justify-content: center;
   align-items: center;
   transition: all .35s ease;
+  font-weight: var(--fw-regular);
+
+}
+.swal-gotoBtn {
+  color:var(--background-text) ;
+}
+
+.swal-button:hover {
+  background-color: var(--hover-on-surface-container) !important;
+}
+
+.swal-button:focus,
+.swal-button:active {
+  box-shadow: none;
 }
 
 

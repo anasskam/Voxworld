@@ -12,8 +12,11 @@ $usersCount = $conn->query('SELECT COUNT(id) AS NumUsers FROM users')->fetchAll(
 
 $emptyIllustration = "";
 // Delete User //
+
+
 if (isset($_POST['user-delete'])) {
 
+    
     $user_id = $_POST['user-delete'];
 
     // Prepare and execute the query //
@@ -21,9 +24,21 @@ if (isset($_POST['user-delete'])) {
     $userDelete->execute([$user_id]);
 
     if ($userDelete) {
-        header('location: manageUsers.php');
+        ?>
+        <script defer>
+            setTimeout(()=> {
+                swal("Success", "User deleted successfully", "success", {
+                    buttons: false,
+                    timer:2500,
+                }).then(()=> {
+                    window.location.href = "./manageUsers.php";
+                })
+            }, 500)
+        </script>
+      <?php
     }
     else {
+
         echo 'Error deleting user';
     }
 }
@@ -53,6 +68,7 @@ else {
     <script src="../js/theme.js" type="module" defer></script>
     <script src="../js/sidebar.js" type="module" defer></script>
     <script src="../js/manageUsers.js" defer></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 
