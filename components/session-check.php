@@ -1,9 +1,9 @@
 <?php
 function checkAdminSession() {
-    if (!isset($_SESSION['adminId'])) {
+    if (!isset($_SESSION['admin_id'])) {
         // Redirect to login page //
         header('Location: ../pages/admin.php');
         exit();
     }
-    return $_SESSION['adminId'];
+    return $_SESSION['admin_id'];
 }

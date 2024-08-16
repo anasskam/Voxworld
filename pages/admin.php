@@ -7,11 +7,12 @@ $errorMessages = ['password' => '','username' => ''];
 include '../components/errorTemplate.php';
 
 // Check if already logged-in //
-if (isset($_SESSION['adminId'])) {
+if (isset($_SESSION['admin_id'])) {
   // Redirect to dashboard page //
   header('Location: ../dashboard/overview.php');
   exit();
 }
+
 
 
 if (isset($_POST['submit'])) {
@@ -40,7 +41,7 @@ if (isset($_POST['submit'])) {
 
           // Password verification
           if (password_verify($password, $admin['password'])) {
-              $_SESSION['adminId'] = $admin['id_admin'];
+              $_SESSION['admin_id'] = $admin['id_admin'];
               header('Location: ../dashboard/overview.php');
             } else {
                 $errorMessages['password'] = errorTemplate("Incorrect password.");
