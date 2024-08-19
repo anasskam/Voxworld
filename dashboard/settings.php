@@ -100,7 +100,7 @@ if (isset($_POST['update-password'])) {
                 })
               }, 500)
             </script>
-          <?php
+            <?php
 
             // Destroy all session data
             session_unset();

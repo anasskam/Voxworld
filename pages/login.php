@@ -6,11 +6,11 @@ $errorMessages = ['password'=> '', 'email' => ''];
 include '../components/errorTemplate.php';
 
 
-if(isset($_SESSION['user_id'])){
-  $user_id = $_SESSION['user_id'];
-}else{
-  $user_id = '';
-};
+// Redirect if already logged in //
+if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
+  header('Location: ../index.php');
+  exit();
+}
 
 // Check if form is submitted //
 if (isset($_POST['submit'])) {
