@@ -104,7 +104,7 @@
   width: 20px;
 }
 
-.inputs input{
+input{
   padding-block: var(--spacing-3);
   width: 100%;
   background-color: transparent;
@@ -130,6 +130,10 @@
   padding-inline: var(--spacing-3);
   color:var(--white);
   align-items: center;
+}
+
+.search-bar-wrapper {
+  width: 350px;
 }
 
 .inputs div:not(.full-name, .input-validation, .error-wrapper, .upload-label):hover{
@@ -1066,7 +1070,7 @@ th {
 
 }
 .swal-gotoBtn {
-  color:var(--background-text) ;
+  color:var(--background-text);
 }
 
 .swal-button:hover {
@@ -1090,6 +1094,18 @@ th {
 .swal-icon--success__hide-corners {
   background-color: var(--background);
 }
+
+
+.swal-icon--warning{
+  border-color: var(--clr-warning) !important;
+}
+
+.swal-icon--warning__body,
+.swal-icon--warning__dot{
+  background-color: var(--clr-warning) !important;
+}
+
+
 
 /* 
 *OVERVIEW PAGE
