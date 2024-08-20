@@ -854,6 +854,7 @@ p,
 
 .preview-btn{
   color: var(--background-text);
+  flex-grow: 1; 
 }
 
 .primary-btn:hover{
