@@ -75,7 +75,7 @@ else {
     <!-- custom js -->
     <script src="../js/theme.js" type="module" defer></script>
     <script src="../js/sidebar.js" type="module" defer></script>
-    <script src="../js/manageUsers.js" defer></script>
+    <script src="../js/manageUsers.js" defer type="module"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>

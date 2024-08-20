@@ -10,5 +10,4 @@ export function setEmptyImageTheme(darkImagePath, lightImagePath) {
     img.src = currentTheme === "dark" ? darkImagePath : lightImagePath;
   })
 }
-
 document.addEventListener("DOMContentLoaded", () => {setEmptyImageTheme(pathOfDarkImg, pathOfLightImg)});

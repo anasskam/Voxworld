@@ -37,6 +37,8 @@ if(isset($_POST['add_comment'])){
      $insert_comment = $conn->prepare("INSERT INTO `comments`(post_id, user_id, FirstName, LastName, comment) VALUES(?,?,?,?,?)");
      $insert_comment->execute([$get_id, $user_id, $fname, $lname, $comment]);
      $message[] = 'new comment added!';
+     $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]/#comments-section";
+     header("Location: $actual_link"); 
   }
 
 }

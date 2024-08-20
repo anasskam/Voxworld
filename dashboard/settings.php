@@ -106,9 +106,7 @@ if (isset($_POST['update-password'])) {
             session_unset();
             session_destroy();
 
-            // // Redirect to the login page //
-            // header("Location: ../pages/admin.php"); 
-            // exit();
+            
 
           } else {
             echo 'Error updating password.';
