@@ -61,7 +61,7 @@ if (isset($_POST['submit'])) {
                     })
                 }, 500)
             </script>
-          <?php
+            <?php
 
         } else {
             $errorMessages['image'] = errorTemplate("Failed to upload image.");

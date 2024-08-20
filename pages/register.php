@@ -1,5 +1,10 @@
 <?php
 session_start();
+// Redirect if already logged in //
+if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
+  header('Location: ../index.php');
+  exit();
+}
 // inti error msg //
 $errorMessages = ['fname'=> '', 'lname' => '', 'email'=> '', 'pwd' => ''];
 

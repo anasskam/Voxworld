@@ -51,7 +51,18 @@ if (isset($_POST['submit'])) {
             $createPost->execute([$title, $content, $filename, $category, $postDate, $postID]);
             //Clear session inputs after successful post creation //
             unset($_SESSION['contentTitle'], $_SESSION['categories'], $_SESSION['file-upload'], $_SESSION['editor-content']);
-            header('location: managePosts.php');
+            ?>
+            <script defer>
+              setTimeout(()=> {
+                swal("Success", "Post updated successfully", "success", {
+                  buttons:false,
+                  timer: 2000,
+                }).then(()=>{
+                    window.location.href = "./managePosts.php";
+                })
+              }, 500)
+            </script>
+            <?php
         } else {
             $errorMessages['image'] = errorTemplate("Failed to upload image.");
         }
@@ -85,6 +96,7 @@ if (isset($_POST['submit'])) {
     <script src="../js/sidebar.js" type="module" defer></script>
     <script src="../js/createPost.js" type="module" defer></script>
     <script src="../assets/ckeditor5/build/ckeditor.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 <body>

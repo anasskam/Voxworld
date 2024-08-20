@@ -2,8 +2,7 @@
 session_start();
 
 // Destroy all session data //
-session_unset();
-session_destroy();
+unset($_SESSION['admin_id']); 
 
 // Redirect to the login page //
 header("Location: ../pages/admin.php"); 

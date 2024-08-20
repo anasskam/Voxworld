@@ -60,6 +60,7 @@ if(isset($_POST['add_comment'])){
       <script src="./js/toggleTheme.js" type="module" defer></script>
       <script src="./js/post.js" type="module" defer></script>
       <script src="./js/header.js" type="module" defer></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
   </head>
   <body>
@@ -134,7 +135,7 @@ if(isset($_POST['add_comment'])){
                     </a>
 
 
-                    <button name="like_post" class="post-likes-wrapper post-intraction-wrapper text-body2">
+                    <button id="likes-section" name="like_post" class="post-likes-wrapper post-intraction-wrapper text-body2">
                      
                     <?php if($confirm_likes->rowCount() > 0){
                         echo '<img src="./assets/icons/like_filled.svg" alt="likes">';

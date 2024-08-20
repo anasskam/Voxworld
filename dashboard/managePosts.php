@@ -47,7 +47,7 @@ if (isset($_POST['post-delete'])) {
                 })
             }, 500)
         </script>
-      <?php
+        <?php
     }
     else {
         echo 'Error deleting post';

@@ -11,42 +11,44 @@ $users = $conn->query('SELECT * FROM users')->fetchAll(PDO::FETCH_ASSOC);
 $usersCount = $conn->query('SELECT COUNT(id) AS NumUsers FROM users')->fetchAll(PDO::FETCH_ASSOC);
 
 $emptyIllustration = "";
+
 // Delete User //
 
-
 if (isset($_POST['user-delete'])) {
-
-    
     $user_id = $_POST['user-delete'];
 
-    // Prepare and execute the query //
+    // Prepare and execute the query to delete the user //
     $userDelete = $conn->prepare('DELETE FROM users WHERE id = ?');
     $userDelete->execute([$user_id]);
 
-    // remove likes related to deleted user //
+    // Remove likes related to the deleted user //
     $likeDelete = $conn->prepare('DELETE FROM likes WHERE user_id = ?');
     $likeDelete->execute([$user_id]);
 
-    // remove comments related to deleted user //
+    // Remove comments related to the deleted user //
     $viewsDelete = $conn->prepare('DELETE FROM comments WHERE user_id = ?');
     $viewsDelete->execute([$user_id]);
 
+    // Check if the session user is the one deleted & unset session variables //
+    if (isset($_SESSION['user_id']) && $user_id == $_SESSION['user_id']) {
+        // Unset session for the deleted user //
+        unset($_SESSION['user_id']);
+    }
     if ($userDelete) {
         ?>
-        <script defer>
-            setTimeout(()=> {
+            <script defer> 
+                setTimeout(()=> {
                 swal("Success", "User deleted successfully", "success", {
-                    buttons: false,
-                    timer:2500,
+                buttons: false,
+                timer:2500,
                 }).then(()=> {
                     window.location.href = "./manageUsers.php";
                 })
-            }, 500)
-        </script>
-      <?php
+                }, 500)
+            </script>
+        <?php
     }
     else {
-
         echo 'Error deleting user';
     }
 }
