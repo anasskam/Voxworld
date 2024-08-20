@@ -28,7 +28,7 @@ if (isset($_SESSION['user_id'])) {
 <header class="main-header">
   <div class="upper-header">
     <a href="./index.php"><img alt="logo" class="logo home-logo"></a>
-    <form method="POST">
+    <form method="POST" action="search.php">
       <div class="search-bar-wrapper">
         <div class="input-field">
           <!-- search icon -->
@@ -37,9 +37,9 @@ if (isset($_SESSION['user_id'])) {
             <path d="M22 22L20 20" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
 
-          <input type="text" placeholder="Search for news, articles, and more..." name="search" value="">
+          <input type="text" placeholder="Search for news, articles, and more..." name="search-bar">
 
-          <button class="ghost-btn">Search</button>
+          <button type="submit" name="search-btn" class="ghost-btn">Search</button>
           
         </div>
       </div>
