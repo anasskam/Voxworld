@@ -1,5 +1,5 @@
 <header class="dashboard-header">
-  <h3>Hi, Anas Karmoua</h3>
+  <h3>Hi, <?php echo htmlspecialchars($username);?></h3>
 
   <script>
     document.addEventListener("DOMContentLoaded", ()=>{

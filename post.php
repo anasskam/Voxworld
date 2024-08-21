@@ -14,6 +14,7 @@ if(isset($_SESSION['user_id'])){
 
 include 'interactions/likes.php';
 include 'interactions/views.php';
+include 'interactions/bookmarksLogic.php';
 
 $get_id = $_GET['post_id'];
 
@@ -103,6 +104,9 @@ $categoryMapping = [
 
                     $confirm_likes = $conn->prepare("SELECT * FROM `likes` WHERE user_id = ? AND post_id = ?");
                     $confirm_likes->execute([$user_id, $post_id]);
+
+                    $confirm_bookmarks = $conn->prepare("SELECT * FROM `bookmarks` WHERE user_id = ? AND post_id = ?");
+                    $confirm_bookmarks->execute([$user_id, $post_id]);
               ?>
               <form method="post">
                 <input type="hidden" name="post_id" value="<?= $post_id; ?>">
@@ -110,7 +114,7 @@ $categoryMapping = [
                   <div class="post-category-date">
                     <span class="chip1 category text-button">
                     <?php 
-                        echo array_search($fetch_posts['category'], $categoryMapping) ?: htmlspecialchars($post['category']);
+                        echo array_search($fetch_posts['category'], $categoryMapping) ?: htmlspecialchars($fetch_posts['category']);
                     ?>
                     </span>
                     <span class="divider"></span>
@@ -150,31 +154,42 @@ $categoryMapping = [
                     <div class="views-likes-wrapper">
                       <a class="post-views-wrapper post-intraction-wrapper text-body2">
                         <img src="./assets/icons/show-pass.svg" alt="views">
-                        <span class="post-views" name="post-views"><?= $total_views ?></span>views
+                        <?php
+                          if($total_views == 1){
+                            echo '<span class="post-views" name="post-views">' . $total_views . '</span> view';
+                          } else {
+                            echo '<span class="post-views" name="post-views">' . $total_views . '</span> views';
+                          }
+                        ?>
                       </a>
 
                       <button id="likes-section" name="like_post" class="post-likes-wrapper post-intraction-wrapper text-body2">
                       
-                      <?php if($confirm_likes->rowCount() > 0){
-                          echo '<img src="./assets/icons/like_filled.svg" alt="likes">';
+                      <?php 
+                        if($confirm_likes->rowCount() > 0){
+                            echo '<img src="./assets/icons/like_filled.svg" alt="likes">';
 
-                      } else {
-                        echo '<img src="./assets/icons/like.svg" alt="likes">';
-                      }
+                        } else {
+                          echo '<img src="./assets/icons/like.svg" alt="likes">';
+                        }
+                        if($total_post_likes == 1){
+                          echo '<span class="post-likes" name="post-likes">' . $total_post_likes . '</span> like';
+                        } else {
+                          echo '<span class="post-likes" name="post-likes">' . $total_post_likes . '</span> likes';
+                        }
                       ?>
 
-                        <span class="post-likes" name="post-likes"><?= $total_post_likes; ?></span>likes
+
                       </button>
 
                     </div>
 
                     <button id="bookmarks-section" name="bookmark_post" class="post-bookmarks-wrapper text-body2 ghost-btn transparent">
-                    <?php if($confirm_likes->rowCount() > 0){
+                    <?php if($confirm_bookmarks->rowCount() > 0){
                         echo '<img src="./assets/icons/bookmark_filled.svg" alt="likes">';
-
-                     } else {
-                      echo '<img src="./assets/icons/bookmark.svg" alt="likes">';
-                     }
+                        } else {
+                          echo '<img src="./assets/icons/bookmark.svg" alt="likes">';
+                        }
                      ?>
                      Read later
                     </button>
