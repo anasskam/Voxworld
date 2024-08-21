@@ -8,59 +8,36 @@ if(isset($_SESSION['user_id'])){
   $user_id = '';
 };
 
-
-
-if (isset($_GET['category'])) {
-    $category = $_GET['category'];
-} else {
-    $category = '';
-}
-
-// Category mapping array //
-$categoryMapping = [
-    'politics' => 'Politics',
-    'economy' => 'Economy',
-    'society' => 'Society',
-    'culture' => 'Culture',
-    'scienceandtech' => 'Science & Tech',
-    'business' => 'Business',
-    'sports' => 'Sports',
-    'entsandarts' => 'Ents & Arts',
-    'mena' => 'Mena',
-    'health' => 'Health',
-    'international' => 'International'
-];
-
-// Use an if statement to get the readable category name //
-if (isset($categoryMapping[$category])) {
-    $displayCategory = $categoryMapping[$category];
-} else {
-    $displayCategory = 'Unknown Category';
-}
-
+include 'interactions/likes.php';
 // DB connection
 require_once 'components/connect.php';
 
-// Fetch latest posts sorted by creation date //
-$selectPosts = $conn->prepare('SELECT p.*, 
-                                (SELECT COUNT(*) FROM likes WHERE post_id = p.id) AS total_likes,
-                                (SELECT COUNT(*) FROM views WHERE post_id = p.id) AS total_views,
-                                (SELECT COUNT(*) FROM comments WHERE post_id = p.id) AS total_comments
-                                FROM posts p WHERE category = ?
-                                ORDER BY CreationDate DESC');
-$selectPosts->execute([$category]);
+$emptyIllustration = "";
 
-// Check if no posts //
-$postsCount = $conn->query('SELECT COUNT(id) AS NumPosts FROM posts')->fetch(PDO::FETCH_ASSOC);
-$emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There are no posts to show :(") : "";
+if(isset($_POST['search-btn']) or isset($_POST['search-bar'])){
 
+    $search_bar = $_POST['search-bar'];
+
+    // Fetch searched posts //
+    $selectPosts = $conn->query("SELECT p.*, 
+                                    (SELECT COUNT(*) FROM likes WHERE post_id = p.id) AS total_likes,
+                                    (SELECT COUNT(*) FROM views WHERE post_id = p.id) AS total_views,
+                                    (SELECT COUNT(*) FROM comments WHERE post_id = p.id) AS total_comments
+                                    FROM posts p WHERE title LIKE '%{$search_bar}%' OR category LIKE '%{$search_bar}%' OR content LIKE '%{$search_bar}%' 
+                                    ")->fetchAll(PDO::FETCH_ASSOC);
+
+    // Check if no posts //
+    $postsCount = $conn->query('SELECT COUNT(id) AS NumPosts FROM posts')->fetch(PDO::FETCH_ASSOC);
+    $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There are no posts to show :(") : "";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Voxworld | Discover world news here</title>
+    <meta name="description" content="The only place you need to know what happen in the world right now!!">
 
     <!-- custom css links -->
     <link rel="shortcut icon" href="./assets/images/favicon32.png" type="image/x-icon">
@@ -70,35 +47,32 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
     <script src="./js/theme.js" type="module" defer></script>
     <script src="./js/toggleTheme.js" type="module" defer></script>
     <script src="./js/index.js" type="module" defer></script>
-    <script src="./js/category.js" type="module" defer></script>
-</head>
+    <script src="./js/header.js" type="module" defer></script>
 
+</head>
 <body>
     <div class="container">
-        
+
         <!-- header -->
         <?php include './components/header.php'; ?>
 
+
         <section class="latest-news">
-            <h3 style="text-transform:uppercase"><?php echo htmlspecialchars($displayCategory); ?></h3>
+            <h3>Search results</h3>
             <div class="cards-wrapper">
-                <?php foreach ($selectPosts as $post):
-                    $PostId = $post['id'];
+                <?php foreach ($selectPosts as $post): ?>
+                <?php 
+                    $latestPostId = $post['id'];
                     $category = $post['category'];
                 ?>
                 <div class="card">
-                    <a href="post.php?post_id=<?= $PostId; ?>?category=<?= $category; ?>">
+                    <a href="post.php?post_id=<?= $latestPostId; ?>?category=<?= $category; ?>">
                         <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="" class="post-img">
                         <div class="card-content">
                             <div class="post-category-date">
                                 <span class="chip1 category text-caption1"><?php echo htmlspecialchars($post['category']); ?></span>
                                 <span class="divider"></span>
-                                <p class="text-caption1 post-date">
-                                    <?php echo date('M j, Y H:i', strtotime($post['CreationDate'])); ?>
-                                    <?php if ($post['UpdateDate'] && $post['UpdateDate'] != $post['CreationDate']): ?>
-                                        <span>(Updated: <?php echo date('M j, Y H:i', strtotime($post['UpdateDate'])); ?>)</span>
-                                    <?php endif; ?>
-                                </p>
+                                <p class="text-caption1 post-date"><?php echo date('M j, Y H:i', strtotime($post['CreationDate'])); ?></p>
                             </div>
                             <h3 class="text-md home-post-title"><?php echo htmlspecialchars($post['title']); ?></h3>
                             <div class="divider horizontal"></div>
@@ -121,9 +95,12 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
                 </div>
                 <?php endforeach; ?>
             </div>
+            <?php echo $emptyIllustration?>
         </section>
 
-        <?php echo $emptyIllustration; ?>
+        <!-- footer -->
+        <?php include './components/footer.php'; ?>
+        
     </div>
 </body>
 </html>

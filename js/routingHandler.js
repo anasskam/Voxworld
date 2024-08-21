@@ -1,6 +1,6 @@
 export function hoverIn(items, it, className){
   items.forEach(item => {
-    item.classList.remove(className, 'smooth' );
+    item.classList.remove(className, 'smooth');
   })
   
   it.classList.add(className, 'smooth');

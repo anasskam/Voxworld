@@ -13,6 +13,7 @@ const initLogo = (theme) => {
     if(currentLocation === '/Voxworld/index.php' || 
       currentLocation === '/Voxworld/post.php' || 
       currentLocation === '/Voxworld/category.php' || 
+      currentLocation === '/Voxworld/search.php' ||
       currentLocation === '/Voxworld/') {
       logoSrc = theme === "dark" ? "./assets/images/logo-dark.svg" : "./assets/images/logo-light.svg";
     } 

@@ -31,7 +31,7 @@ if (isset($_SESSION['user_id'])) {
 
     <!-- search bar -->
     <?php 
-    include 'search.php'
+    include 'searchBar.php'
     ?>
 
     <?php 

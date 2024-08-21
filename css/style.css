@@ -292,6 +292,10 @@ footer p{
   border-top: var(--border-line) ;
   margin-top: var(--spacing-4);
 }
+.side-bar-footer.profile{
+  display: inline-block;
+  text-align: center;
+}
 
 .side-bar-footer p{
   font-size: var(--fs-caption1);
@@ -643,7 +647,8 @@ th {
   -webkit-line-clamp: 2;
 }
 
-.post-intractions-wrapper{
+.post-intractions-wrapper,
+.views-likes-wrapper{
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
@@ -652,6 +657,7 @@ th {
 .post-intractions-wrapper img{
   width: 18px;
 }
+
 
 .post-intraction-wrapper{
   display: flex;
@@ -914,11 +920,6 @@ th {
 
 .upper-footer .social-media-icons svg:hover > path{
  fill:var(--primary);
-}
-
-.copyright{
-  width: 100%;
-  text-align: right;
 }
 
 .home-footer {

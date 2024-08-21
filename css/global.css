@@ -773,6 +773,10 @@ p,
   max-height: 100vh;
 }
 
+.space-between {
+  justify-content: space-between;
+}
+
 /**
   * typography calsses
 */
@@ -846,6 +850,13 @@ p,
   justify-content: center;
   align-items: center;
   transition: all .35s ease;
+}
+
+.ghost-btn.transparent{
+  background-color: transparent;
+}
+.ghost-btn.transparent:hover{
+  background-color: var(--on-surface-container);
 }
 
 .delete-btn{

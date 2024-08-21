@@ -127,25 +127,38 @@ if(isset($_POST['add_comment'])){
 
                 <main class="post-content"><?= $fetch_posts['content']; ?></main>
 
-                <div class="post-intractions-wrapper">
-                    
-                    <a class="post-views-wrapper post-intraction-wrapper text-body2">
-                      <img src="./assets/icons/show-pass.svg" alt="views">
-                      <span class="post-views" name="post-views"><?= $total_views ?></span>views
-                    </a>
+                <div class="post-intractions-wrapper space-between">
 
+                    <div class="views-likes-wrapper">
+                      <a class="post-views-wrapper post-intraction-wrapper text-body2">
+                        <img src="./assets/icons/show-pass.svg" alt="views">
+                        <span class="post-views" name="post-views"><?= $total_views ?></span>views
+                      </a>
 
-                    <button id="likes-section" name="like_post" class="post-likes-wrapper post-intraction-wrapper text-body2">
-                     
+                      <button id="likes-section" name="like_post" class="post-likes-wrapper post-intraction-wrapper text-body2">
+                      
+                      <?php if($confirm_likes->rowCount() > 0){
+                          echo '<img src="./assets/icons/like_filled.svg" alt="likes">';
+
+                      } else {
+                        echo '<img src="./assets/icons/like.svg" alt="likes">';
+                      }
+                      ?>
+
+                        <span class="post-likes" name="post-likes"><?= $total_post_likes; ?></span>likes
+                      </button>
+
+                    </div>
+
+                    <button id="bookmarks-section" name="bookmark_post" class="post-bookmarks-wrapper text-body2 ghost-btn transparent">
                     <?php if($confirm_likes->rowCount() > 0){
-                        echo '<img src="./assets/icons/like_filled.svg" alt="likes">';
+                        echo '<img src="./assets/icons/bookmark_filled.svg" alt="likes">';
 
                      } else {
-                      echo '<img src="./assets/icons/like.svg" alt="likes">';
+                      echo '<img src="./assets/icons/bookmark.svg" alt="likes">';
                      }
                      ?>
-
-                      <span class="post-likes" name="post-likes"><?= $total_post_likes; ?></span>likes
+                     Read later
                     </button>
                     
                 </div>

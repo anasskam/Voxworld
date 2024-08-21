@@ -1,4 +1,4 @@
-<form method="POST">
+<form method="POST" action="search.php">
   <div class="search-bar-wrapper">
     <div class="input-field">
       <!-- search icon -->
@@ -7,8 +7,8 @@
         <path d="M22 22L20 20" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
 
-      <input type="text" placeholder="Search for news, articles, and more..." name="search" value="">
-      <button class="ghost-btn">Search</button>
+      <input type="text" placeholder="Search for news, articles, and more..." name="search-bar">
+      <button class="ghost-btn" type="submit" name="search-btn">Search</button>
       
     </div>
   </div>
