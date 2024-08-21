@@ -73,6 +73,20 @@ else {
     $emptyIllustration = "";
 }
 
+$categoryMapping = [
+    'Politics' => 'politics',
+    'Economy' => 'economy',
+    'Society' => 'society',
+    'Culture' => 'culture',
+    'Science & Tech' => 'scienceandtech',
+    'Business' => 'business',
+    'Sports' => 'sports',
+    'Ents & Arts' => 'entsandarts',
+    'Mena' => 'mena',
+    'Health' => 'health',
+    'International' => 'international',
+];
+
 ?>
 
 <!DOCTYPE html>
@@ -129,7 +143,11 @@ else {
                                                 <p class="text-body1 text-md" value><?php echo $post['title']?></p>
 
                                                     <div class="post-category-date">
-                                                        <span class="chip1 category text-caption1"><?php echo $post['category']?></span>
+                                                        <span class="chip1 category text-caption1">
+                                                        <?php 
+                                                            echo array_search($post['category'], $categoryMapping) ?: htmlspecialchars($post['category']);
+                                                        ?>
+                                                        </span>
                                                         <span class="divider"></span>
                                                         <p class="text-button post-date">
                                                             <?php                                      
@@ -150,22 +168,37 @@ else {
                                                         </p>
                                                     </div>
 
-                                        <div class="post-intractions-wrapper">
-                                            <div class="post-views-wrapper post-intraction-wrapper">
-                                                <img src="../assets/icons/show-pass.svg" alt="views">
-                                                <span class="post-views text-button" name="post-views"><?php echo htmlspecialchars($post['total_views']); ?></span>views
-                                            </div>
+                                                    <div class="post-intractions-wrapper">
+                                                <div class="post-views-wrapper post-intraction-wrapper">
+                                                    <img src="../assets/icons/show-pass.svg" alt="views">
+                                                    <?php
+                                                    if($post['total_views'] == 1){
+                                                        echo '<span class="post-views text-button" name="post-views">' . $post['total_views'] . '</span>view';
+                                                    } else {
+                                                        echo '<span class="post-views text-button" name="post-views">' . $post['total_views'] . '</span>views';                                    }
+                                                    ?>
+                                                </div>
 
-                                            <div class="post-likes-wrapper post-intraction-wrapper">
-                                                <img src="../assets/icons/like.svg" alt="likes">
-                                                <span class="post-likes text-button" name="post-likes"><?php echo htmlspecialchars($post['total_likes']); ?></span>likes
-                                            </div>
+                                                <div class="post-likes-wrapper post-intraction-wrapper">
+                                                    <img src="../assets/icons/like.svg" alt="likes">
+                                                    <?php
+                                                    if($post['total_likes'] == 1){
+                                                        echo '<span class="post-likes text-button" name="post-likes">' . $post['total_likes'] . '</span>like';
+                                                    } else {
+                                                        echo '<span class="post-likes text-button" name="post-likes">' . $post['total_likes'] . '</span>likes';                                    }
+                                                    ?>
+                                                </div>
 
-                                            <div class="post-comments-wrapper post-intraction-wrapper">
-                                                <img src="../assets/icons/comment.svg" alt="views">
-                                                <span class="post-comments text-button" name="post-comments"><?php echo htmlspecialchars($post['total_comments']); ?></span>comments
+                                                <div class="post-comments-wrapper post-intraction-wrapper">
+                                                    <img src="../assets/icons/comment.svg" alt="views">
+                                                    <?php
+                                                    if($post['total_comments'] == 1){
+                                                        echo '<span class="post-comments text-button" name="post-comments">' . $post['total_comments'] . '</span>comment';
+                                                    } else {
+                                                        echo '<span class="post-comments text-button" name="post-comments">' . $post['total_comments'] . '</span>comments';                                    }
+                                                    ?>
+                                                </div>
                                             </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="post-actions">

@@ -175,6 +175,7 @@ input:not(input[type='checkbox'], input[type='submit']){
 /*cta part*/
 .cta{
   display: flex;
+  justify-self: flex-start;
   flex-direction: column;
   gap: var(--spacing-3);
   margin-top:var(--spacing-8);
@@ -756,14 +757,11 @@ th {
   height: 100%;
 }
 
-.profile-dropDown {
+.profile-btn {
   display: flex;
   flex-direction: column;
   justify-content: left;
   align-items: start;
-  position: absolute;
-  top:0;
-  right: 0;
   padding-inline:var(--spacing-2);
   padding-block:var(--spacing-2);
   background-color: var(--on-surface-container);
@@ -771,12 +769,12 @@ th {
   cursor: pointer;
 }
 
-.profile-dropDown .theme-toggle-icon {
+.profile-btn .theme-toggle-icon {
   margin-top: var(--spacing-3);
   display: none;
 }
 
-.profile-dropDown a {
+.profile-btn a {
   display:none;
   padding: 0px !important;
   margin-top:var(--spacing-4);
@@ -785,19 +783,19 @@ th {
   color:var(--clr-error)
 
 }
-.profile-dropDown a:hover {
+.profile-btn a:hover {
   margin-left: var(--spacing-1);
 
 }
 
-.profile-dropDown:hover a {
+.profile-btn:hover a {
   display: inline-block;
 }
-.profile-dropDown:hover .theme-toggle-icon {
+.profile-btn:hover .theme-toggle-icon {
   display: flex;
 }
 
-.profile-dropDown .profile-name {
+.profile-btn .profile-name {
   display:flex;
   align-items: center;
   gap:var(--spacing-1);
@@ -860,7 +858,7 @@ th {
   grid-area: right-bottom;
 }
 
-.latest-news .cards-wrapper{
+.cards-wrapper{
   grid-template-columns: repeat(3, 1fr);
 }
 
@@ -963,6 +961,10 @@ th {
   padding: var(--spacing-2);
   border-radius: 100px;
   background-color: transparent;
+}
+
+.post-bookmarks-wrapper {
+  color:var(--background-text)
 }
 
 .post-likes-wrapper {
@@ -1227,6 +1229,22 @@ th {
 .overview-content .overview-comments {
   width: 30%;
 }
+
+/* 
+*USER PROFILE 
+*/
+.danger-zone-area {
+  display: flex;
+  flex-direction: column;
+  gap:var(--spacing-4);
+  align-items: flex-start;
+  padding: var(--spacing-8);
+  margin-top: var(--spacing-4);
+  border: 1px solid var(--clr-error-600);
+  border-radius: 12px;
+  background-color:rgba(254,67,67, 0.15);
+}
+
 
 /* 
 *RESPONSIVE LAYOUT

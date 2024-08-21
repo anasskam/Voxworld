@@ -861,10 +861,10 @@ p,
   transition: all .35s ease;
 }
 
-.ghost-btn.transparent{
+.transparent{
   background-color: transparent;
 }
-.ghost-btn.transparent:hover{
+.transparent:hover{
   background-color: var(--on-surface-container);
 }
 
@@ -929,4 +929,8 @@ p,
 }
 .full-rounded{
   border-radius: 1000px;
+}
+
+.date {
+  margin-top: var(--spacing-4);
 }

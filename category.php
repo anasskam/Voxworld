@@ -91,7 +91,7 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
                         <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="" class="post-img">
                         <div class="card-content">
                             <div class="post-category-date">
-                                <span class="chip1 category text-caption1"><?php echo htmlspecialchars($post['category']); ?></span>
+                                <span class="chip1 category text-caption1"><?php echo htmlspecialchars($displayCategory); ?></span>
                                 <span class="divider"></span>
                                 <p class="text-caption1 post-date">
                                     <?php echo date('M j, Y H:i', strtotime($post['CreationDate'])); ?>
@@ -105,15 +105,30 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
                             <div class="post-intractions-wrapper">
                                 <div class="post-views-wrapper post-intraction-wrapper text-caption1">
                                     <img src="./assets/icons/show-pass.svg" alt="views">
-                                    <span class="post-views" name="post-views"><?php echo htmlspecialchars($post['total_views']); ?> </span>views
+                                    <?php
+                                    if($post['total_views'] == 1){
+                                        echo '<span class="post-views" name="post-views">' . $post['total_views'] . '</span>view';
+                                    } else {
+                                        echo '<span class="post-views" name="post-views">' . $post['total_views'] . '</span>views';                                    }
+                                    ?>
                                 </div>
                                 <div class="post-likes-wrapper post-intraction-wrapper text-caption1">
                                     <img src="./assets/icons/like.svg" alt="likes">
-                                    <span class="post-likes" name="post-likes"><?php echo htmlspecialchars($post['total_likes']); ?> </span>likes
+                                    <?php
+                                    if($post['total_likes'] == 1){
+                                        echo '<span class="post-likes" name="post-likes">' . $post['total_likes'] . '</span>like';
+                                    } else {
+                                        echo '<span class="post-likes" name="post-likes">' . $post['total_likes'] . '</span>likes';                                    }
+                                    ?>
                                 </div>
                                 <div class="post-comments-wrapper post-intraction-wrapper text-caption1">
-                                    <img src="./assets/icons/comment.svg" alt="comments">          
-                                    <span class="post-comments" name="post-comments"><?php echo htmlspecialchars($post['total_comments']); ?> </span>comments
+                                    <img src="./assets/icons/comment.svg" alt="comments">    
+                                    <?php
+                                    if($post['total_comments'] == 1){
+                                        echo '<span class="post-comments" name="post-comments">' . $post['total_comments'] . '</span>comment';
+                                    } else {
+                                        echo '<span class="post-comments" name="post-comments">' . $post['total_comments'] . '</span>comments';                                    }
+                                    ?>      
                                 </div>
                             </div>
                         </div>

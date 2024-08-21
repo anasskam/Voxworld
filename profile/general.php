@@ -1,10 +1,114 @@
+<?php
+session_start();
+// DB connection //
+require_once '../components/connect.php';
+
+// Session check for access //
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to login page //
+    header('Location: ../pages/login.php');
+    exit();
+}
+
+$user_id = '';
+$username = '';
+
+// inti error msg //
+$errorMessages = ['fname'=> '', 'lname' => '', 'email'=> ''];
+
+include '../components/errorTemplate.php';
+
+// Check if user_id is set in session //
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+
+    // Prepare the statement //
+    $checkUser = $conn->prepare('SELECT * FROM users WHERE id = ?');
+    $checkUser->execute([$user_id]);
+    $user = $checkUser->fetch(PDO::FETCH_ASSOC);
+
+    // Check if a user was found //
+    if ($user) {
+        $username = $user['FirstName'] . ' ' . $user['LastName'];
+    } else {
+        $username = '';
+    }
+}
+
+if (isset($_POST['submit'])) {
+    $fname = $_POST['fname'];
+    $lname = $_POST['lname'];
+    $email = $_POST['email'];
+
+// Empty fields check //
+if (empty($fname)) {
+    $errorMessages['fname'] = errorTemplate("First name is required.");
+} 
+
+elseif (empty($lname)) {
+    $errorMessages['lname'] = errorTemplate("Last name is required.");
+} 
+
+elseif (empty($email)) {
+    $errorMessages['email'] = errorTemplate("Email address is required.");
+} 
+
+    else {
+
+        // Email existence check //
+        $sqlCheck = $conn->prepare('SELECT * FROM users WHERE email = ?');
+        $sqlCheck->execute([$email]);
+
+        // Update user information in db //
+        $updateUser = $conn->prepare('UPDATE users SET FirstName = ?, LastName = ?, email = ? WHERE id = ?');
+        $updateUser->execute([$fname, $lname, $email, $user_id]);
+
+        // check if user updated = success popup //
+        if ($updateUser) {
+            ?>
+            <script defer> 
+                setTimeout(()=> {
+                swal("Success", "Information updated successfully", "success", {
+                buttons: false,
+                timer:2500,
+                }).then(()=> {
+                    window.location.href = "./general.php";
+                })
+                }, 500)
+            </script>
+            <?php
+        } else {
+            ?>
+            <script defer>
+                setTimeout(()=> {
+                    swal("Please try again", "There was an error updating your information.", "warning", {
+                        buttons: {
+                            redirect: {
+                                text: "Sign in",
+                                className:"swal-gotoBtn",
+                            }
+                        },
+                    }).then((value)=>{
+                        if(value === "redirect") {
+                            window.location.href = "./general.php";
+                        }
+                    })
+                }, 500)
+            </script>
+            <?php
+        }
+    }
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Anas karmoua</title>
+    <title><?php echo htmlspecialchars($username);?></title>
 
     <!-- custom css links -->
     <link rel="shortcut icon" href="../assets/images/favicon32.png" type="image/x-icon">
@@ -12,8 +116,10 @@
 
     <!-- custom js -->
     <script src="../js/theme.js" type="module" defer></script>
+    <script src="../js/toggleTheme.js" type="module" defer></script>
     <script src="../js/userSideBar.js" type="module" defer></script>
     <script src="../js/profileGeneral.js" type="module" defer></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 
@@ -32,8 +138,8 @@
             <div class="content-container w-half">
                 <form method="post">
                     <header>
-                        <h1 class="text-sm">General</h1>
-                        <p class="text-body2 italic opacity-half">Profile created at: <span>Feb 2, 2024 19:28</span></p>
+                        <h3>General</h3>
+                        <p class="text-button italic opacity-half date">Profile created at: <span>Feb 2, 2024 19:28</span></p>
                     </header>
 
                     <div class="inputs for-general">
@@ -49,11 +155,15 @@
                                 <path d="M7.16021 14.5595C4.74021 16.1795 4.74021 18.8195 7.16021 20.4295C9.91021 22.2695 14.4202 22.2695 17.1702 20.4295C19.5902 18.8095 19.5902 16.1695 17.1702 14.5595C14.4302 12.7295 9.92021 12.7295 7.16021 14.5595Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
 
-                                <input type="text" placeholder="First name" name="fname" value="">
+                                <input type="text" placeholder="First name" name="fname" value="<?php echo htmlspecialchars($user['FirstName']); ?>">
 
                             </div>
 
-                            <!-- //TODO: add error message here : get it form register.php -->
+                            <?php
+                                if(isset($_POST['submit']) && !empty($errorMessages)){
+                                echo $errorMessages['fname']; 
+                                }
+                            ?>
 
                             </div>
 
@@ -67,11 +177,15 @@
                                 <path d="M7.16021 14.5595C4.74021 16.1795 4.74021 18.8195 7.16021 20.4295C9.91021 22.2695 14.4202 22.2695 17.1702 20.4295C19.5902 18.8095 19.5902 16.1695 17.1702 14.5595C14.4302 12.7295 9.92021 12.7295 7.16021 14.5595Z" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
 
-                            <input type="text" placeholder="Last name" name="lname" value="">
+                            <input type="text" placeholder="Last name" name="lname" value="<?php echo htmlspecialchars($user['LastName']); ?>">
 
                             </div>
 
-                            <!-- //TODO: add error message here : get it form register.php -->
+                            <?php
+                                if(isset($_POST['submit']) && !empty($errorMessages)){
+                                echo $errorMessages['lname']; 
+                                }
+                            ?>
 
                             </div>
                         </div>
@@ -85,16 +199,20 @@
                                     <path d="M17 9L13.87 11.5C12.84 12.32 11.15 12.32 10.12 11.5L7 9" stroke="currentcolor" stroke-width="1.25" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>  
 
-                                <input type="email" placeholder="Enter your email" name="email" value="">
+                                <input type="email" placeholder="Enter your email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>">
                             </div>
                             
-                            <!-- //TODO: add error message here : get it form register.php -->
+                            <?php
+                                if(isset($_POST['submit']) && !empty($errorMessages)){
+                                echo $errorMessages['email']; 
+                                }
+                            ?>
+
                         </div>
-            
                     </div>
 
                     <div class="cta center margin-0">
-                        <button type="button" name="submit" class="primary-btn">Update</button>
+                        <button type="submit" name="submit" class="primary-btn">Update</button>
                     </div>
 
                  </form>

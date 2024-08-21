@@ -1,5 +1,8 @@
 <header class="dashboard-header">
-  <h3>Hi, Anas Karmoua</h3>
+  <h3>Hi, <?php echo htmlspecialchars($username);?></h3>
+  <?php 
+    include 'themeToggle.php'
+  ?>
 
   <script>
     document.addEventListener("DOMContentLoaded", ()=>{
