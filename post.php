@@ -5,7 +5,6 @@ require_once 'components/connect.php';
 // Session start //
 session_start();
 
-
 if(isset($_SESSION['user_id'])){
   $user_id = $_SESSION['user_id'];
 }else{
@@ -32,13 +31,13 @@ if(isset($_POST['add_comment'])){
   $verify_comment->execute([$get_id, $user_id, $fname, $lname, $comment]);
 
   if($verify_comment->rowCount() > 0){
-     $message[] = 'comment already added!';
+    $message[] = 'comment already added!';
   }else{
-     $insert_comment = $conn->prepare("INSERT INTO `comments`(post_id, user_id, FirstName, LastName, comment) VALUES(?,?,?,?,?)");
-     $insert_comment->execute([$get_id, $user_id, $fname, $lname, $comment]);
-     $message[] = 'new comment added!';
-     $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]/#comments-section";
-     header("Location: $actual_link"); 
+    $insert_comment = $conn->prepare("INSERT INTO `comments`(post_id, user_id, FirstName, LastName, comment) VALUES(?,?,?,?,?)");
+    $insert_comment->execute([$get_id, $user_id, $fname, $lname, $comment]);
+    $message[] = 'new comment added!';
+    $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]/#comments-section";
+    header("Location: $actual_link"); 
   }
 
 }

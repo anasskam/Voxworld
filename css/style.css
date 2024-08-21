@@ -99,12 +99,17 @@
   gap:var(--spacing-4);
 }
 
+.inputs.for-general {
+  margin-block: var(--spacing-5);
+}
+
 .inputs img, 
 .error-wrapper img{
   width: 20px;
 }
 
-input{
+
+input:not(input[type='checkbox'], input[type='submit']){
   padding-block: var(--spacing-3);
   width: 100%;
   background-color: transparent;
@@ -117,6 +122,7 @@ input{
 
 .full-name{
   display: flex;
+  width: 100%;
   gap: var(--spacing-6);
 }
 
@@ -140,6 +146,11 @@ input{
   border: 1px solid var(--primary);
   transition: all .25s ease;
 }
+
+.full-name .input-validation {
+  flex-grow: 1;
+}
+
 
 .error-wrapper{
   margin-top: var(--spacing-1);
@@ -202,6 +213,10 @@ footer p{
   display: flex;
   flex-direction: column;
   padding: var(--spacing-4);
+}
+
+.w-half {
+  width: 50%;
 }
 
 .dashboard-header{

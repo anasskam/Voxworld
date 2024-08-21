@@ -13,6 +13,7 @@
     <!-- custom js -->
     <script src="../js/theme.js" type="module" defer></script>
     <script src="../js/userSideBar.js" type="module" defer></script>
+    <script src="../js/profileGeneral.js" type="module" defer></script>
 </head>
 <body>
 
@@ -28,14 +29,14 @@
                 include "../components/profile-header.php"
             ?>
 
-            <div class="content-container">
+            <div class="content-container w-half">
                 <form method="post">
                     <header>
                         <h1 class="text-sm">General</h1>
-                        <p>Update your personal information</p>
+                        <p class="text-body2 italic opacity-half">Profile created at: <span>Feb 2, 2024 19:28</span></p>
                     </header>
 
-                    <div class="inputs">
+                    <div class="inputs for-general">
                         <div class="full-name">
 
                             <div class="input-validation">
@@ -92,11 +93,11 @@
             
                     </div>
 
-            <div class="cta full center margin-0">
-                <button type="button" name="submit" class="primary-btn full">Update</button>
-            </div>
+                    <div class="cta center margin-0">
+                        <button type="button" name="submit" class="primary-btn">Update</button>
+                    </div>
 
-        </form>
+                 </form>
             </div>
         </main>
     </div>

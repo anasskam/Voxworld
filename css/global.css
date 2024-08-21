@@ -200,6 +200,11 @@ textarea {
   
 }
 
+button:disabled {
+  cursor:not-allowed;
+  opacity: .3;
+}
+
 /**
  * Show the overflow in IE.
  * 1. Show the overflow in Edge.
@@ -800,6 +805,9 @@ p,
   font-weight: var(--fw-bold);
 }
 
+.italic {
+  font-style: italic;
+}
 
 /**
   * opacity calsses
@@ -819,6 +827,7 @@ p,
 .no-opacity{
   opacity:0;
 }
+
 .light-gray {
   color: var(--light-gray);
 }
