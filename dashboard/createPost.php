@@ -158,11 +158,24 @@ if (isset($_POST['submit'])) {
                                     </svg>
 
                                 <?php
-                                $categories = ["Politics", "Economy", "Society", "Culture", "Science & Tech", "Business", "Sports", "Ents & Arts", "Mena", "Health", "International"];
+                                $categoryMapping = [
+                                    'Politics' => 'politics',
+                                    'Economy' => 'economy',
+                                    'Society' => 'society',
+                                    'Culture' => 'culture',
+                                    'Science & Tech' => 'scienceandtech',
+                                    'Business' => 'business',
+                                    'Sports' => 'sports',
+                                    'Ents & Arts' => 'entsandarts',
+                                    'Mena' => 'mena',
+                                    'Health' => 'health',
+                                    'International' => 'international',
+                                ];
+                                // $categories = ["Politics", "Economy", "Society", "Culture", "Scienceandtech", "Business", "Sports", "Entsandarts", "Mena", "Health", "International"];
                                 ?>
                                 <select name="categories" id="categories" class="categories-dropDown">
-                                    <?php foreach ($categories as $category): ?>
-                                        <option value="<?= $category ?>" <?php if (isset($_SESSION['categories']) && $_SESSION['categories'] == $category) { echo 'selected'; } ?>>
+                                    <?php foreach ($categoryMapping as $category => $value): ?>
+                                        <option value="<?= $value ?>" <?php if (isset($_SESSION['categories']) && $_SESSION['categories'] == $category) { echo 'selected'; } ?>>
                                             <?= $category ?>
                                         </option>
                                     <?php endforeach; ?>

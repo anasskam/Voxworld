@@ -73,6 +73,20 @@ else {
     $emptyIllustration = "";
 }
 
+$categoryMapping = [
+    'Politics' => 'politics',
+    'Economy' => 'economy',
+    'Society' => 'society',
+    'Culture' => 'culture',
+    'Science & Tech' => 'scienceandtech',
+    'Business' => 'business',
+    'Sports' => 'sports',
+    'Ents & Arts' => 'entsandarts',
+    'Mena' => 'mena',
+    'Health' => 'health',
+    'International' => 'international',
+];
+
 ?>
 
 <!DOCTYPE html>
@@ -129,7 +143,11 @@ else {
                                                 <p class="text-body1 text-md" value><?php echo $post['title']?></p>
 
                                                     <div class="post-category-date">
-                                                        <span class="chip1 category text-caption1"><?php echo $post['category']?></span>
+                                                        <span class="chip1 category text-caption1">
+                                                        <?php 
+                                                            echo array_search($post['category'], $categoryMapping) ?: htmlspecialchars($post['category']);
+                                                        ?>
+                                                        </span>
                                                         <span class="divider"></span>
                                                         <p class="text-button post-date">
                                                             <?php                                      

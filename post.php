@@ -42,6 +42,20 @@ if(isset($_POST['add_comment'])){
   }
 
 }
+$categoryMapping = [
+  'Politics' => 'politics',
+  'Economy' => 'economy',
+  'Society' => 'society',
+  'Culture' => 'culture',
+  'Science & Tech' => 'scienceandtech',
+  'Business' => 'business',
+  'Sports' => 'sports',
+  'Ents & Arts' => 'entsandarts',
+  'Mena' => 'mena',
+  'Health' => 'health',
+  'International' => 'international',
+];
+
 ?>
 
 <!DOCTYPE html>
@@ -94,7 +108,11 @@ if(isset($_POST['add_comment'])){
                 <input type="hidden" name="post_id" value="<?= $post_id; ?>">
                 <header class="post-header">
                   <div class="post-category-date">
-                    <span class="chip1 category text-button"><?php echo htmlspecialchars($fetch_posts['category']); ?></span>
+                    <span class="chip1 category text-button">
+                    <?php 
+                        echo array_search($fetch_posts['category'], $categoryMapping) ?: htmlspecialchars($post['category']);
+                    ?>
+                    </span>
                     <span class="divider"></span>
                     <p class="text-button post-date">
                     <?php                                      

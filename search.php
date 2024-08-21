@@ -14,6 +14,20 @@ require_once 'components/connect.php';
 
 $emptyIllustration = "";
 
+$categoryMapping = [
+    'Politics' => 'politics',
+    'Economy' => 'economy',
+    'Society' => 'society',
+    'Culture' => 'culture',
+    'Science & Tech' => 'scienceandtech',
+    'Business' => 'business',
+    'Sports' => 'sports',
+    'Ents & Arts' => 'entsandarts',
+    'Mena' => 'mena',
+    'Health' => 'health',
+    'International' => 'international',
+];
+
 if(isset($_POST['search-btn']) or isset($_POST['search-bar'])){
 
     $search_bar = $_POST['search-bar'];
@@ -70,7 +84,11 @@ if(isset($_POST['search-btn']) or isset($_POST['search-bar'])){
                         <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="" class="post-img">
                         <div class="card-content">
                             <div class="post-category-date">
-                                <span class="chip1 category text-caption1"><?php echo htmlspecialchars($post['category']); ?></span>
+                                <span class="chip1 category text-caption1">
+                                <?php 
+                                    echo array_search($post['category'], $categoryMapping) ?: htmlspecialchars($post['category']);
+                                ?>
+                                </span>
                                 <span class="divider"></span>
                                 <p class="text-caption1 post-date"><?php echo date('M j, Y H:i', strtotime($post['CreationDate'])); ?></p>
                             </div>
