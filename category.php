@@ -82,8 +82,7 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
         <section class="latest-news">
             <h3 style="text-transform:uppercase"><?php echo htmlspecialchars($displayCategory); ?></h3>
             <div class="cards-wrapper">
-                <?php foreach ($selectPosts as $post): ?>
-                <?php 
+                <?php foreach ($selectPosts as $post):
                     $PostId = $post['id'];
                     $category = $post['category'];
                 ?>

@@ -32,13 +32,13 @@ if(isset($_POST['search-btn']) or isset($_POST['search-bar'])){
 
     $search_bar = $_POST['search-bar'];
 
-    // Fetch searched posts sorted by creation date //
+    // Fetch searched posts //
     $selectPosts = $conn->query("SELECT p.*, 
                                     (SELECT COUNT(*) FROM likes WHERE post_id = p.id) AS total_likes,
                                     (SELECT COUNT(*) FROM views WHERE post_id = p.id) AS total_views,
                                     (SELECT COUNT(*) FROM comments WHERE post_id = p.id) AS total_comments
                                     FROM posts p WHERE title LIKE '%{$search_bar}%' OR category LIKE '%{$search_bar}%' OR content LIKE '%{$search_bar}%' 
-                                    ORDER BY CreationDate DESC")->fetchAll(PDO::FETCH_ASSOC);
+                                    ")->fetchAll(PDO::FETCH_ASSOC);
 
     // Check if no posts //
     $postsCount = $conn->query('SELECT COUNT(id) AS NumPosts FROM posts')->fetch(PDO::FETCH_ASSOC);
@@ -72,7 +72,7 @@ if(isset($_POST['search-btn']) or isset($_POST['search-bar'])){
 
 
         <section class="latest-news">
-            <h3>LATEST NEWS</h3>
+            <h3>Search results</h3>
             <div class="cards-wrapper">
                 <?php foreach ($selectPosts as $post): ?>
                 <?php 
@@ -119,7 +119,6 @@ if(isset($_POST['search-btn']) or isset($_POST['search-bar'])){
         <!-- footer -->
         <?php include './components/footer.php'; ?>
         
-
     </div>
 </body>
 </html>
