@@ -3,37 +3,10 @@ session_start();
 // DB connection //
 require_once '../components/connect.php';
 
-// Session check for access //
-if (!isset($_SESSION['user_id'])) {
-    // Redirect to login page //
-    header('Location: ../pages/login.php');
-    exit();
-}
-
-$user_id = '';
-$username = '';
-
 // inti error msg //
 $errorMessages = ['fname'=> '', 'lname' => '', 'email'=> ''];
 
 include '../components/errorTemplate.php';
-
-// Check if user_id is set in session //
-if (isset($_SESSION['user_id'])) {
-    $user_id = $_SESSION['user_id'];
-
-    // Prepare the statement //
-    $checkUser = $conn->prepare('SELECT * FROM users WHERE id = ?');
-    $checkUser->execute([$user_id]);
-    $user = $checkUser->fetch(PDO::FETCH_ASSOC);
-
-    // Check if a user was found //
-    if ($user) {
-        $username = $user['FirstName'] . ' ' . $user['LastName'];
-    } else {
-        $username = '';
-    }
-}
 
 if (isset($_POST['submit'])) {
     $fname = $_POST['fname'];
@@ -43,18 +16,15 @@ if (isset($_POST['submit'])) {
 // Empty fields check //
 if (empty($fname)) {
     $errorMessages['fname'] = errorTemplate("First name is required.");
+} 
 
-    } 
-
-    elseif (empty($lname)) {
+elseif (empty($lname)) {
     $errorMessages['lname'] = errorTemplate("Last name is required.");
+} 
 
-    } 
-
-    elseif (empty($email)) {
+elseif (empty($email)) {
     $errorMessages['email'] = errorTemplate("Email address is required.");
-   
-    } 
+} 
 
     else {
 
@@ -62,48 +32,43 @@ if (empty($fname)) {
         $sqlCheck = $conn->prepare('SELECT * FROM users WHERE email = ?');
         $sqlCheck->execute([$email]);
 
-        if ($sqlCheck->rowCount() > 0) {
-            $errorMessages['email'] = errorTemplate("Email already exists.");
+        // Update user information in db //
+        $updateUser = $conn->prepare('UPDATE users SET FirstName = ?, LastName = ?, email = ? WHERE id = ?');
+        $updateUser->execute([$fname, $lname, $email, $user_id]);
+
+        // check if user updated = success popup //
+        if ($updateUser) {
+            ?>
+            <script defer> 
+                setTimeout(()=> {
+                swal("Success", "Information updated successfully", "success", {
+                buttons: false,
+                timer:2500,
+                }).then(()=> {
+                    window.location.href = "./general.php";
+                })
+                }, 500)
+            </script>
+            <?php
         } else {
-            // Update user information in db //
-            $updateUser = $conn->prepare('UPDATE users SET FirstName = ?, LastName = ?, email = ? WHERE id = ?');
-            $updateUser->execute([$fname, $lname, $email, $user_id]);
-
-            // check if user updated = success popup //
-            if ($updateUser) {
-                ?>
-                <script defer> 
-                    setTimeout(()=> {
-                    swal("Success", "Information updated successfully", "success", {
-                    buttons: false,
-                    timer:2500,
-                    }).then(()=> {
-                        window.location.href = "./general.php";
-                    })
-                    }, 500)
-                </script>
-                <?php
-            } else {
-                ?>
-                <script defer>
-                    setTimeout(()=> {
-                        swal("Please try again", "There was an error updating your information.", "warning", {
-                            buttons: {
-                                redirect: {
-                                    text: "Sign in",
-                                    className:"swal-gotoBtn",
-                                }
-                            },
-                        }).then((value)=>{
-                            if(value === "redirect") {
-                                window.location.href = "./general.php";
+            ?>
+            <script defer>
+                setTimeout(()=> {
+                    swal("Please try again", "There was an error updating your information.", "warning", {
+                        buttons: {
+                            redirect: {
+                                text: "Sign in",
+                                className:"swal-gotoBtn",
                             }
-                        })
-                    }, 500)
-                </script>
-                <?php
-            }
-
+                        },
+                    }).then((value)=>{
+                        if(value === "redirect") {
+                            window.location.href = "./general.php";
+                        }
+                    })
+                }, 500)
+            </script>
+            <?php
         }
     }
 }
@@ -116,7 +81,7 @@ if (empty($fname)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><?php echo htmlspecialchars($username); ?></title>
+    <title><?php echo htmlspecialchars($username);?></title>
 
     <!-- custom css links -->
     <link rel="shortcut icon" href="../assets/images/favicon32.png" type="image/x-icon">
@@ -124,7 +89,9 @@ if (empty($fname)) {
 
     <!-- custom js -->
     <script src="../js/theme.js" type="module" defer></script>
+    <script src="../js/toggleTheme.js" type="module" defer></script>
     <script src="../js/userSideBar.js" type="module" defer></script>
+    <script src="../js/profileGeneral.js" type="module" defer></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
@@ -141,14 +108,14 @@ if (empty($fname)) {
                 include "../components/profile-header.php"
             ?>
 
-            <div class="content-container">
+            <div class="content-container w-half">
                 <form method="post">
                     <header>
-                        <h1 class="text-sm">General</h1>
-                        <p>Update your personal information</p>
+                        <h3>General</h3>
+                        <p class="text-button italic opacity-half date">Profile created at: <span>Feb 2, 2024 19:28</span></p>
                     </header>
 
-                    <div class="inputs">
+                    <div class="inputs for-general">
                         <div class="full-name">
 
                             <div class="input-validation">
@@ -217,11 +184,11 @@ if (empty($fname)) {
                         </div>
                     </div>
 
-            <div class="cta full center margin-0">
-                <button type="submit" name="submit" class="primary-btn full">Update</button>
-            </div>
+                    <div class="cta center margin-0">
+                        <button type="submit" name="submit" class="primary-btn">Update</button>
+                    </div>
 
-        </form>
+                 </form>
             </div>
         </main>
     </div>

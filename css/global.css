@@ -200,6 +200,11 @@ textarea {
   
 }
 
+button:disabled {
+  cursor:not-allowed;
+  opacity: .3;
+}
+
 /**
  * Show the overflow in IE.
  * 1. Show the overflow in Edge.
@@ -800,6 +805,9 @@ p,
   font-weight: var(--fw-bold);
 }
 
+.italic {
+  font-style: italic;
+}
 
 /**
   * opacity calsses
@@ -819,6 +827,7 @@ p,
 .no-opacity{
   opacity:0;
 }
+
 .light-gray {
   color: var(--light-gray);
 }
@@ -852,10 +861,10 @@ p,
   transition: all .35s ease;
 }
 
-.ghost-btn.transparent{
+.transparent{
   background-color: transparent;
 }
-.ghost-btn.transparent:hover{
+.transparent:hover{
   background-color: var(--on-surface-container);
 }
 
@@ -920,4 +929,8 @@ p,
 }
 .full-rounded{
   border-radius: 1000px;
+}
+
+.date {
+  margin-top: var(--spacing-4);
 }

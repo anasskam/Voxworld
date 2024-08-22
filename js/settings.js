@@ -30,8 +30,3 @@ function toggleDrop(e){
   })
 
 }
-
-
-// swal("Success", "Username updated successfully", "success", {
-//   buttons:false
-// });

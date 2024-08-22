@@ -5,7 +5,6 @@ require_once 'components/connect.php';
 // Session start //
 session_start();
 
-
 if(isset($_SESSION['user_id'])){
   $user_id = $_SESSION['user_id'];
 }else{
@@ -42,7 +41,7 @@ if(isset($_POST['add_comment'])){
   $verify_comment->execute([$get_id, $user_id, $fname, $lname, $comment]);
 
   if($verify_comment->rowCount() > 0){
-     $message[] = 'comment already added!';
+    $message[] = 'comment already added!';
   }else{
      $insert_comment = $conn->prepare("INSERT INTO `comments`(post_id, user_id, FirstName, LastName, comment) VALUES(?,?,?,?,?)");
      $insert_comment->execute([$get_id, $user_id, $fname, $lname, $comment]);
@@ -200,9 +199,9 @@ $categoryMapping = [
 
                     <button id="bookmarks-section" name="bookmark_post" class="post-bookmarks-wrapper text-body2 ghost-btn transparent">
                     <?php if($confirm_bookmarks->rowCount() > 0){
-                        echo '<img src="./assets/icons/bookmark_filled.svg" alt="likes">';
+                        echo '<img src="./assets/icons/bookmark_filled.svg" alt="bookmark icon">';
                         } else {
-                          echo '<img src="./assets/icons/bookmark.svg" alt="likes">';
+                          echo '<img src="./assets/icons/bookmark.svg" alt="bookmark icon">';
                         }
                      ?>
                      Read later
