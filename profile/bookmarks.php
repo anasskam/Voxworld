@@ -1,10 +1,16 @@
 <?php
-// DB connection
-require_once '../components/connect.php';
-
 
 // Session start //
 session_start();
+
+// Check if user_id is set in session //
+if (!isset($_SESSION['user_id'])) {
+  // Redirect to login page if user is not logged in
+  header("Location: ../pages/login.php");
+  exit();
+}
+// DB connection
+require_once '../components/connect.php';
 
 if(isset($_SESSION['user_id'])){
   $user_id = $_SESSION['user_id'];
@@ -39,7 +45,7 @@ $bookmarkedPosts = $selectBookmarked->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Bookmarks</title>
+    <title>Profile | Bookmarks</title>
 
     <!-- custom css links -->
     <link rel="shortcut icon" href="../assets/images/favicon32.png" type="image/x-icon">

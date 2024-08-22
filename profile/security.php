@@ -153,7 +153,7 @@ if (isset($_POST['user-delete'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Security</title>
+    <title>Profile | Security</title>
 
     <!-- custom css links -->
     <link rel="shortcut icon" href="../assets/images/favicon32.png" type="image/x-icon">
