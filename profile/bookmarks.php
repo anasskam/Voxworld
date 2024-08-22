@@ -40,7 +40,10 @@
             
             <div class="card">
               <a href="#">
-                <img src="../assets/images/test.jpg" alt="" class="post-img">
+                <div class="post-img-wrapper">
+                  <img src="../assets/images/test.jpg" alt="" class="post-img">
+                </div>
+
                 <div class="card-content">
                   <div class="post-category-date">
                     <span class="chip1 category text-caption1">Health</span>

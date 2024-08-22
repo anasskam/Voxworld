@@ -110,7 +110,10 @@
 
           <form action="POST">
             <div class="danger-zone-area">
-              <p>Note: Once your account deleted you can't restore it</p>
+              <div class="danger-zone-titles">
+                <p class="delete-account-title">Delete account</p>
+                <p class="text-button italic">Note: Once your account deleted you can't restore it</p>
+              </div>
               <button class="ghost-btn delete-btn">Delete account</button>
             </div>
           </form>

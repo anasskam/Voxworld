@@ -88,7 +88,9 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
                 ?>
                 <div class="card">
                     <a href="post.php?post_id=<?= $PostId; ?>?category=<?= $category; ?>">
+                    <div class="post-img-wrapper">
                         <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="" class="post-img">
+                    </div>
                         <div class="card-content">
                             <div class="post-category-date">
                                 <span class="chip1 category text-caption1"><?php echo htmlspecialchars($displayCategory); ?></span>

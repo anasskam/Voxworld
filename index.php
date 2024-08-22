@@ -67,6 +67,7 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
     <script src="./js/toggleTheme.js" type="module" defer></script>
     <script src="./js/index.js" type="module" defer></script>
     <script src="./js/header.js" type="module" defer></script>
+    <script src="./js/weather.js" type="module" defer></script>
 
 </head>
 <body>
@@ -85,7 +86,10 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
                 ?>
                 <div class="card main-card">
                     <a href="post.php?post_id=<?= $topPostId; ?>?category=<?= $category; ?>">
-                        <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="">
+                        <div class="post-img-wrapper">
+                            <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="">
+                        </div>
+
                         <div class="card-content">
                             <div class="post-category-date">
                                 <span class="chip1 category text-caption1">
@@ -148,7 +152,10 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
                 ?>
                 <div class="card">
                     <a href="post.php?post_id=<?= $latestPostId; ?>?category=<?= $category; ?>">
-                        <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="" class="post-img">
+                        <div class="post-img-wrapper">
+                            <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="" class="post-img">
+                        </div>
+                        
                         <div class="card-content">
                             <div class="post-category-date">
                                 <span class="chip1 category text-caption1">
