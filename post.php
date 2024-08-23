@@ -19,7 +19,8 @@ $get_id = $_GET['post_id'];
 
 $select_title = $conn->prepare("SELECT * FROM `posts` WHERE id = ?");
 $select_title->execute([$get_id]);
-$title = 'Default Title'; // Default title in case no post is found
+// Default title in case no post found //
+$title = 'Title'; 
 
 if ($select_title->rowCount() > 0) {
     $fetch_title = $select_title->fetch(PDO::FETCH_ASSOC);
@@ -89,6 +90,8 @@ $categoryMapping = [
       <script src="./js/post.js" type="module" defer></script>
       <script src="./js/header.js" type="module" defer></script>
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      
+
 
   </head>
   <body>
@@ -194,6 +197,52 @@ $categoryMapping = [
 
 
                       </button>
+                      <button id="shareButton" class="post-likes-wrapper post-intraction-wrapper text-body2" onclick="openSharePopup()">Share</button>
+                      <script>
+                        function openSharePopup() {
+                            
+                            const postUrl = encodeURIComponent('http://voxworld.one/post.php?post_id=<?= $post_id; ?>');
+                            const postTitle = encodeURIComponent('<?= $title; ?>');
+
+                            // dimensions //
+                            const width = 300;
+                            const height = 200;
+                            const left = (window.screen.width - width) / 2;
+                            const top = (window.screen.height - height) / 2;
+                        
+                            const popup = window.open("", "Share", `width=${width},height=${height},top=${top},left=${left}`);
+
+                            popup.document.write(`
+                                <html>
+                                <head>
+                                    <title>Share this post</title>
+                                    <style>
+                                        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+                                        .share-icon { width: 50px; height: 50px; margin: 10px; cursor: pointer; }
+                                        .social-media-icons { display: flex; justify-content: center; }
+                                    </style>
+                                </head>
+                                <body>
+                                    <h3>Share this post</h3>
+                                    <div class="social-media-icons">
+                                        <img src="./assets/icons/facebook.svg" alt="Facebook" class="share-icon" onclick="window.opener.shareTo('https://www.facebook.com/sharer/sharer.php?u=${postUrl}')">
+                                        <img src="./assets/icons/twitter.svg" alt="Twitter" class="share-icon" onclick="window.opener.shareTo('https://twitter.com/intent/tweet?url=${postUrl}&text=${postTitle}')">
+                                        <img src="./assets/icons/linkedin.svg" alt="LinkedIn" class="share-icon" onclick="window.opener.shareTo('https://www.linkedin.com/shareArticle?mini=true&url=${postUrl}&title=${postTitle}')">
+                                    </div>
+                                </body>
+                                </html>
+                            `);
+                            // Close //
+                            popup.document.close();
+                        }
+
+                        function shareTo(url) {
+                            // Close share popup //
+                            window.close();
+                            // Open sharing URL //
+                            window.open(url, 'Share', 'width=600,height=400');
+                        }
+                      </script>
 
                     </div>
 
