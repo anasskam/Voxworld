@@ -10,7 +10,7 @@ const initLogo = (theme) => {
   const currentLocation = location.pathname;
   let logoSrc;
 
-    if(currentLocation === '/Voxworld/index.php' || 
+    if(currentLocation === '/Voxworld/home' || 
       currentLocation === '/Voxworld/post.php' || 
       currentLocation === '/Voxworld/category.php' || 
       currentLocation === '/Voxworld/search.php' ||

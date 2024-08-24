@@ -1,6 +1,6 @@
 <aside class="side-bar">
         <div class="side-bar-header">
-          <a href="../index.php">
+          <a href="../home.php">
             <img src="../assets/images/logo-light.svg" alt="logo" class="logo">
           </a>
 

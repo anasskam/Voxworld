@@ -8,7 +8,7 @@ include '../components/errorTemplate.php';
 
 // Redirect if already logged in //
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
-  header('Location: ../index.php');
+  header('Location: ../home.php');
   exit();
 }
 
@@ -36,7 +36,7 @@ if (isset($_POST['submit'])) {
             if (password_verify($password, $user['password'])) {
                 // Start session and store user information
                 $_SESSION['user_id'] = $user['id'];
-                header('Location: ../index.php');
+                header('Location: ../home.php');
             } else {
                 $errorMessages['password'] = errorTemplate("Incorrect password.");
             }

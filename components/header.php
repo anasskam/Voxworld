@@ -27,7 +27,7 @@ if (isset($_SESSION['user_id'])) {
 
 <header class="main-header">
   <div class="upper-header">
-    <a href="./index.php"><img alt="logo" class="logo home-logo"></a>
+    <a href="./home.php"><img alt="logo" class="logo home-logo"></a>
 
     <!-- search bar -->
     <?php 
@@ -98,7 +98,7 @@ if (isset($_SESSION['user_id'])) {
 
   <nav>
     <ul>
-      <li data-relation="index"><a href="./index.php">Home</a></li>
+      <li data-relation="index"><a href="./home.php">Home</a></li>
       <li data-relation="politics"><a href="./category.php?category=politics">Politics</a></li>
       <li data-relation="economy"><a href="./category.php?category=economy">Economy</a></li>
       <li data-relation="society"><a href="./category.php?category=society">Society</a></li>

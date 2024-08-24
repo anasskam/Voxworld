@@ -1,6 +1,6 @@
 <footer class="home-footer">
             <div class="upper-footer">
-                <a href="./index.php"><img alt="logo" class="logo home-logo"></a>
+                <a href="./home.php"><img alt="logo" class="logo home-logo"></a>
                 <nav>
                     <ul>
                         <li ><a href="#">About us</a></li>
