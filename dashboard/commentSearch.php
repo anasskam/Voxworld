@@ -1,4 +1,62 @@
-<!DOCTYPE html>
+<?php
+session_start();
+// Session Test //
+include '../components/session-check.php';
+include '../components/emptyStateTemplate.php';
+$emptyIllustration = "";
+$adminId = checkAdminSession();
+
+// DB Connection //
+require_once '../components/connect.php';
+
+if(isset($_POST['search-btn']) or isset($_POST['search-bar'])){
+
+    $search_bar = $_POST['search-bar'];
+
+    // Fetch searched comments //
+    $LatestComments = $conn->query("SELECT * FROM comments WHERE comment LIKE '%{$search_bar}%'")->fetchAll(PDO::FETCH_ASSOC);
+
+    // Check if no comments //
+    $commentsCount = $conn->query('SELECT COUNT(id) AS NumComments FROM comments')->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// Empty table check //
+if (count($LatestComments) == 0) {
+    $emptyIllustration = emptyStateTemplate("No comments found :(");
+}
+else {
+    $emptyIllustration = "";
+}
+
+// Delete Post //
+if (isset($_POST['comment-delete'])) {
+
+    $commentID = $_POST['comment-delete'];
+
+    // Prepare and execute the query //
+    $commentDelete = $conn->prepare('DELETE FROM comments WHERE id = ?');
+    $commentDelete->execute([$commentID]);
+
+    if ($commentDelete) {
+        ?>
+        <script defer>
+            setTimeout(()=> {
+                swal("Success", "Comment deleted successfully", "success", {
+                    buttons: false,
+                    timer: 2500,
+                }).then(()=> {
+                    window.location.href = "./comments.php";
+                })
+            }, 500)
+        </script>
+      <?php
+    }
+    else {
+        echo 'Error deleting comment';
+    }
+}
+
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,6 +72,7 @@
     <script src="../js/theme.js" type="module" defer></script>
     <script src="../js/sidebar.js" type="module" defer></script>
     <script src="../js/post.js" type="module" defer></script>
+    <script src="../js/manageUsers.js" defer type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -34,9 +93,9 @@
             
             <div class="content-container">
                 <header class="dashboard-content-header">
-                    <p class="text-body1">Comments <span>(<?php echo $commentsCount[0]['NumComments'];?>)</span></p>
+                    <p class="text-body1">Comments <span>(<?php echo count($LatestComments);?>)</span></p>
                     
-                    <form method="POST" action="search.php">
+                    <form method="POST">
                         <div class="search-bar-wrapper">
                             <div class="input-field">
                             <!-- search icon -->
@@ -113,6 +172,7 @@
                     </div>
                     <?php
                         }
+                        echo $emptyIllustration;
                     ?>
 
                 </div>

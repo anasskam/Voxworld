@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 // Session Test //
 include '../components/session-check.php';
 include '../components/emptyStateTemplate.php';
@@ -10,6 +9,17 @@ $adminId = checkAdminSession();
 require_once '../components/connect.php';
 $LatestComments = $conn->query('SELECT * FROM comments ORDER BY date DESC')->fetchAll(PDO::FETCH_ASSOC);
 $commentsCount = $conn->query('SELECT COUNT(id) AS NumComments FROM comments')->fetchAll(PDO::FETCH_ASSOC);
+$emptyIllustration = "";
+
+// Empty table check //
+if (count($LatestComments) == 0) {
+    $emptyIllustration = emptyStateTemplate("There are no comments to show :(");
+}
+else {
+    $emptyIllustration = "";
+}
+
+
 
 // Delete Post //
 if (isset($_POST['comment-delete'])) {
@@ -57,6 +67,7 @@ if (isset($_POST['comment-delete'])) {
     <script src="../js/theme.js" type="module" defer></script>
     <script src="../js/sidebar.js" type="module" defer></script>
     <script src="../js/post.js" type="module" defer></script>
+    <script src="../js/manageUsers.js" defer type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -79,7 +90,7 @@ if (isset($_POST['comment-delete'])) {
                 <header class="dashboard-content-header">
 
                     <p class="text-body1">Comments <span>(<?php echo $commentsCount[0]['NumComments'];?>)</span></p>
-                    <form method="POST" action="search.php">
+                    <form method="POST" action="commentSearch.php">
                         <div class="search-bar-wrapper">
                             <div class="input-field">
                             <!-- search icon -->
@@ -156,6 +167,7 @@ if (isset($_POST['comment-delete'])) {
                     </div>
                     <?php
                         }
+                        echo $emptyIllustration;
                     ?>
 
                 </div>

@@ -66,7 +66,7 @@ if (isset($_POST['post-edit'])) {
 $emptyIllustration = "";
 
 // Empty table check //
-if ($postsCount[0]['NumPosts'] == 0) {
+if (count($posts) == 0) {
     $emptyIllustration = emptyStateTemplate("There are no posts to show :(");
 }
 else {
@@ -126,7 +126,7 @@ $categoryMapping = [
                     <p class="text-body1">
                         Manage posts(<?php echo $postsCount[0]['NumPosts'];?>)
                     </p>
-                    <form method="POST" action="search.php">
+                    <form method="POST" action="postSearch.php">
                         <div class="search-bar-wrapper">
                             <div class="input-field">
                             <!-- search icon -->

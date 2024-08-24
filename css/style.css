@@ -622,14 +622,16 @@ th {
   padding-bottom: var(--spacing-5);
   margin-bottom: var(--spacing-5);
   border-bottom: 1px solid var(--border);
-  flex-wrap: wrap;
 }
 
 .comment-wrapper.manage-comment {
   margin-bottom:0px;
   gap:var(--spacing-8);
 }
-
+.comment-wrapper.manage-comment:last-child {
+  border-bottom: none
+}
+.comment-wrapper.manage-comment:last-child,
 .post-wrapper:last-child{
   padding-bottom: 0;
   margin-bottom: 0;
@@ -715,7 +717,6 @@ th {
   display: flex;
   gap: var(--spacing-2);
   align-items: center;
-  flex-wrap: wrap;
 }
 
 /* 
@@ -1592,5 +1593,9 @@ th {
     margin-bottom: var(--spacing-4);
   }
 
-
+  .comment-wrapper.manage-comment,
+  .comments-actions form {
+    flex-wrap: wrap;
+  }
+  
 }

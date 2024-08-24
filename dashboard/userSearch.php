@@ -1,4 +1,75 @@
+<?php
+session_start();
+// Session Test //
+include '../components/session-check.php';
+include '../components/emptyStateTemplate.php';
+$adminId = checkAdminSession();
 
+// DB Connection //
+require_once '../components/connect.php';
+if(isset($_POST['search-btn']) or isset($_POST['search-bar'])){
+
+    $search_bar = $_POST['search-bar'];
+
+    // Fetch searched users //
+    $users = $conn->query("SELECT * FROM users WHERE FirstName LIKE '%{$search_bar}%' OR LastName LIKE '%{$search_bar}%' or email LIKE '%{$search_bar}%'")->fetchAll(PDO::FETCH_ASSOC);
+
+    // Check if no users //
+    $usersCount = $conn->query('SELECT COUNT(id) AS NumUsers FROM users')->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+$emptyIllustration = "";
+
+// Delete User //
+
+if (isset($_POST['user-delete'])) {
+    $user_id = $_POST['user-delete'];
+
+    // Prepare and execute the query to delete the user //
+    $userDelete = $conn->prepare('DELETE FROM users WHERE id = ?');
+    $userDelete->execute([$user_id]);
+
+    // Remove likes related to the deleted user //
+    $likeDelete = $conn->prepare('DELETE FROM likes WHERE user_id = ?');
+    $likeDelete->execute([$user_id]);
+
+    // Remove comments related to the deleted user //
+    $viewsDelete = $conn->prepare('DELETE FROM comments WHERE user_id = ?');
+    $viewsDelete->execute([$user_id]);
+
+    // Check if the session user is the one deleted & unset session variables //
+    if (isset($_SESSION['user_id']) && $user_id == $_SESSION['user_id']) {
+        // Unset session for the deleted user //
+        unset($_SESSION['user_id']);
+    }
+    if ($userDelete) {
+        ?>
+            <script defer> 
+                setTimeout(()=> {
+                swal("Success", "User deleted successfully", "success", {
+                buttons: false,
+                timer:2500,
+                }).then(()=> {
+                    window.location.href = "./manageUsers.php";
+                })
+                }, 500)
+            </script>
+        <?php
+    }
+    else {
+        echo 'Error deleting user';
+    }
+}
+
+// Empty table check //
+if (count($users) == 0) {
+    $emptyIllustration = emptyStateTemplate("No users found :(");
+}
+else {
+    $emptyIllustration = "";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,8 +104,8 @@
 
             <div class="content-container">
                 <header class="dashboard-content-header">
-                    <p class="text-body1"> Manage users(<?php echo $usersCount[0]['NumUsers'];?>)</p>
-                    <form method="POST" action="search.php">
+                    <p class="text-body1"> Manage users(<?php echo count($users);?>)</p>
+                    <form method="POST">
                         <div class="search-bar-wrapper">
                             <div class="input-field">
                             <!-- search icon -->
