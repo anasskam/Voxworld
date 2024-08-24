@@ -1259,7 +1259,6 @@ th {
   background-color: var(--surface-container);
 }
 
-
 .overview-comments-wrapper {
   padding-block: 0;
   max-height: 450px;
@@ -1294,6 +1293,7 @@ th {
 .overview-content .overview-comments {
   width: 30%;
 }
+
 
 /* 
 *USER PROFILE 
