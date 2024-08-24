@@ -97,7 +97,7 @@ else {
             <div class="content-container">
                 <header class="dashboard-content-header">
                     <p class="text-body1"> Manage users(<?php echo $usersCount[0]['NumUsers'];?>)</p>
-                    <form method="POST" action="userSearch.php">
+                    <form method="POST" action="userSearch">
                         <div class="search-bar-wrapper">
                             <div class="input-field">
                             <!-- search icon -->

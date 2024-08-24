@@ -126,7 +126,7 @@ $categoryMapping = [
                     <p class="text-body1">
                         Manage posts(<?php echo $postsCount[0]['NumPosts'];?>)
                     </p>
-                    <form method="POST" action="postSearch.php">
+                    <form method="POST" action="postSearch">
                         <div class="search-bar-wrapper">
                             <div class="input-field">
                             <!-- search icon -->

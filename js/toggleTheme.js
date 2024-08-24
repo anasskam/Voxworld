@@ -24,10 +24,10 @@ const toggleLogo = (theme) => {
   const currentLocation = location.pathname;
   let logoSrc;
 
-  if(currentLocation === '/Voxworld/index.php' || 
-  currentLocation === '/Voxworld/post.php' || 
-  currentLocation === '/Voxworld/category.php' || 
-  currentLocation === '/Voxworld/search.php' ||
+  if(currentLocation === '/Voxworld/home' || 
+  currentLocation === '/Voxworld/post' || 
+  currentLocation === '/Voxworld/category' || 
+  currentLocation === '/Voxworld/search' ||
   currentLocation === '/Voxworld/') {
     logoSrc = theme === "dark" ? "./assets/images/logo-dark.svg" : "./assets/images/logo-light.svg";
   } 

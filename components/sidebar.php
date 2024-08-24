@@ -1,7 +1,7 @@
 <aside class="side-bar" data-state="grow">
 
     <div class="side-bar-header">
-        <a href="../index.php">
+        <a href="../home.php">
             <img src="../assets/images/logo-light.svg" alt="logo" class="logo">
         </a>
         <div class="role">Admin</div>

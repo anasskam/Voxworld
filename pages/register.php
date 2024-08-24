@@ -2,7 +2,7 @@
 session_start();
 // Redirect if already logged in //
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
-  header('Location: ../index.php');
+  header('Location: ../home.php');
   exit();
 }
 // inti error msg //

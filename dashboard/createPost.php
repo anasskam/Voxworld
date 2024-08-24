@@ -94,7 +94,7 @@ if (isset($_POST['submit'])) {
     <script src="../js/sidebar.js" type="module" defer></script>
     <script src="../js/createPost.js" type="module" defer></script>
     <script src="../assets/ckeditor5/build/ckeditor.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" defer></script>
 
 
 </head>
