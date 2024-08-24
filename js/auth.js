@@ -3,7 +3,10 @@ const app = () => {
   const toogleIcons = document.querySelectorAll(".password-toggle");
 
   toogleIcons.forEach(icon =>{
-      icon.addEventListener("click", (e) => {tooglePassword(e)});
+    icon.addEventListener("click", (e) => {
+      e.preventDefault();
+      tooglePassword(e);
+    });
   })
 
   //set input focus
@@ -33,13 +36,13 @@ const tooglePassword = (e) => {
     <path d="M2 22.75C1.81 22.75 1.62 22.68 1.47 22.53C1.18 22.24 1.18 21.76 1.47 21.47L8.94 14C9.23 13.71 9.71 13.71 10 14C10.29 14.29 10.29 14.77 10 15.06L2.53 22.53C2.38 22.68 2.19 22.75 2 22.75Z" fill="currentcolor"/> 
     <path d="M14.53 10.22C14.34 10.22 14.15 10.15 14 10C13.71 9.71 13.71 9.23 14 8.94L21.47 1.47C21.76 1.18 22.24 1.18 22.53 1.47C22.82 1.76 22.82 2.24 22.53 2.53L15.06 10C14.91 10.15 14.72 10.22 14.53 10.22Z" fill="currentcolor"/>
   `;
-  const previousElement = e.target.previousElementSibling;
+
+  const previousElement = e.currentTarget.previousElementSibling;
   const type = previousElement.getAttribute("type");
-  previousElement.setAttribute("type", (type === "password" ? "text" : "password"));
-  e.target.innerHTML = (type === "password" ? hideIcon : showIcon);
+  previousElement.setAttribute("type", (type === "password") ? "text" : "password");
+  e.currentTarget.children[0].innerHTML = (type === "password") ? hideIcon : showIcon;
 
 }
-
 
 const focusOnCurrentInput = (e, inputs) => {
   removeAllfocuses(inputs);

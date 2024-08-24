@@ -12,7 +12,6 @@ const app = () => {
   const menuBtnsWrapper = document.createElement('div');
   const menuWrapper = document.createElement('div');
 
-  console.log(menuBtn);
   //check for menu icon display
   if(window.innerWidth <= 768) {
 
@@ -48,14 +47,7 @@ const app = () => {
       }
     })
 
-  } else {
-
-      menuBtn.classList.add('hide');
-      mainHeader.append(navs);
-      upperHeaderWrapper.append(searchBar, navActions);
-      menuBtnsWrapper.remove();
-      menuWrapper.remove();
-    }
+  }
 
 }
 

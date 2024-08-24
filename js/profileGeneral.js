@@ -1,5 +1,4 @@
 const app = () => {
-  
   const button = document.querySelector('.cta button');
   button.disabled = true;
 
@@ -8,18 +7,26 @@ const app = () => {
   const email = document.querySelector('.email-input input');
 
   const fields = [fname, lname, email];
-  const currentValues = [ fname.value, lname.value, email.value];
+  const currentValues = [fname.value, lname.value, email.value];
 
   fields.forEach((field, index) => {
-    setDisable(field, button, currentValues[index])
+    field.addEventListener('input', () => {
+      field.setAttribute('data-changed', (field.value !== currentValues[index]) ? true : false);
+      button.disabled = checkForChange(fields) ? false : true;
+    })
+
   })
 
+  const checkForChange = (fields) => {
+
+    for(let i = 0; i < fields.length; i++) {
+      if(fields[i].getAttribute('data-changed') === 'true') {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
-function setDisable(field, button, value) {
-  field.addEventListener('input', () => {
-    button.disabled = (field.value !== value) ? false : true;
-  })
-}
 
 document.addEventListener("DOMContentLoaded", app);
