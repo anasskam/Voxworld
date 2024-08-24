@@ -263,7 +263,10 @@ button,
 [type="submit"] {
   -webkit-appearance: button;
 }
-
+button {
+  background-color: transparent;
+  cursor: pointer;
+}
 /**
  * Remove the inner border and padding in Firefox.
  */
@@ -737,9 +740,13 @@ p,
   margin-inline: auto;
 }
 
-.form-container{
-  width: clamp(65%, 25%, 400px);
+/* .form-container{
+  width:68%;
   margin-inline: auto;
+} */
+.form-container{
+  width:100%;
+  padding-inline: clamp(15%, 2%, var(--spacing-20));
 }
 
 .content-container{
@@ -753,7 +760,7 @@ p,
   grid-template-columns: 45% 50%;
   justify-content: space-between;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .right,
@@ -763,7 +770,7 @@ p,
 }
 
 .flex{
-  display: flex;
+  display: flex !important;
 }
 
 .flex-justify-center{
@@ -844,6 +851,7 @@ p,
   transition: background-color .35s ease;
   gap: var(--spacing-1);
   font-size: var(--fs-button);
+  text-align: center;
 }
 
 .ghost-btn{
@@ -875,6 +883,7 @@ p,
 .preview-btn{
   color: var(--background-text);
   flex-grow: 1; 
+  text-wrap: nowrap;
 }
 
 .primary-btn:hover{
@@ -903,9 +912,11 @@ p,
 }
 
 .hide{
-  display: none;
+  display: none !important;
 }
-
+.hidden {
+  overflow: hidden;
+}
 /**
   * focus, hover, transitions...
 */
@@ -932,5 +943,5 @@ p,
 }
 
 .date {
-  margin-top: var(--spacing-4);
+  margin-block: var(--spacing-4);
 }

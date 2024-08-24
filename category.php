@@ -74,7 +74,7 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
 </head>
 
 <body>
-    <div class="container">
+    <div class="container hidden">
         
         <!-- header -->
         <?php include './components/header.php'; ?>

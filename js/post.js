@@ -1,12 +1,16 @@
-const commentsWrapper = document.querySelector('.comments-wrapper');
+function getTwoChars(name) {
+  return name.textContent.split(" ").map((word, index) => {
+    if(index < 2) {
+      return word.charAt(0);
+    }
+  }).join("");
+}
 
-const colors = ['--clr-error-400', '--clr-primary', '--clr-success', '--clr-warning'];
+document.addEventListener("DOMContentLoaded", () => {
+  const names = document.querySelectorAll('.commentator');
+  const targets = document.querySelectorAll('.comment-img p');
 
-document.addEventListener("DOMContentLoaded", ()=> {
-  const imageWrapper = document.querySelectorAll('.comment-wrapper .comment-img');
-
-  imageWrapper.forEach(image => {
-    const randIndex = Math.floor(Math.random() * colors.length);
-    image.style.backgroundColor = `var(${colors[randIndex]})`;
+  targets.forEach((target, index) => {
+    target.textContent = getTwoChars(names[index]);
   })
 })

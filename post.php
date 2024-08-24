@@ -17,6 +17,15 @@ include 'interactions/bookmarksLogic.php';
 
 $get_id = $_GET['post_id'];
 
+$select_title = $conn->prepare("SELECT * FROM `posts` WHERE id = ?");
+$select_title->execute([$get_id]);
+$title = 'Default Title'; // Default title in case no post is found
+
+if ($select_title->rowCount() > 0) {
+    $fetch_title = $select_title->fetch(PDO::FETCH_ASSOC);
+    $title = isset($fetch_title['title']) ? htmlspecialchars($fetch_title['title']) : $title;
+}
+
 if(isset($_POST['add_comment'])){
 
 
@@ -34,11 +43,16 @@ if(isset($_POST['add_comment'])){
   if($verify_comment->rowCount() > 0){
     $message[] = 'comment already added!';
   }else{
-    $insert_comment = $conn->prepare("INSERT INTO `comments`(post_id, user_id, FirstName, LastName, comment) VALUES(?,?,?,?,?)");
-    $insert_comment->execute([$get_id, $user_id, $fname, $lname, $comment]);
-    $message[] = 'new comment added!';
-    $actual_link = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]/#comments-section";
-    header("Location: $actual_link"); 
+     $insert_comment = $conn->prepare("INSERT INTO `comments`(post_id, user_id, FirstName, LastName, comment) VALUES(?,?,?,?,?)");
+     $insert_comment->execute([$get_id, $user_id, $fname, $lname, $comment]);
+     if (empty($_SERVER['HTTPS'])) {
+      $protocol = 'http';
+      } else {
+          $protocol = 'https';
+      }
+      
+      $actual_link = $protocol . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]/#comments-section";
+       header("Location: $actual_link"); 
   }
 
 }
@@ -63,7 +77,7 @@ $categoryMapping = [
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Document</title>
+      <title><?= $title; ?></title>
 
       <!-- custom css links -->
       <link rel="shortcut icon" href="./assets/images/favicon32.png" type="image/x-icon">
@@ -78,7 +92,7 @@ $categoryMapping = [
 
   </head>
   <body>
-      <div class="container">
+      <div class="container hidden">
 
           <!-- header -->
           <?php include './components/header.php'; ?>
@@ -258,13 +272,13 @@ $categoryMapping = [
                   <div class="comment-wrapper">
                     
                     <div class="comment-img">
-                      <img src="./assets/icons/user2.svg" alt="comment user image">
+                      <p class="text-caption1"></p>
                     </div>
 
                     <div class="comment-content-wrapper">
                       
                       <div class="comment-header">
-                        <p class="text-body2"><?= $fetch_comments['FirstName'] . ' ' . $fetch_comments['LastName']; ?></p>
+                        <p class="text-body2 commentator"><?= $fetch_comments['FirstName'] . ' ' . $fetch_comments['LastName']; ?></p>
                         <span class="bullet"></span>
                         <p class="text-caption1 opacity-half">
                           <?php                                      

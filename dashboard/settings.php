@@ -165,7 +165,7 @@ if (isset($_POST['update-password'])) {
       ?>
 
       <div class="content-container">
-        <p class="text-body1">Settings</p>
+        <h3 class="text-body1">Settings</h3>
         <div class="dropDowns-wrapper">
           
           <div class="dropDown-wrapper">

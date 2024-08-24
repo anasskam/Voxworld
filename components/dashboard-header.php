@@ -14,8 +14,11 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", ()=>{
-      document.querySelector(".dashboard-header").style.height = 
+      setTimeout(() => {
+        document.querySelector(".dashboard-header").style.height = 
       `${document.querySelector(".side-bar-header").getBoundingClientRect().height +1}px`
+      },);
+
     })
   </script>
 

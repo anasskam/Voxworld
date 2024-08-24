@@ -67,11 +67,11 @@ $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There 
     <script src="./js/toggleTheme.js" type="module" defer></script>
     <script src="./js/index.js" type="module" defer></script>
     <script src="./js/header.js" type="module" defer></script>
-    <script src="./js/weather.js" type="module" defer></script>
+
 
 </head>
 <body>
-    <div class="container">
+    <div class="container hidden">
 
         <!-- header -->
         <?php include './components/header.php'; ?>

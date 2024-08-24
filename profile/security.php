@@ -1,10 +1,159 @@
+<?php
+// DB connection //
+require_once '../components/connect.php';
+// Session start //
+session_start();
+// Session check for access //
+if (!isset($_SESSION['user_id'])) {
+  // Redirect to login page //
+  header('Location: ../pages/login.php');
+  exit();
+}
+
+// Initialize error messages //
+$errorMessages = [
+    'current-username' => '', 
+    'new-username' => '', 
+    'current-password' => '', 
+    'new-password' => '',
+];
+include '../components/errorTemplate.php';
+
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+} else {
+    $user_id = '';
+}
+
+
+// ----------------------- PASSWORD UPDATE ----------------------- //
+if (isset($_POST['update-password'])) {
+    $currentpwd = $_POST['current-password'];
+    $newpwd = $_POST['new-password'];
+
+    // Check if the password fields are empty //
+    if (empty($currentpwd)) {
+        $errorMessages['current-password'] = errorTemplate("Current password cannot be empty.");
+    }
+
+    if (empty($newpwd)) {
+        $errorMessages['new-password'] = errorTemplate("New password cannot be empty.");
+    }
+
+    // Proceed if there is no error msg //
+    if (empty($errorMessages['current-password']) && empty($errorMessages['new-password'])) {
+        $selectPwd = $conn->prepare('SELECT * FROM users WHERE id = ?');
+        $selectPwd->execute([$user_id]);
+
+        if ($selectPwd->rowCount() > 0) {
+            $user = $selectPwd->fetch(PDO::FETCH_ASSOC);
+            // Check if passwords match //
+            if (password_verify($currentpwd, $user['password'])) {
+
+                // Check if ew password isn't same as current one //
+                if ($currentpwd != $newpwd) {
+
+                    // Hash nd store new password //
+                    $hashed_password = password_hash($newpwd, PASSWORD_DEFAULT);
+                    $updatePwd = $conn->prepare('UPDATE users SET password = ? WHERE id = ?');
+                    if ($updatePwd->execute([$hashed_password, $user_id])) {
+                        
+                        ?>
+                        <script defer>
+                            setTimeout(()=> {
+                                swal("Success", "Password updated successfully", "success", {
+                                    buttons:false,
+                                    timer: 2500,
+                                }).then(()=>{
+                                    window.location.href = "../pages/login.php";
+                                })
+                            }, 500)
+                        </script>
+                        <?php
+
+                        // unset session data //
+                        unset($_SESSION['user_id']); 
+                    } else {
+                        echo 'Error updating password.';
+                    }
+                } else {
+                    $errorMessages['new-password'] = errorTemplate("New password cannot be the same as the current password.");
+                }
+            } else {
+                $errorMessages['current-password'] = errorTemplate("Invalid current password.");
+            }
+        } else {
+            ?>
+            <script defer>
+                setTimeout(()=> {
+                    swal("Oops!", "User not found!", "warning", {
+                        buttons: {
+                            redirect: {
+                                text: "Try again",
+                                className:"swal-gotoBtn",
+                            }
+                        },
+                    }).then((value)=>{
+                        if(value === "redirect") {
+                            window.location.href = "security.php";
+                        }
+                    })
+                }, 500)
+            </script>
+            <?php
+        }
+    }
+}
+
+// ----------------------- ACCOUNT DELETE ----------------------- //
+if (isset($_POST['user-delete'])) {
+  $user_id = $_POST['user-delete'];
+
+  // Prepare and execute the query to delete the user //
+  $userDelete = $conn->prepare('DELETE FROM users WHERE id = ?');
+  $userDelete->execute([$user_id]);
+
+  // Remove likes related to the deleted user //
+  $likeDelete = $conn->prepare('DELETE FROM likes WHERE user_id = ?');
+  $likeDelete->execute([$user_id]);
+
+  // Remove comments related to the deleted user //
+  $viewsDelete = $conn->prepare('DELETE FROM comments WHERE user_id = ?');
+  $viewsDelete->execute([$user_id]);
+
+  if ($userDelete) {
+    ?>
+    <script defer>
+        setTimeout(()=> {
+            swal("Account Deleted", "Your account has been deleted.", "warning", {
+                buttons:false,
+                timer: 2500,
+            }).then(()=>{
+                window.location.href = "../pages/register.php";
+            })
+        }, 500)
+    </script>
+    <?php
+  }
+  else {
+      echo 'Error deleting user';
+  }
+  // Check if the session user is the one deleted & unset session variables //
+  if (isset($_SESSION['user_id']) && $user_id == $_SESSION['user_id']) {
+      // Unset session for the deleted user //
+      unset($_SESSION['user_id']);
+  }
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Security</title>
+    <title>Profile | Security</title>
 
     <!-- custom css links -->
     <link rel="shortcut icon" href="../assets/images/favicon32.png" type="image/x-icon">
@@ -34,7 +183,7 @@
       <div class="content-container w-half">
         <section class="user-update-password">
           <form method="post">
-            <header>
+            <header class="header-title">
               <h3>Security</h3>
             </header>
 
@@ -61,7 +210,11 @@
               
                   </div>
 
-                  <!-- //TODO:erro message for password -->
+                  <?php
+                    if(isset($_POST['update-password']) && !empty($errorMessages)){
+                      echo  $errorMessages['current-password']; 
+                    }
+                  ?> 
 
                 </div>
 
@@ -88,7 +241,11 @@
               
                   </div>
 
-                  <!-- //TODO:erro message for password -->
+                  <?php
+                    if(isset($_POST['update-password']) && !empty($errorMessages)){
+                      echo  $errorMessages['new-password']; 
+                    }
+                  ?> 
 
                 </div>
 
@@ -108,13 +265,13 @@
             <h3>Danger zone</h3>
           </header>
 
-          <form action="POST">
+          <form method="POST">
             <div class="danger-zone-area">
               <div class="danger-zone-titles">
                 <p class="delete-account-title">Delete account</p>
-                <p class="text-button italic">Note: Once your account deleted you can't restore it</p>
+                <p class="text-button italic">Note: Once your account deleted, all your data will be lost and cannot be recovered.</p>
               </div>
-              <button class="ghost-btn delete-btn">Delete account</button>
+              <button name="user-delete" value="<?php echo $user['id']?>" onclick="return confirm('Are you sure you want to delete your account?')" class="ghost-btn delete-btn">Delete account</button>
             </div>
           </form>
 

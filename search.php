@@ -65,7 +65,7 @@ if(isset($_POST['search-btn']) or isset($_POST['search-bar'])){
 
 </head>
 <body>
-    <div class="container">
+    <div class="container hidden">
 
         <!-- header -->
         <?php include './components/header.php'; ?>
@@ -81,7 +81,9 @@ if(isset($_POST['search-btn']) or isset($_POST['search-bar'])){
                 ?>
                 <div class="card">
                     <a href="post.php?post_id=<?= $latestPostId; ?>?category=<?= $category; ?>">
-                        <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="" class="post-img">
+                        <div class="post-img-wrapper">
+                            <img src="assets/hostedImages/<?php echo htmlspecialchars($post['image']); ?>" alt="" class="post-img">
+                        </div>
                         <div class="card-content">
                             <div class="post-category-date">
                                 <span class="chip1 category text-caption1">

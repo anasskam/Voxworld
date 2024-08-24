@@ -76,7 +76,7 @@ if (isset($_POST['comment-delete'])) {
             ?>
             
             <div class="content-container">
-                <h3>Comments <span>(<?php echo $commentsCount[0]['NumComments'];?>)</span></h3>
+                <p class="text-body1">Comments <span>(<?php echo $commentsCount[0]['NumComments'];?>)</span></p>
                 <div class="comments-wrapper">
                     <?php
                         foreach ($LatestComments as $comment) {
@@ -87,13 +87,13 @@ if (isset($_POST['comment-delete'])) {
                         
                         <div class="comment-body">
                             <div class="comment-img">
-                            <img src="../assets/icons/user2.svg" alt="comment user image">
+                                <p class="text-caption1"></p>
                             </div>
                             
                             <div class="comment-content-wrapper">
                             
                             <div class="comment-header">
-                                <p class="text-body2"><?php echo $comment['FirstName'] . ' ' . $comment['LastName'];?></p>
+                                <p class="text-body2 commentator"><?php echo $comment['FirstName'] . ' ' . $comment['LastName'];?></p>
                                 <span class="bullet"></span>
                                 <p class="text-caption1 opacity-half">
                                     <?php                                      

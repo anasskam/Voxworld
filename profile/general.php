@@ -3,20 +3,9 @@ session_start();
 // DB connection //
 require_once '../components/connect.php';
 
-// Session check for access //
-if (!isset($_SESSION['user_id'])) {
-    // Redirect to login page //
-    header('Location: ../pages/login.php');
-    exit();
-}
 
-$user_id = '';
+// Initialize username variable //
 $username = '';
-
-// inti error msg //
-$errorMessages = ['fname'=> '', 'lname' => '', 'email'=> ''];
-
-include '../components/errorTemplate.php';
 
 // Check if user_id is set in session //
 if (isset($_SESSION['user_id'])) {
@@ -30,10 +19,14 @@ if (isset($_SESSION['user_id'])) {
     // Check if a user was found //
     if ($user) {
         $username = $user['FirstName'] . ' ' . $user['LastName'];
-    } else {
-        $username = '';
     }
 }
+
+
+// inti error msg //
+$errorMessages = ['fname'=> '', 'lname' => '', 'email'=> ''];
+
+include '../components/errorTemplate.php';
 
 if (isset($_POST['submit'])) {
     $fname = $_POST['fname'];
@@ -108,7 +101,7 @@ elseif (empty($email)) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><?php echo htmlspecialchars($username);?></title>
+    <title>Profile | <?php echo htmlspecialchars($username);?></title>
 
     <!-- custom css links -->
     <link rel="shortcut icon" href="../assets/images/favicon32.png" type="image/x-icon">
@@ -139,7 +132,6 @@ elseif (empty($email)) {
                 <form method="post">
                     <header>
                         <h3>General</h3>
-                        <p class="text-button italic opacity-half date">Profile created at: <span>Feb 2, 2024 19:28</span></p>
                     </header>
 
                     <div class="inputs for-general">
@@ -210,7 +202,9 @@ elseif (empty($email)) {
 
                         </div>
                     </div>
-
+                    
+                    <p class="text-button italic opacity-half date">Profile created at: <span>Feb 2, 2024 19:28</span></p>
+                    
                     <div class="cta center margin-0">
                         <button type="submit" name="submit" class="primary-btn">Update</button>
                     </div>

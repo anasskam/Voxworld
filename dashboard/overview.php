@@ -90,7 +90,7 @@ $selectLatestComments = $conn->query('SELECT c.*, p.category, u.FirstName, u.Las
                 <div class="overview-content"> 
                     <div class="main-content">
                         <section class="overview-cards">   
-                            <h3>Overview</h3>
+                            <p class="text-body1">Overview</p>
                             <div class="overview-cards-wrapper">
                                 <div class="overview-card">
                                     <div class="overview-card-header">
@@ -147,7 +147,7 @@ $selectLatestComments = $conn->query('SELECT c.*, p.category, u.FirstName, u.Las
 
                         <section class="overview-posts">
                             <div class="overview-posts-header">
-                                <h3>🔥Top posts <span>(<?= $topPostsCount; ?>)</span></h3>
+                                <p class="text-body1">🔥Top posts <span>(<?= $topPostsCount; ?>)</span></p>
                                 <a href="./managePosts.php" class="see-more">
                                     <p class="text-caption1">See more</p>
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -240,7 +240,7 @@ $selectLatestComments = $conn->query('SELECT c.*, p.category, u.FirstName, u.Las
 
                     <section class="overview-comments">
                         <div class="overview-comments-header">
-                            <h3>Recent comments <span>(<?= count($selectLatestComments); ?>)</span></h3>
+                            <p class="text-body1">Recent comments <span>(<?= count($selectLatestComments); ?>)</span></p>
                             <a href="./comments.php" class="see-more">
                                 <p class="text-caption1">See more</p>
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -254,13 +254,13 @@ $selectLatestComments = $conn->query('SELECT c.*, p.category, u.FirstName, u.Las
                             <div class="comment-wrapper overview-comment">
                                 <a class="comment-body" href="../post.php?post_id=<?= $comment['post_id']; ?>#comments-section">
                                     <div class="comment-img">
-                                    <img src="../assets/icons/user2.svg" alt="comment user image">
+                                        <p class="text-caption2"></p>
                                     </div>
                                     
                                     <div class="comment-content-wrapper">
                                     
                                     <div class="comment-header">
-                                        <p class="text-body2"><?= $comment['FirstName'] . ' ' . $comment['LastName']; ?></p>
+                                        <p class="text-body2 commentator"><?= $comment['FirstName'] . ' ' . $comment['LastName']; ?></p>
                                         <span class="bullet"></span>
                                         <p class="text-caption1 opacity-half">                        
                                             <?php                                      

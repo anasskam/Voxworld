@@ -10,3 +10,4 @@ allListItems.forEach(item => {
 const route = window.location.pathname.slice(20, -4);
 
 document.addEventListener("load", setRoute(route, allListItems, 'active'));
+
