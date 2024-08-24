@@ -39,6 +39,8 @@ $selectBookmarked = $conn->prepare("SELECT posts.* FROM posts
                                     WHERE bookmarks.user_id = ?") ;
 $selectBookmarked->execute([$user_id]);
 $bookmarkedPosts = $selectBookmarked->fetchAll(PDO::FETCH_ASSOC);
+
+$emptyIllustration = "";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,12 +79,12 @@ $bookmarkedPosts = $selectBookmarked->fetchAll(PDO::FETCH_ASSOC);
 
       <div class="content-container">
         <header>
-          <h3>Bookmarks</h3>
+          <h3>Bookmarks <span>(<?php echo count($bookmarkedPosts); ?>)</span></h3>
         </header>
         
         <div class="cards-wrapper">
             <?php
-              if (empty($bookmarkedPosts)) {
+              if (count($bookmarkedPosts) == 0) {
                 $emptyIllustration = emptyStateTemplate("There are no bookmarks to show :(");
               } else {
                 foreach ($bookmarkedPosts as $post) {              
@@ -145,6 +147,9 @@ $bookmarkedPosts = $selectBookmarked->fetchAll(PDO::FETCH_ASSOC);
             ?>
           
         </div>
+          <?php 
+            echo $emptyIllustration;
+          ?>
           
         
       </div>

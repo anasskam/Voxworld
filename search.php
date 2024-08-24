@@ -43,6 +43,8 @@ if(isset($_POST['search-btn']) or isset($_POST['search-bar'])){
     // Check if no posts //
     $postsCount = $conn->query('SELECT COUNT(id) AS NumPosts FROM posts')->fetch(PDO::FETCH_ASSOC);
     $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There are no posts to show :(") : "";
+} else {
+    header ('Location : home.php');
 }
 ?>
 <!DOCTYPE html>
@@ -74,7 +76,12 @@ if(isset($_POST['search-btn']) or isset($_POST['search-bar'])){
         <section class="latest-news">
             <h3>Search results</h3>
             <div class="cards-wrapper">
-                <?php foreach ($selectPosts as $post): ?>
+                <?php 
+                if (empty($selectPosts)) {
+                    $emptyIllustration = emptyStateTemplate("There are no results to show :(");
+        
+                } else {
+                foreach ($selectPosts as $post): ?>
                 <?php 
                     $latestPostId = $post['id'];
                     $category = $post['category'];
@@ -128,7 +135,7 @@ if(isset($_POST['search-btn']) or isset($_POST['search-bar'])){
                         </div>
                     </a>
                 </div>
-                <?php endforeach; ?>
+                <?php endforeach; }?>
             </div>
             <?php echo $emptyIllustration?>
         </section>

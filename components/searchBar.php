@@ -1,4 +1,4 @@
-<form method="POST" action="search.php">
+<form method="POST" action="search">
   <div class="search-bar-wrapper">
     <div class="input-field">
       <!-- search icon -->

@@ -45,14 +45,6 @@ $comments = $selectComments->fetchAll(PDO::FETCH_ASSOC);
 
 $emptyIllustration = "";
 
-// Empty table check //
-if (count($comments) == 0) {
-    $emptyIllustration = emptyStateTemplate("There are no comments to show :(");
-}
-else {
-    $emptyIllustration = "";
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -95,7 +87,7 @@ else {
           <div class="comments-wrapper">
           <?php
             if (empty($comments)) {
-              $emptyIllustration = emptyStateTemplate("No comments found :(");
+              $emptyIllustration = emptyStateTemplate("There are no comments to show :(");
 
             } else {
                 foreach ($comments as $comment) {

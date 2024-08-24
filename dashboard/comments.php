@@ -90,7 +90,7 @@ if (isset($_POST['comment-delete'])) {
                 <header class="dashboard-content-header">
 
                     <p class="text-body1">Comments <span>(<?php echo $commentsCount[0]['NumComments'];?>)</span></p>
-                    <form method="POST" action="commentSearch.php">
+                    <form method="POST" action="commentSearch">
                         <div class="search-bar-wrapper">
                             <div class="input-field">
                             <!-- search icon -->
