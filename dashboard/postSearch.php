@@ -1,3 +1,101 @@
+<?php
+session_start();
+// Session Test //
+include '../components/session-check.php';
+include '../components/emptyStateTemplate.php';
+$adminId = checkAdminSession();
+
+// DB Connection //
+require_once '../components/connect.php';
+
+if(isset($_POST['search-btn']) or isset($_POST['search-bar'])){
+
+    $search_bar = $_POST['search-bar'];
+
+    // Fetch searched posts //
+    $selectLatestPosts = $conn->query("SELECT p.*, 
+    (SELECT COUNT(*) FROM likes WHERE post_id = p.id) AS total_likes,
+    (SELECT COUNT(*) FROM views WHERE post_id = p.id) AS total_views,
+    (SELECT COUNT(*) FROM comments WHERE post_id = p.id) AS total_comments
+    FROM posts p WHERE title LIKE '%{$search_bar}%' 
+                OR content LIKE '%{$search_bar}%' 
+                or category LIKE '%{$search_bar}%'")->fetchAll(PDO::FETCH_ASSOC);
+
+    // Check if no posts //
+    $postsCount = $conn->query('SELECT COUNT(id) AS NumPosts FROM posts')->fetchAll(PDO::FETCH_ASSOC);
+
+}
+
+// Delete Post //
+if (isset($_POST['post-delete'])) {
+
+    $postID = $_POST['post-delete'];
+
+    // Prepare and execute the query //
+    $postDelete = $conn->prepare('DELETE FROM posts WHERE id = ?');
+    $postDelete->execute([$postID]);
+
+    // remove likes related to deleted posts //
+    $likeDelete = $conn->prepare('DELETE FROM likes WHERE post_id = ?');
+    $likeDelete->execute([$postID]);
+
+    // remove views related to deleted posts //
+    $viewsDelete = $conn->prepare('DELETE FROM views WHERE post_id = ?');
+    $viewsDelete->execute([$postID]);
+    
+    if ($postDelete) {
+        ?>
+        <script defer>
+            setTimeout(()=> {
+                swal("Success", "Post deleted successfully", "success", {
+                    buttons: false,
+                    timer:2500,
+                }).then(()=> {
+                    window.location.href = "./managePosts.php";
+                })
+            }, 500)
+        </script>
+        <?php
+    }
+    else {
+        echo 'Error deleting post';
+    }
+}
+
+// Redirect to edit page //
+if (isset($_POST['post-edit'])) {
+    $postID = $_POST['post-edit'];
+    $_SESSION['post_id'] = $postID;
+    header('Location: editPost.php');
+    exit;
+}
+
+
+$emptyIllustration = "";
+
+// Empty table check //
+if (count($selectLatestPosts) == 0) {
+    $emptyIllustration = emptyStateTemplate("No posts found :(");
+}
+else {
+    $emptyIllustration = "";
+}
+
+$categoryMapping = [
+    'Politics' => 'politics',
+    'Economy' => 'economy',
+    'Society' => 'society',
+    'Culture' => 'culture',
+    'Science & Tech' => 'scienceandtech',
+    'Business' => 'business',
+    'Sports' => 'sports',
+    'Ents & Arts' => 'entsandarts',
+    'Mena' => 'mena',
+    'Health' => 'health',
+    'International' => 'international',
+];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,9 +131,9 @@
             <div class="content-container">
                 <header class="dashboard-content-header">
                     <p class="text-body1">
-                        Manage posts(<?php echo $postsCount[0]['NumPosts'];?>)
+                        Manage posts(<?php echo count($selectLatestPosts);?>)
                     </p>
-                    <form method="POST" action="search.php">
+                    <form method="POST">
                         <div class="search-bar-wrapper">
                             <div class="input-field">
                             <!-- search icon -->

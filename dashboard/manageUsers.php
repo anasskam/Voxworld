@@ -54,7 +54,7 @@ if (isset($_POST['user-delete'])) {
 }
 
 // Empty table check //
-if ($usersCount[0]['NumUsers'] == 0) {
+if (count($users) == 0) {
     $emptyIllustration = emptyStateTemplate("There are no users to show :(");
 }
 else {
@@ -97,7 +97,7 @@ else {
             <div class="content-container">
                 <header class="dashboard-content-header">
                     <p class="text-body1"> Manage users(<?php echo $usersCount[0]['NumUsers'];?>)</p>
-                    <form method="POST" action="search.php">
+                    <form method="POST" action="userSearch.php">
                         <div class="search-bar-wrapper">
                             <div class="input-field">
                             <!-- search icon -->
