@@ -61,14 +61,14 @@ $comments = $selectComments->fetchAll(PDO::FETCH_ASSOC);
     <script src="../js/theme.js" type="module" defer></script>
     <script src="../js/toggleTheme.js" type="module" defer></script>
     <script src="../js/userSideBar.js" type="module" defer></script>
-    <script src="../js/profileGeneral.js" type="module" defer></script>
     <script src="../js/post.js" type="module" defer></script>
     <script src="../js/manageUsers.js" type="module" defer></script>
+    <script src="../js/profileRespo.js" type="module" defer></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 
-    <div class="dashboard-container">
+    <div class="dashboard-container hidden">
       <!-- side bar --> 
       <?php
           include "../components/userSideBar.php"
@@ -148,7 +148,6 @@ $comments = $selectComments->fetchAll(PDO::FETCH_ASSOC);
 
           </div>
 
-          <?php echo $emptyIllustration?>
 
         </div>
 
