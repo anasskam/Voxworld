@@ -43,6 +43,8 @@ if(isset($_POST['search-btn']) or isset($_POST['search-bar'])){
     // Check if no posts //
     $postsCount = $conn->query('SELECT COUNT(id) AS NumPosts FROM posts')->fetch(PDO::FETCH_ASSOC);
     $emptyIllustration = ($postsCount['NumPosts'] == 0) ? emptyStateTemplate("There are no posts to show :(") : "";
+} else {
+    header('Location: index.php');
 }
 ?>
 <!DOCTYPE html>

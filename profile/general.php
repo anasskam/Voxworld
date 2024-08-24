@@ -84,21 +84,22 @@ elseif (empty($email)) {
         // check if user updated = success popup //
         if ($updateUser) {
             ?>
-            <script defer> 
-                setTimeout(()=> {
-                swal("Success", "Information updated successfully", "success", {
-                buttons: false,
-                timer:2500,
-                }).then(()=> {
-                    window.location.href = "./general.php";
-                })
-                }, 500)
-            </script>
+                <script defer> 
+                    setTimeout(()=> {
+                        swal("Success", "Information updated successfully", "success", {
+                            buttons: false,
+                            timer:2500,
+                        }).then(()=> {
+                            window.location.href = "./general.php";
+                        });
+                    }, 500);
+                </script>
             <?php
+
         } else {
             ?>
-            <script defer>
-                setTimeout(()=> {
+                <script defer>
+                    setTimeout(()=> {
                     swal("Please try again", "There was an error updating your information.", "warning", {
                         buttons: {
                             redirect: {
@@ -112,7 +113,7 @@ elseif (empty($email)) {
                         }
                     })
                 }, 500)
-            </script>
+                </script>
             <?php
         }
     }
@@ -138,7 +139,7 @@ elseif (empty($email)) {
     <script src="../js/userSideBar.js" type="module" defer></script>
     <script src="../js/profileGeneral.js" type="module" defer></script>
     <script src="../js/profileRespo.js" type="module" defer></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" defer></script>
 </head>
 <body>
 

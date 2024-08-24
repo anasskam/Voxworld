@@ -643,6 +643,9 @@ th {
   align-items: center;
   gap: var(--spacing-3);
 }
+.post-content img {
+  object-fit: cover;
+}
 
 .post-wrapper img {
   aspect-ratio: 1;
@@ -1596,6 +1599,10 @@ th {
   .comment-wrapper.manage-comment,
   .comments-actions form {
     flex-wrap: wrap;
+  }
+
+  .intraction-widget p {
+    display: none;
   }
   
 }
