@@ -6,6 +6,13 @@ include '../components/emptyStateTemplate.php';
 // Session start //
 session_start();
 
+// Check if user_id is set in session //
+if (!isset($_SESSION['user_id'])) {
+  // Redirect to login page if user is not logged in
+  header("Location: ../pages/login.php");
+  exit();
+}
+
 if(isset($_SESSION['user_id'])){
   $user_id = $_SESSION['user_id'];
 }else{

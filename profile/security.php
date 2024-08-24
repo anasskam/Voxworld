@@ -268,7 +268,6 @@ if (isset($_POST['user-delete'])) {
           <form method="POST">
             <div class="danger-zone-area">
               <div class="danger-zone-titles">
-                <p class="delete-account-title">Delete account</p>
                 <p class="text-button italic">Note: Once your account deleted, all your data will be lost and cannot be recovered.</p>
               </div>
               <button name="user-delete" value="<?php echo $user['id']?>" onclick="return confirm('Are you sure you want to delete your account?')" class="ghost-btn delete-btn">Delete account</button>

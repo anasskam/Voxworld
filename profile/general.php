@@ -1,7 +1,32 @@
 <?php
 session_start();
+
+// Check if user_id is set in session //
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to login page if user is not logged in
+    header("Location: ../pages/login.php");
+    exit();
+}
+
 // DB connection //
 require_once '../components/connect.php';
+// Initialize username variable //
+$username = '';
+
+// Check if user_id is set in session //
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+
+    // Prepare the statement //
+    $checkUser = $conn->prepare('SELECT * FROM users WHERE id = ?');
+    $checkUser->execute([$user_id]);
+    $user = $checkUser->fetch(PDO::FETCH_ASSOC);
+
+    // Check if a user was found //
+    if ($user) {
+        $username = $user['FirstName'] . ' ' . $user['LastName'];
+    }
+}
 
 
 // Initialize username variable //
@@ -203,7 +228,15 @@ elseif (empty($email)) {
                         </div>
                     </div>
                     
-                    <p class="text-button italic opacity-half date">Profile created at: <span>Feb 2, 2024 19:28</span></p>
+                    <p class="text-button italic opacity-half date">Profile created at: 
+                        <span>                                                            
+                        <?php                                      
+                            $date = $user['CreationDate'];
+                            $dateTime = new DateTime($date);
+                            echo $dateTime->format('M j, Y H:i');                             
+                        ?>  
+                        </span>
+                    </p>
                     
                     <div class="cta center margin-0">
                         <button type="submit" name="submit" class="primary-btn">Update</button>
