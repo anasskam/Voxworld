@@ -9,5 +9,4 @@ allNavs.forEach(item => {
 
 const route = window.location.search;
 const from = route.indexOf('=');
-
 document.addEventListener("load", setRoute(route.slice(from+1), allNavs, 'active-nav'));

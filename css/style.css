@@ -682,10 +682,7 @@ th {
 }
 
 .post-content p {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;  
-  overflow: hidden;
-  -webkit-line-clamp: 2;
+ margin-bottom: var(--spacing-2);
 }
 
 .post-intractions-wrapper,

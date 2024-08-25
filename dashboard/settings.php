@@ -95,8 +95,8 @@ if (isset($_POST['update-password'])) {
                 swal("Success", "Password updated successfully", "success", {
                   buttons:false
                 }).then(()=>{
-                  // window.location.href = "http://localhost/Voxworld/pages/admin.php";
-                  window.location.href = "../pages/admin.php";
+                  // window.location.href = "http://localhost/Voxworld/auth/admin.php";
+                  window.location.href = "../auth/admin.php";
                 })
               }, 500)
             </script>

@@ -3,9 +3,9 @@
                 <a href="./home.php"><img alt="logo" class="logo home-logo"></a>
                 <nav>
                     <ul>
-                        <li ><a href="#">About us</a></li>
-                        <li ><a href="#">Contact us</a></li>
-                        <li ><a href="#">Privacy Policy</a></li>
+                        <li ><a href="about.php">About us</a></li>
+                        <li ><a href="contact.php">Contact us</a></li>
+                        <li ><a href="privacy.php">Privacy Policy</a></li>
                     </ul>
                 </nav>
 

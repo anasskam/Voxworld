@@ -70,7 +70,6 @@ $selectLatestComments = $conn->query('SELECT c.*, p.category, u.FirstName, u.Las
     <script src="../js/theme.js" type="module" defer></script>
     <script src="../js/sidebar.js" type="module" defer></script>
     <script src="../js/post.js" type="module" defer></script>
-    <script src="../js/overview.js" type="module" defer></script>
 </head>
 <body>
 

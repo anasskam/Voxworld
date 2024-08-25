@@ -7,5 +7,5 @@ allListItems.forEach(item => {
   item.addEventListener("mouseleave", () => {hoverOut(allListItems, 'active')});
 })
 
-const route = window.location.pathname.slice(18, -4);
+const route = window.location.pathname.slice(18);
 document.addEventListener("load", setRoute(route, allListItems, 'active'));

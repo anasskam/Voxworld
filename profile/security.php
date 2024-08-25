@@ -6,7 +6,7 @@ session_start();
 // Session check for access //
 if (!isset($_SESSION['user_id'])) {
   // Redirect to login page //
-  header('Location: ../pages/login.php');
+  header('Location: ../auth/login.php');
   exit();
 }
 
@@ -65,7 +65,7 @@ if (isset($_POST['update-password'])) {
                                     buttons:false,
                                     timer: 2500,
                                 }).then(()=>{
-                                    window.location.href = "../pages/login.php";
+                                    window.location.href = "../auth/login.php";
                                 })
                             }, 500)
                         </script>
@@ -129,7 +129,7 @@ if (isset($_POST['user-delete'])) {
                 buttons:false,
                 timer: 2500,
             }).then(()=>{
-                window.location.href = "../pages/register.php";
+                window.location.href = "../auth/register.php";
             })
         }, 500)
     </script>

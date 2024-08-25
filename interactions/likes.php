@@ -32,7 +32,7 @@ if(isset($_POST['like_post'])){
                   },
               }).then((value)=>{
                   if(value === "redirect") {
-                      window.location.href = "./pages/login.php";
+                      window.location.href = "./auth/login.php";
                   }
               })
           }, 500)

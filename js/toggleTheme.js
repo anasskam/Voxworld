@@ -28,6 +28,9 @@ const toggleLogo = (theme) => {
   currentLocation === '/Voxworld/post' || 
   currentLocation === '/Voxworld/category' || 
   currentLocation === '/Voxworld/search' ||
+  currentLocation === '/Voxworld/about' ||
+  currentLocation === '/Voxworld/privacy' ||
+  currentLocation === '/Voxworld/contact' ||
   currentLocation === '/Voxworld/') {
     logoSrc = theme === "dark" ? "./assets/images/logo-dark.svg" : "./assets/images/logo-light.svg";
   } 

@@ -243,7 +243,7 @@ if (isset($_POST['submit'])) {
       <footer>
           <p class="text-button">© Copyright, 2024 All rights reserved to Voxworld</p>
             <ul>
-              <li ><a href="#" class="text-button">Contact</a></li>
+              <li ><a href="../contact.php" class="text-button">Contact</a></li>
               <li ><a href="#" class="text-button">Help</a></li>
 
             </ul>

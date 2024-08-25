@@ -21,22 +21,22 @@ if(isset($_POST['bookmark_post'])){
       header("Location: post.php?post_id=$post_id#likes-section");
    }else{
       ?>
-      <script defer>
-          setTimeout(()=> {
-              swal("Oops!", "Please sign in to save content", "warning", {
-                  buttons: {
-                      redirect: {
-                          text: "Sign in",
-                          className:"swal-gotoBtn",
-                      }
-                  },
-              }).then((value)=>{
-                  if(value === "redirect") {
-                      window.location.href = "./pages/login.php";
-                  }
-              })
-          }, 500)
-      </script>
+        <script defer>
+            setTimeout(()=> {
+                swal("Oops!", "Please Log in to save content", "warning", {
+                    buttons: {
+                        redirect: {
+                            text: "Log in",
+                            className:"swal-gotoBtn",
+                        }
+                    },
+                }).then((value)=>{
+                    if(value === "redirect") {
+                        window.location.href = "./auth/login.php";
+                    }
+                })
+            }, 500)
+        </script>
       <?php
    }
 

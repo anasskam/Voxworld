@@ -8,5 +8,5 @@ allNavs.forEach(item => {
 })
 
 
-const route = window.location.pathname.slice(10,-4) || 'index';
+const route = window.location.pathname.slice(10) || 'home';
 document.addEventListener("load", setRoute(route, allNavs, 'active-nav'));

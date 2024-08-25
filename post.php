@@ -92,7 +92,6 @@ $categoryMapping = [
       <script src="./js/share.js" type="module" defer></script>
 
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-      
 
 
   </head>
@@ -253,7 +252,7 @@ $categoryMapping = [
                           <path d="M12 8V13" stroke="currentcolor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
                           <path d="M11.9945 16H12.0035" stroke="currentcolor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                          <p>Please <a href="pages/login.php" style="text-decoration:underline">login</a> to add your comment</p>
+                          <p>Please <a href="auth/login.php" style="text-decoration:underline">login</a> to add your comment</p>
                       </div>
                     </div>
                   <?php

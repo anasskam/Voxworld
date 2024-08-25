@@ -9,7 +9,7 @@ session_start();
 // Check if user_id is set in session //
 if (!isset($_SESSION['user_id'])) {
   // Redirect to login page if user is not logged in
-  header("Location: ../pages/login.php");
+  header("Location: ../auth/login.php");
   exit();
 }
 
@@ -60,7 +60,6 @@ $emptyIllustration = "";
     <script src="../js/userSideBar.js" type="module" defer></script>
     <script src="../js/manageUsers.js" type="module" defer></script>
     <script src="../js/profileRespo.js" type="module" defer></script>
-    <!-- <script src="../js/overview.js" type="module" defer></script> -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>

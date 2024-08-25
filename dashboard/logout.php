@@ -5,5 +5,5 @@ session_start();
 unset($_SESSION['admin_id']); 
 
 // Redirect to the login page //
-header("Location: ../pages/admin.php"); 
+header("Location: ../auth/admin.php"); 
 exit();
