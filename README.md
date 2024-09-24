@@ -30,3 +30,23 @@
 1. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/voxworld.git
+   
+2. Navigate to the project directory:
+   ```bash
+   cd voxworld
+   
+3. Set up the database:
+   - Create a new MySQL database name it **journal**
+   - Import the provided SQL dump file into the database:
+   ```bash
+   mysql -u yourusername -p yourdatabase < database/journal.sql
+   
+4. Start the web server and visit the application at **http://localhost/voxworld**
+
+### Usage
+- **For Users**: Once registered, users can browse articles, leave comments, and share articles directly from the platform.
+- **For Admins**: After logging in, admins can access the dashboard to manage content, users, and contributors.
+
+### License
+- VoxWorld is licensed under the MIT License.
+
