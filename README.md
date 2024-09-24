@@ -12,7 +12,6 @@
 ### Admin Interface
 - **Article Management**: Create, edit, and publish articles with ease.
 - **User Management**: Add, remove, or edit user roles and permissions.
-- **Contributor Roles**: Assign permissions to contributors for collaborative content creation and management.
 
 ## Technology Stack
 - **Frontend**: JavaScript, HTML5, CSS3
@@ -28,24 +27,27 @@
 
 ### Steps
 1. Clone the repository:
+2. 
    ```bash
-   git clone https://github.com/yourusername/voxworld.git
+   git clone projectUrl
    
-2. Navigate to the project directory:
+3. Navigate to the project directory:
+   
    ```bash
    cd voxworld
    
-3. Set up the database:
+4. Set up the database:
    - Create a new MySQL database name it **journal**
    - Import the provided SQL dump file into the database:
+   
    ```bash
    mysql -u yourusername -p yourdatabase < database/journal.sql
    
-4. Start the web server and visit the application at **http://localhost/voxworld**
+5. Start the web server and visit the application at **http://localhost/voxworld**
 
 ### Usage
 - **For Users**: Once registered, users can browse articles, leave comments, and share articles directly from the platform.
-- **For Admins**: After logging in, admins can access the dashboard to manage content, users, and contributors.
+- **For Admins**: After logging in, admins can access the dashboard to manage content, users.
 
 ### License
 - VoxWorld is licensed under the MIT License.
